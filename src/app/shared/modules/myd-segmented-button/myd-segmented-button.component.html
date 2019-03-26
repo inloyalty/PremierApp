@@ -1,0 +1,8 @@
+<div class="btn-group" role="group">
+    <ng-template ngFor let-item [ngForOf]="buttons">
+    <button type="button" class="btn {{buttonClass}}"
+     [class.active]="item.active"
+    (click)="onButtonChanged(item)">{{item.name}}   
+    </button>
+    </ng-template>
+</div>

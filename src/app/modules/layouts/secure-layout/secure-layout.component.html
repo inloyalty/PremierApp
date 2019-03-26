@@ -1,0 +1,7 @@
+<top-navbar #topNavbar (click)="collapesSidenav()" [pageTitle]="pageTitle"></top-navbar>
+<main-menu (sidenavMenu)='sidenavMenu($event)' (titleChange)="ontitleChange($event)"></main-menu>
+<div id="content-wrapper" (click)="collapesSidenav()">
+  <div class="container-fluid">
+    <router-outlet></router-outlet>
+  </div>
+</div>

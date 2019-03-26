@@ -1,0 +1,37 @@
+<div class="fix-header" [style.height.px]="height" #scrollContainer (scroll)="onScroll($event)" id="divscrollContainer"
+    tabindex="1">
+    <ul class="list-group list-group-flush" [style.width.px]="width">
+        <li *ngIf="headerItems && headerItems.length>0"
+            class="list-group-item border-left-0 border-right-0 border-top-0 header" style="height: 48px; z-index: 2;">
+            <div class="row header">
+                <ng-template ngFor let-headerItem [ngForOf]="headerItems">
+                    <div class="{{headerItem.widthClass}} " [style.width.px]="headerItem.width">
+                        <h6 class="m-0">
+                            <span class="non-selectable" style="cursor:pointer;"
+                                (click)="headerItem.sortable && onSort(headerItem)">
+                                {{headerItem.title}}
+                            </span>
+                            <span [ngClass]="{'text-primary':headerItem.sortable}"><i [class]="headerItem.sortClassName"
+                                    aria-hidden="true"></i>
+                            </span>
+                        </h6>
+                    </div>
+                </ng-template>
+            </div>
+        </li>
+
+        <li class="list-group-item list-group-item-action {{itemClassName}} px-0"
+            *ngFor="let item of localDataSource; let i = index; "
+            [ngClass]="{'bg-primary text-white': item.selected && selectable}"
+            [class.active]="i==activeIndex && selectableOnScroll" (click)="onItemSelection(item)"
+            (keydown)="onKeyUp($event)" id="li_{{i}}">
+            <ng-container
+                *ngTemplateOutlet="childTemplate|| templateOption || defaultItemTemplate; context: { $implicit: item }">
+            </ng-container>
+        </li>
+    </ul>
+    <ng-template #defaultItemTemplate let-item>
+        <p>{{ item?.ProductName }}</p>
+        <p>{{ item?.desc }}</p>
+    </ng-template>
+</div>

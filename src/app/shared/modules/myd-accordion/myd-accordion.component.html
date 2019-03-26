@@ -1,0 +1,29 @@
+<div class="card-group">
+    <div class="card card-default text-white border-0">
+        <div class="card-heading" [style.background-color]="color(positionData.nodeLevel)">
+            <a data-toggle="collapse" href="#{{positionData.id}}" style="color:#fff;text-decoration: none;"
+                (click)="toggleIcon($event)">
+                <div class="row p-3">
+                    <div class="col-1">
+                        <a [class]="isExpand? 'fa fa-chevron-right cat-header' : 'fa fa-chevron-down cat-header'">
+                        </a>
+                    </div>
+                    <div class="col-11">
+                        <ng-container *ngTemplateOutlet="headerTemplate || defaultHeaderTemplate;">
+                        </ng-container>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div [id]="positionData.id" class="card-collapse collapse in">
+            <div class="card-body p-0">
+                <ng-content>
+                </ng-content>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #defaultHeaderTemplate>
+    <h5>{{title}}</h5>
+</ng-template>

@@ -1,0 +1,26 @@
+.top-navbar {
+    margin-left:48px; 
+    height: 48px;
+    z-index: 1000;
+}
+ 
+.top-navbar.navbar .btn.nav-button {
+   border-radius: 0;
+   height: 48px;
+   width: 48px;
+   border: 0px transparent;
+} 
+
+.top-navbar.navbar .btn.nav-button:focus,
+.top-navbar.navbar .btn.nav-button:hover,
+.top-navbar.navbar .btn.nav-button:active  {
+    border: 0px transparent;
+    box-shadow: none;
+} 
+
+.top-navbar.navbar .title {
+    margin-bottom: 0;
+    font-weight: 300;
+    padding: 12px 10px;
+} 
+ 

@@ -1,0 +1,112 @@
+<div class="card" style="margin-top: 49px;">
+    <myd-tab (tabChanged)="onTabChanged($event)" [tabItems]="tabs"> </myd-tab>
+</div>
+
+
+<div class="tab-content" id="myTabContent">
+
+    <div class="tab-pane fade show active" *ngIf="selectedTab == 1" id="analyst" role="tabpanel"  aria-labelledby="analyst-tab">
+   
+            <div class="card shadow-sm fade-in mt-3">
+                    <div class="card-body">
+                            <div class="row">
+                                    <ng-template ngFor let-match [ngForOf]="upcomingMatches" let-index="index">
+                                        <div class="col-3  margin-top">
+                                
+                                            <div class="card shadow-sm">
+                                                <div class="card-header m-0 text-center text-white bg-secondary"> {{match.leagueName}} </div>
+                                                <div class="card-body">
+                                                    <div class="row p-0 m-0" *ngIf="match.isTeamMatch">
+                                                        <div class="col-5">
+                                                            <strong>{{match.teamAName}}</strong>
+                                                        </div>
+                                                        <div class="col-2">
+                                                            VS
+                                                        </div>
+                                                        <div class="col-5">
+                                                            <strong>{{match.teamBName}}</strong>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row p-0 m-0" *ngIf=" !match.isTeamMatch">
+                                                        <div class="col text-center">
+                                                            <strong>{{match.userAFullName}}</strong>
+                                                        </div>
+                                                    </div>
+                                
+                                                </div>
+                                                <div class="card-footer">
+                                                    <span>{{match.venue}}</span>
+                                                    <span *ngIf="!match.isMatchFinished">
+                                                        <button class="btn btn-warning ripple nav-button float-right text-light" type="button"
+                                                            (click)="onMatchScoreEdit(match)" style="margin-left:5px;">
+                                                            Match Score <i class="fas fa-pencil-alt"></i>
+                                                        </button>
+                                                    </span>
+                                                    <span style="margin-left: 5px;" *ngIf="match.isMatchFinished">
+                                                        <button class="btn btn-primary ripple nav-button float-right" type="button"
+                                                            (click)="onMatchScoreResult(match.id)">
+                                                            Match Result <i class="far fa-eye"></i>
+                                                        </button>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                
+                                </div>
+                        </div>
+                </div>
+    </div>
+    <div class="tab-pane fade show active" *ngIf="selectedTab == 2" id="analyst" role="tabpanel"  aria-labelledby="analyst-tab">
+   
+            <div class="card shadow-sm fade-in mt-3">
+                    <div class="card-body">
+                            <div class="row">
+                                    <ng-template ngFor let-match [ngForOf]="pastMatches" let-index="index">
+                                        <div class="col-3  margin-top">
+                                
+                                            <div class="card shadow-sm">
+                                                <div class="card-header m-0 text-center text-white bg-secondary"> {{match.leagueName}} </div>
+                                                <div class="card-body">
+                                                    <div class="row p-0 m-0" *ngIf="match.isTeamMatch">
+                                                        <div class="col-5">
+                                                            <strong>{{match.teamAName}}</strong>
+                                                        </div>
+                                                        <div class="col-2">
+                                                            VS
+                                                        </div>
+                                                        <div class="col-5">
+                                                            <strong>{{match.teamBName}}</strong>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row p-0 m-0" *ngIf=" !match.isTeamMatch">
+                                                        <div class="col text-center">
+                                                            <strong>{{match.userAFullName}}</strong>
+                                                        </div>
+                                                    </div>
+                                
+                                                </div>
+                                                <div class="card-footer">
+                                                    <span>{{match.venue}}</span>
+                                                    <span *ngIf="!match.isMatchFinished">
+                                                        <button class="btn btn-warning ripple nav-button float-right text-light" type="button"
+                                                            (click)="onMatchScoreEdit(match)" style="margin-left:5px;">
+                                                            Match Score <i class="fas fa-pencil-alt"></i>
+                                                        </button>
+                                                    </span>
+                                                    <span style="margin-left: 5px;" *ngIf="match.isMatchFinished">
+                                                        <button class="btn btn-primary ripple nav-button float-right" type="button"
+                                                            (click)="onMatchScoreResult(match.id)">
+                                                            Match Result <i class="far fa-eye"></i>
+                                                        </button>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                
+                                </div>
+                        </div>
+                </div>
+    </div>
+</div>

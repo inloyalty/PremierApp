@@ -1,0 +1,239 @@
+<!-- Grid Container -->
+<div style="margin-bottom:0;" [ngStyle]="{'width': width}" (window:resize)="onResize($event)">
+    <div class="row margin-bottom-10">
+        <div class="col-md-8 ">
+            <div class="btn-group btn-group-sm" role="group">
+            <ng-template ngFor let-command [ngForOf]="commands" let-i="index">
+                <button class="btn" name="command.name" [class]="command.class" (click)="OnCommandButtonClick(command.name)">
+                    <i *ngIf="command.iconClass" [ngClass]="command.iconClass" aria-hidden="true"></i>
+                    {{command.label}} </button>
+            </ng-template>
+        
+            <span class="margin-left-10" *ngIf="quickCommands && quickCommands.length>0">
+                <div class="dropdown">
+                    <button class="btn btn-outline-secondary btn-flat" type="button" id="dropdownMenuButton1"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <ng-template ngFor let-command [ngForOf]="quickCommands" let-i="index">
+                            <button class="dropdown-item" (click)="OnCommandButtonClick(command.name)">
+                                <i *ngIf="command.iconClass" [ngClass]="command.iconClass" aria-hidden="true"></i>
+                                {{command.label}} </button>
+                        </ng-template>
+
+                    </div>
+                </div>
+
+            </span>
+        </div>
+        </div>
+       
+        <div class="col-md-4">
+            
+            <div class="input-group float-right" *ngIf="dataSource && dataSource.length > 0 && showSearchBar">
+                <input type="text" class="form-control" placeholder="Search" style="width:300px;" [(ngModel)]="searchText" />
+                
+
+                <div class="input-group-append" >
+                        <button class="btn btn-primary" type="button" (click)="onSearch()">
+                                <i class="fa fa-search"></i>
+                            </button>
+                <button class="btn btn-secondary" type="button" (click)="openColumnConfigurationDrawer()">
+                    <i class="fa fa-cog" aria-hidden="true"></i>
+                </button>
+                <button class="btn btn-secondary" type="button" (click)="this.showfilterDrawer = true">
+                    <i class="fas fa-filter" aria-hidden="true"></i>
+                </button>
+            </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <!-- Grid Wrapper -->
+    <div class="tableFixHead" style="width:100%;"  [style.height.px]="height"   #scrollMe (scroll)="localPagination && onScroll()">
+       
+        <!-- Grid Content -->
+
+        <table class="table table-hover table-bordered table-sm" [ngStyle]="{'width': contentWidth}" 
+            >
+            <thead>
+                <tr>
+                    <th *ngIf="showAction && rowAction"  style="vertical-align:center;" [width]="actionColumnWidthPx"
+                        [ngStyle]="{'min-width': actionColumnWidthPx}">Action</th>
+                    <ng-template ngFor let-headerItem [ngForOf]="columns">
+                        <th *ngIf="headerItem.visible==true" class="shadow-sm" [width]="headerItem.widthPx"
+                            [ngStyle]="{'min-width': headerItem.widthPx}" style="vertical-align:center;">
+                            <span style="cursor:pointer;" [ngClass]="{'text-primary':headerItem.sortable}"
+                                (click)="headerItem.sortable && onSort(headerItem)">
+                                {{headerItem.title}} <i [class]="headerItem.sortClassName"
+                                    aria-hidden="true"></i></span>
+
+
+
+                            <span class="float-right">
+
+                                <div class="dropdown float-right">
+                                    <button class="btn btn-outline-secondary btn-flat btn-sm pb-0 pt-0" type="button"
+                                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" (click)="onHideColumnClick(headerItem)">
+                                            <i class="fa fa-eye-slash margin-right-5 " aria-hidden="true"></i>
+                                            Hide</a>
+                                        <a class="dropdown-item" (click)="openColumnConfigurationDrawer()">
+                                            <i class="fa fa-cog" aria-hidden="true"></i>
+                                            Configure</a>
+
+                                    </div>
+                                </div>
+
+                            </span>
+
+                            <!-- </div> -->
+
+                        </th>
+                    </ng-template>
+
+                </tr>
+            </thead>
+            <tbody *ngIf='dataSource && dataSource.length > 0'>
+                <tr *ngFor="let item of dataSource">
+                    <td *ngIf="showAction && rowAction" [hidden]="!dataSource" [width]="actionColumnWidthPx"
+                        [ngStyle]="{'min-width': actionColumnWidthPx}">
+                        <div class="btn-group-sm">
+                            <button type="button" data-toggle="tooltip" title="View" data-placement="left"
+                                (click)='onEditRow(item)'
+                                class="btn btn-sm btn-outline-light btn-flat text-secondary px-2" style="padding:2px;"
+                                *ngIf="rowAction && checkRowAction('V')">
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" data-toggle="tooltip" title="Edit" data-placement="left"
+                                (click)='onViewRow(item)'
+                                class="btn btn-sm btn-outline-light btn-flat text-primary px-2" style="padding:2px;"
+                                *ngIf="rowAction && checkRowAction('E')">
+                                <i class="fa fa-pen" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" data-toggle="tooltip" title="Delete" data-placement="right"
+                                (click)='onDeleteRow(item)'
+                                class="btn btn-sm btn-outline-light btn-flat text-danger px-2" style="padding:2px;"
+                                *ngIf="rowAction && checkRowAction('D')">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </td>
+                    <ng-template ngFor let-headerItem [ngForOf]="columns">
+
+                        <td *ngIf="headerItem.visible==true" [width]="headerItem.widthPx"
+                            [ngClass]="headerItem.textAlignClassName" [ngStyle]="{'min-width': headerItem.widthPx}">
+                            {{item[headerItem.fieldName]}}
+                        </td>
+                    </ng-template>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <!-- Grid Footer -->
+    <table class="table table-hover table-sm" style="margin-bottom:0; " [ngStyle]="{'width': contentWidth}"  >
+        <tfoot>
+            <tr>
+                <td colspan="100">
+                    <myd-pagination 
+                    *ngIf=' localPagination ===false && dataSource && dataSource.length > 0'
+                    [pageSize]="pageSize" 
+                    [totalRecord]=totalRecord 
+                    [pageSizes]="pageSizes"
+                    (pageChange)="onPageChange($event)"></myd-pagination>
+
+                        <div class="col-md-12 text-right" *ngIf="localPagination">
+                            <label class="align-middle">Viewing <strong>1</strong> to<strong>
+                                {{localDataSourceTotalRecord}}</strong> of
+                            <strong> {{totalRecord}} </strong>
+                            Records
+                        </label>
+                    </div>
+
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+<!-- <pagination [directionLinks]="true" [rotate]="false" [maxSize]="5" [boundaryLinks]="true" [totalItems]="totalRocord" [itemsPerPage]="filterObject.PageSize"
+    [(ngModel)]="pageIndex" (pageChanged)="getPageData($event)">
+</pagination> -->
+<myd-side-drawer [showDrawer]="showDrawer" [title]="title" (close)="onDrawerClose($event)">
+
+    <div body *ngIf="tempColumns !=null">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="element-group float-right form-group">
+                    <input type="text" class="txt" placeholder="Search" style="width:300px" [(ngModel)]="columnSearchText"
+                        name="txtColumnSearch" (keyup)="onColumnSearch()" />
+                    <button class="btn btn-primary" type="button" (click)="onColumnSearch()">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <ul class="list-group" >
+            <li class="list-group-item">
+                
+                <div class="custom-control custom-checkbox">
+                    <!-- <input type="checkbox" class="custom-control-input" id="customCheck1"> -->
+                    <input type="checkbox" class="custom-control-input" id="chkGridColumnAll"  name="chkGridColumnAll" [(ngModel)]="selectAllGridColumn" (change)="onGridColumnAllChange()">
+                    <label class="custom-control-label" for="chkGridColumnAll"> Select All</label>
+                  </div>
+            </li>
+            <ng-template ngFor let-headerItem [ngForOf]="tempColumns" let-i="index">
+                <div class="" [makeDraggable]="headerItem" makeDroppable (dropped)="onGridColumnDrop($event, headerItem)">
+
+                    <li class="list-group-item " [makeDraggable]="headerItem" makeDroppable (dropped)="onGridColumnDrop($event, headerItem)">
+                        <!-- <label class="checkbox">
+                            {{headerItem.title}} {{headerItem.displayOrder}}
+                            <input type="checkbox" name="{{i}}_col1" [(ngModel)]="headerItem.visible" (change)="onDataGridColumnChanged(headerItem)">
+                            <span class="checkmark"></span>
+                        </label> -->
+
+
+                        <div class="custom-control custom-checkbox">
+                            <span>
+                            <input type="checkbox" class="custom-control-input" id="col_{{i}}" name="col_{{i}}" [(ngModel)]="headerItem.visible" (change)="onDataGridColumnChanged(headerItem)">
+                            <label class="custom-control-label" for="col_{{i}}"> {{headerItem.title}}</label>
+                        </span>  
+                        <span class="float-right">
+                            <button *ngIf="i>0" class="btn btn-default btn-flat btn-sm" (click)='onGridColumnDisplayChange(headerItem.displayOrder,"up")'>
+                                <i class="fas fa-long-arrow-alt-up"></i>
+                            </button>
+                            <button *ngIf="i != tempColumns.length-1" class="btn btn-default btn-flat btn-sm" (click)="onGridColumnDisplayChange(headerItem.displayOrder,'down')"><i
+                                    class="fas fa-long-arrow-alt-down"></i>
+                            </button>
+                        </span>
+                        </div>
+
+                        
+                    </li>
+                </div>
+            </ng-template>
+        </ul>
+    </div>
+    <div footer class="float-right">
+        <button class="btn btn-default" type="button" (click)="applyDataGridColumnConfiguration()">
+            <i class="fa fa-floppy-o"></i>Cancel
+        </button>
+        <button class="btn btn-primary" type="button" (click)="applyDataGridColumnConfiguration()">
+            <i class="fa fa-floppy-o"></i> Apply
+        </button>
+
+    </div>
+</myd-side-drawer>
+<!-- Filter drawer -->
+<myd-side-drawer [showDrawer]="showfilterDrawer" [title]="filterDrawerTitle" (close)="this.showfilterDrawer = false">
+    <div body>
+        <myd-advance-filter [dataSource]="filterDataSource" (applyFilter)="onApplyFilter($event)">
+        </myd-advance-filter>
+    </div>
+</myd-side-drawer>

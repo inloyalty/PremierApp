@@ -1,0 +1,127 @@
+ 
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-3">
+                <h4> League :   {{leagueMatch.leagueName}}</h4>
+              
+            </div>
+            <div class="col-2">
+                    <h4> Match Nr :   {{leagueMatch.mathcNr}}</h4>
+                  
+                </div>
+            <div class="col-3">
+                 <h4>  Venue :  {{leagueMatch.venue}}</h4> 
+            </div>
+            <div class="col-2">
+              <h4>  {{leagueMatch.startDate | dateFormat}}</h4>
+
+            </div>
+            <div class="col-2" *ngIf="leagueMatch.isTeamMatch">
+                <h4> Winner:  {{winningTeamName }}</h4> 
+    
+                </div>
+        </div>
+    </div>
+
+    <div class="card-header">
+        Score Detail
+
+    </div>
+    <div *ngIf="leagueMatch.isTeamMatch" class="card-body">
+        <div class="row" style="height:50px;">
+            <div class="col-2 border center-block text-left" style="padding: 4px;font-size: 24px;">
+                Team
+            </div>
+            <div class="col-2 border center-block text-center" style="padding: 4px;font-size: 24px;">
+                    Total Points
+                </div>
+            <ng-template ngFor let-matchQuater [ngForOf]="leagueMatch.matchSessions" let-index="index">
+                <div class="col-2 border center-block text-center" style="padding: 4px;font-size: 24px;">
+                    Q {{matchQuater.quarterNr}}
+                </div>
+            </ng-template>
+
+        </div>
+
+        <div class="row" style="height: 70px;" *ngIf="leagueMatch.teamA">
+            <div class="col-2 border">
+                <h4> {{leagueMatch.teamA.name}}</h4>
+            </div>
+            <div class="col-2 border p-0 text-center" style="font-size: 44px;">
+                    <span>{{teamATotalPoints}} </span>  
+
+            </div>
+            <ng-template ngFor let-matchQuater [ngForOf]="leagueMatch.teamABasketBallScoreSummaries" let-index="index">
+                <div class="col-2 border p-0">
+                    <div class="row p-0 m-0 h-100" style="font-size: 44px;">
+                        <div class="col text-center">
+                            <span> {{matchQuater.totalPoints}} </span>
+                        </div>
+
+                    </div>
+                </div>
+            </ng-template>
+
+        </div>
+        <div class="row" style="height: 50px;" *ngIf="leagueMatch.teamB">
+            <div class="col-2 border">
+                <h4>{{leagueMatch.teamB.name}}</h4>
+            </div>
+            <div class="col-2 border p-0 text-center" style="font-size: 44px;">
+                   <span>{{teamBTotalPoints}} </span>  
+                </div>
+            <ng-template ngFor let-matchQuater [ngForOf]="leagueMatch.teamBBasketBallScoreSummaries" let-index="index">
+                <div class="col-2 border p-0">
+                    <div class="row p-0 m-0 h-100" style="font-size: 44px;">
+                        <div class="col text-center">
+
+                            <span> {{matchQuater.totalPoints}} </span>
+                        </div>
+
+                    </div>
+                </div>
+            </ng-template>
+
+        </div>
+    </div>
+
+    <div *ngIf="leagueMatch.isTeamMatch == null || leagueMatch.isTeamMatch == false" class="card-body">
+            <div class="row" style="height:50px;">
+                <div class="col-2 border center-block text-left" style="padding: 4px;font-size: 24px;">
+                    User
+                </div>
+                <div class="col-2 border center-block text-center" style="padding: 4px;font-size: 24px;">
+                        Total Points
+                    </div>
+                <ng-template ngFor let-matchQuater [ngForOf]="leagueMatch.matchSessions" let-index="index">
+                    <div class="col-2 border center-block text-center" style="padding: 4px;font-size: 24px;">
+                        Q {{matchQuater.quarterNr}}
+                    </div>
+                </ng-template>
+    
+            </div>
+    
+            <div class="row" style="height: 70px;">
+                <div class="col-2 border">
+                    <h4> {{leagueMatch.userAFullName}}</h4>
+                </div>
+                <div class="col-2 border p-0 text-center" style="font-size: 44px;">
+                        <span>{{userATotalPoints}} </span>  
+    
+                </div>
+                <ng-template ngFor let-matchQuater [ngForOf]="leagueMatch.userABasketBallScoreSummaries" let-index="index">
+                    <div class="col-2 border p-0">
+                        <div class="row p-0 m-0 h-100" style="font-size: 44px;">
+                            <div class="col text-center">
+                                <span> {{matchQuater.totalPoints}} </span>
+                            </div>
+    
+                        </div>
+                    </div>
+                </ng-template>
+    
+            </div>
+             
+        </div>
+</div>

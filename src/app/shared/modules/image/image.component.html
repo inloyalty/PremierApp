@@ -1,0 +1,23 @@
+<div id="imgContainer" 
+[class.rounded-circle]="rounded" 
+[class.bg-primary]="!backgroundColor"
+    class="mx-auto mx-auto mt-0 position-relative" 
+    [style.width.px]="width" 
+    [style.height.px]="height"
+    [style.padding.px]="padding" 
+    [style.background]="backgroundColor">
+    <h4 class="text-light font-weight-light position-absolute" 
+    [style.font-size.px]="captionFontSize"
+    [style.padding.px]="captionPadding" 
+    [style.top]="capTop + '%'" 
+    [style.left]="capLeft + '%'"
+    [style.display]="this.src ? 'none' : 'block'">{{initials}}
+    </h4>
+    <img id="imgControl" 
+    [src]="src" 
+    [style.display]="hasError ? 'none' : 'block'" onerror='this.style.display = "none"'
+        class=" position-relative m-auto" 
+        [class.rounded-circle]="rounded" 
+        [height]="imgHeight? imgHeight: height"
+        [width]="imgWidth? imgWidth: width">
+</div>

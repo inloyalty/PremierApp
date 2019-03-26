@@ -1,0 +1,10 @@
+<div  style="overflow-y: overlay; overflow-x: hidden; outline: none;"
+
+[style.height.px]="height"
+ 
+#scrollContainer (scroll)="onScroll($event)" 
+id="divscrollContainer"
+tabindex="1"
+>
+<ng-content select="[body]"> </ng-content>
+</div>

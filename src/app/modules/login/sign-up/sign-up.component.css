@@ -1,0 +1,90 @@
+.login-card-background {
+    position: absolute;
+    min-width: 600px;
+    left: 500px;
+    top: 100px;
+    background: #000;
+    opacity: 0.5;
+    min-height: 700px;
+}
+
+.card.card-login
+{
+    min-width:600px;
+    position: absolute;
+    left: 500px;
+    top: 100px;
+    min-height: 350px;
+    background: #2F3238;
+}
+
+.card.card-login img.logo{
+    float: right;
+    width: 300px;
+    height: 70px;
+    margin-bottom: 20px;
+}
+
+#login-overlay
+{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+#login-background{    
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;    
+    background-attachment: fixed;
+}
+
+
+.detail-menu{
+    flex-direction: row;
+}
+
+.detail-menu .list-group-item {
+    min-height: 90px;
+    min-width: 130px;
+    max-width: 130px;
+    max-height: 90px;
+    border: 2px solid rgba(0,0,0,0.125);
+    transition: all 0.25s ease-in-out;
+}
+
+.detail-menu .list-group-item.active {
+    z-index: 2;
+    color: inherit;
+    background-color: #0274e9;
+    border: 2px solid #0274e9;
+}
+
+.detail-menu .list-group-item.active i,
+.detail-menu .list-group-item.active p {
+    color: #fff;
+}
+
+.detail-menu .list-group-item i {
+    font-size: 16px;
+}
+
+.detail-menu .list-group-item:hover
+{
+   border : 2px solid #0274e9;
+}
+
+.card-image
+{
+    color: #000;
+}
+.card-selected{
+    border: 5px solid blue;
+}
+
+.card-unselected{
+    border: 5px solid gray;
+}

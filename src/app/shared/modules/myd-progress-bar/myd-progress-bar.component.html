@@ -1,0 +1,33 @@
+<div *ngIf="stacked" class="progress" style="height: 1px;"
+[style.height.px]="height" 
+[style.background-color]="backgroundColor"
+[style.border-radius]="borderRadius">  
+    <ng-template ngFor let-item [ngForOf]="values" let-i="index">
+            <div class="progress-bar" role="progressbar"  
+            [attr.aria-valuemin]="min"
+            [attr.aria-valuemax]="max"
+            [style.width.%]="item.value"
+            [style.background-color]="item.progressColor"
+            >
+            <span *ngIf="showValue==true"> {{item.label}}</span>
+            </div>
+    </ng-template>
+</div>
+
+
+<div *ngIf="!stacked" class="progress d-block" style="height: 1px;" 
+[style.height.px]="height"
+[style.background-color]="backgroundColor"
+[style.border-radius]="borderRadius">  
+<div  class="progress-bar h-100" role="progressbar" 
+[style.float]="rightToLeft? 'right':'left'"
+[attr.aria-valuenow]="value"
+[attr.aria-valuemin]="min"
+[attr.aria-valuemax]="max"
+[style.width.%]="valuePerc"
+[style.background-color]="progressColor"
+>
+<span *ngIf="showValue==true"> {{label}}</span>
+</div>
+
+</div>

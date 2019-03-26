@@ -1,0 +1,29 @@
+<div id="app-sidenav" class="sidenav" [class.expanded]="isOpen">
+    <a class="toggle-button" (click)="onToggleNav()">
+        <i class="fas fa-bars"></i>
+    </a>
+    <div id="sidenav-item-wrapper" class="bg-dark">
+        <ng-template ngFor let-mainMenuItem [ngForOf]="mainMenuItems" let-index="index">
+            <a class="ripple" title="{{mainMenuItem.title}}" (click)="onMenuItemClick(mainMenuItem)">
+                <i *ngIf="mainMenuItem.iconClass != null" class="{{mainMenuItem.iconClass}}"></i>
+                <img *ngIf="mainMenuItem.iconClass == null" class="menu-img" src={{mainMenuItem.iconImage}} />
+                <span>{{mainMenuItem.name}}</span>
+            </a>
+        </ng-template>
+        <div class="bg-dark" style="vertical-align:bottom; bottom:0; position:absolute; width:100%;">
+
+            <div *ngFor="let footerMenuItem of footerMenuItems">
+                <a class="ripple" href="javascript:void(0)" title="{{footerMenuItem.title}}" (click)="onMenuItemClick(footerMenuItem)">
+                    <i class="{{footerMenuItem.iconClass}}"></i>
+                    <span>{{footerMenuItem.title}}</span>
+                </a>
+            </div>
+            <div>
+                <a href="javascript:void(0)" (click)="onMenuItemClick(105)">
+                    <img [src]="userProfileImage" class="rounded-circle user-img" width="48" height="48" />
+                    <span>Peter White</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+<div class="row">
+    <div class="col-md-3">
+           <label> Items Per Page: &nbsp;</label> 
+            <select data-toggle="tooltip" data-placement="top" title="Items Per Page" [(ngModel)]="pageSize"
+                class="custom-select" style="width:80px" (change)="changePageSize()">
+                <ng-template ngFor let-pageSize [ngForOf]="pageSizes" let-i="index">
+                    <option [value]="pageSize">{{pageSize}}</option>
+                </ng-template>
+            </select>
+    </div>
+    <div class="col-md-6">
+        <div >
+            <!-- items being paged -->
+        
+            <nav >
+                <!-- pager -->
+                <ul *ngIf="pager.pages && pager.pages.length" class="pagination justify-content-center" style="margin:0px !important;">
+                    <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item">
+                        <a (click)="setPage(1)" class="page-link">
+                            <i *ngIf="paginationConfig && paginationConfig.showIcon" [ngClass]="paginationConfig.firstIconClass"
+                                style="padding-right:2px;" aria-hidden="true"></i>
+                            <span *ngIf="paginationConfig && paginationConfig.showLabel"> First </span>
+                        </a>
+                    </li>
+                    <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item">
+
+                        <button (click)="setPage(pager.currentPage - 1)" class="page-link">
+                            <i *ngIf="paginationConfig && paginationConfig.showIcon" [ngClass]="paginationConfig.previousIconClass"
+                                style="padding-right:2px;" aria-hidden="true"></i>
+                            <span *ngIf="paginationConfig && paginationConfig.showLabel"> Previous </span>
+                        </button>
+                    </li>
+                    <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="page-item">
+                        <a (click)="setPage(page)" class="page-link">{{page}}</a>
+                    </li>
+                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item">
+                        <a (click)="setPage(pager.currentPage + 1)" class="page-link">
+                            <span *ngIf="paginationConfig && paginationConfig.showLabel"> Next </span>
+                            <i *ngIf="paginationConfig && paginationConfig.showIcon" [ngClass]="paginationConfig.nextIconClass"
+                                style="padding-left:4px;" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item">
+                        <a (click)="setPage(pager.totalPages)" class="page-link">
+                            <span *ngIf="paginationConfig && paginationConfig.showLabel"> Last</span>
+
+                            <i *ngIf="paginationConfig && paginationConfig.showIcon" [ngClass]="paginationConfig.lastIconClass"
+                                style="padding-left:4px;" aria-hidden="true"></i>
+
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="col-md-3 text-right">
+            <label class="align-middle">Viewing <strong>{{pager.startIndex}}</strong> to<strong>
+                {{pager.endIndex}}</strong> of
+            <strong> {{pager.totalItems}} </strong>
+
+            Records
+        </label>
+    </div>
+</div>

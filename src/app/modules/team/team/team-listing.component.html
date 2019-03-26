@@ -1,0 +1,119 @@
+<div class="row">
+    <div class="col border-bottom-0">
+        <command-bar>
+            <div class="form-row">
+                <div class=" form-group col-1 mb-0">
+                     
+                </div>
+                <div class="form-group col-4 mb-0">
+                     
+                </div>
+                <div class="form-group col-4 mb-0">
+                     
+                </div>
+                <div class="form-group col-3 mb-0">
+
+                    <button class="btn btn-primary ripple nav-button float-right" type="button"
+                    (click)="onAddTeam()">
+                    <i class="fas fa-plus"></i>
+                </button>
+                </div>
+            </div>
+        </command-bar>
+    </div>
+</div>
+<div class="row" busy [showLoading]="loading">
+    <div class="col  margin-top" >
+        <div class="card shadow-sm">
+             <myd-list #mydList [dataSource]="teams" [serverSidePagination]="true"
+                [totalRecord]="totalRecords" [headerItems]="headerItems" [height]="cardHeight"
+                (sort)="onSort($event)" (pageChange)="onPageChange($event)">
+                <ng-template myd-select-option let-item>
+                    <div class="row p-0">
+                        <div class="col-2">
+                                <div class="col-2" style="max-width: 75px;">
+                                    <image [src]="item.image" [height]="35" [imgHeight]="35" [padding]="0"
+                                    [caption]="item.name"[capTop]="0"
+                                    [capLeft]="0" [captionPadding]="5" [captionFontSize]="10">
+                                    </image>
+                                </div>
+                            
+                        </div>
+                        <div class="col-3">
+                            <h6 class="font-weight-normal text-muted" >
+                                {{item.name}}
+                            </h6>
+                        </div>
+                        <div class="col-3">
+                                <h6 class="font-weight-normal text-muted" >
+                                    {{item.description}}
+                                </h6>
+                            </div>
+                        <div class="col-2">
+                            <h6 class="font-weight-normal text-muted">
+                                {{item.createdOn |dateFormat }}
+                            </h6>
+                        </div>
+                        <div class="col-2">
+                            <div class="float-right">
+                                
+                                <button type="button" class="btn btn-outline-light btn-flat p-0 btn-icon"
+                                (click)="onEdit(item)">
+                                    <i class="fas fa-pencil-alt text-primary"></i>
+                                </button>
+                                <button type="button"  (click)=onDelete(item.id)
+                                    class="btn btn-outline-light btn-flat btn-icon p-0">
+                                    <i class="fas fa-trash text-danger"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </myd-list> 
+        </div>
+
+    </div>
+</div>
+
+<myd-side-drawer [title]="'Add/Edit Team'" (close)="onClose($event)" [showDrawer]="showDrader">
+        <div body>
+                <form name="Form" #userForm="ngForm" method="post" enctype="multipart/form-data" novalidate>
+
+                    <div class="row">
+                            <div class="col-sm-12 col-sm-3 form-group">
+                                <img alt="User Image" [src]="imageUser" onerror='this.src="assets/images/no-image.png";'
+                                    class="el-image el-framed el-circled" style="min-width: 150px; max-width: 150px; min-height: 150px; max-height: 150px;">
+                                <br>
+                                <label class="fileUpload btn btn-outline-secondary btn-rounded">
+                                    <i class="fa fa-folder-open-o" aria-hidden="true"></i> Browse
+                                    <input type="file" name="userImage" class="upload" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|images/*"
+                                        (change)="onUserImage($event)" hidden />
+                                </label>
+                                <br>
+                            </div>
+                        </div>
+
+                    <div class="form-group">
+                        <label for=""> Name <span>*</span> </label>
+                        <label *ngIf="(userForm.submitted || name.touched) && !name.valid"
+                            class="text-danger float-right"> Name is required</label>
+                        <input type="text" class="form-control" aria-describedby="emailHelp" placeholder=" name"
+                            [(ngModel)]="team.name" #name="ngModel" name="name" required>
+    
+                    </div>
+                    <div class="form-group">
+                        <label for="">Description   </label>
+                        <input type="text" class="form-control" placeholder="description" name="description"
+                            [(ngModel)]="team.description" #description="ngModel">
+                    </div>
+                     
+                    
+                     
+                </form>
+        </div>
+        <div footer>
+                <button [disabled]="loading" type="submit" class="btn btn-primary float-right "
+                (click)="userForm.form.valid && saveTeam()">Save
+                 <i class="far fa-long-arrow-right"></i></button>
+        </div>
+    </myd-side-drawer>

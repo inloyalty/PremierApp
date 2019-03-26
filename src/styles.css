@@ -1,1 +1,308 @@
 /* You can add global styles to this file, and also import other style files */
+
+.app
+{
+    /* -webkit-user-select: none; */
+    /* user-select: none; */
+    -webkit-app-region: drag;
+    cursor: default;
+}
+
+.non-selectable{
+    -webkit-user-select: none; 
+    user-select: none; 
+}
+
+.bg-gradient
+{
+    background: #2F3238;
+    background: -webkit-linear-gradient(to bottom, #2F3238, #485461);
+    background: linear-gradient(to bottom, #2F3238,#485461);
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    animation: fade-in 1.0s;
+}
+
+@keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* Animations */
+
+.fade-in{
+  animation: fade-in 1.0s;
+}
+
+/* Fixed width buttons */
+.btn-w-100
+{
+  min-width: 100px !important;
+  width: 100px;
+}
+
+.assets-tabs .btn-group{
+  margin-top: 5px;
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled):active:focus,
+.btn-outline-primary:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-primary.dropdown-toggle:focus{
+  box-shadow: none !important;
+}
+
+/* Utility Classes */
+
+.padding{
+  padding: 15px;
+}
+
+.padding-top{
+  padding-top: 15px; 
+}
+
+.padding-bottom{
+  padding-bottom: 15px; 
+}
+
+.padding-left{
+  padding-left: 15px; 
+}
+
+.padding-right{
+  padding-right: 15px; 
+}
+
+.margin{
+  margin: 15px;
+}
+
+.margin-top{
+  margin-top: 15px; 
+}
+
+.margin-bottom{
+  margin-bottom: 15px; 
+}
+
+.margin-left{
+  margin-left: 15px; 
+}
+
+.margin-right{
+  margin-right: 15px; 
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+  /* Custom styles for ng-select */
+
+  .ng-select.form-control {
+    position: relative;
+    flex: 1 1 auto;
+    width: 100%;
+    border: none;
+    padding: 0;
+    height: auto;
+  }
+
+  .ng-select.form-control .ng-select-container  {            
+    min-height: 0px;
+    border-radius: 2px;
+}
+
+.ng-select.form-control .ng-dropdown-panel{
+  padding: 0;
+  height: auto;
+  background: white;
+}
+
+/*  Custom style for busy directive */
+
+.loader-container{
+  width: 50px;
+  height: 50px;
+  top: calc(100% - 55%);
+  left: calc(100% - 55%);
+  border-radius: 50%;
+  position: absolute;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.loader {
+  border: 5px solid #f1f1f1;
+  border-radius: 50%;
+  border-top: 5px solid #0274e9;
+  width: 50px;
+  height: 50px;
+  -webkit-animation: spin 1.5s linear infinite; /* Safari */
+  animation: spin 1.5s linear infinite;
+ 
+}
+.overlay {
+  background-color:red;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  top: 0px;
+  left: 0px;
+  opacity: .5; /* in FireFox */ 
+  filter: alpha(opacity=50); /* in IE */
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+/* Popover Style  */
+ 
+.ngxp__container {
+  border-radius: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  z-index: 9 !important;
+  
+}
+  
+/* .ngxp__container[x-placement^="bottom"]{
+  margin-top: 0 !important;
+} */
+
+.ngxp__container > .ngxp__arrow{
+  border-color: #cccccc !important;
+}
+
+.ngxp__container[x-placement^="bottom"] > .ngxp__arrow{
+  border-width: 0 10px 10px 10px !important;
+  border-top-color: transparent !important;
+  border-right-color: transparent !important;
+  border-left-color: transparent !important;
+  top: -10px !important; 
+}
+
+/* For topnav  */
+
+top-navbar .top-navbar .ngxp__container > .ngxp__arrow{
+  border-color: white;
+}
+
+/* Scrollbar Style */
+
+/* .ng-scrollbar-visible { 
+  --scrollbar-padding: 8px 0; 
+}  */
+
+/* Browse Button Style */
+.myd-btn-file{
+  position:relative;
+}
+.myd-btn-file input[type="file"]{
+  position: absolute;
+  top: -9999999;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  width:0;
+  height:0;
+  outline: none;
+  cursor: inherit;
+}
+
+/* CheckBox Style */
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before{
+  background-color: #0274e9 !important;
+}
+
+/* -------------------Fixed header style --------------------*/
+
+
+.fix-header    { overflow-y: auto; overflow-x: auto;}
+.fix-header .header { position: sticky; top: 0; background-color: white;}
+
+
+/* Login Styles --------------------------------------*/
+.login-card-background {
+  position: absolute;
+  min-width: 500px;
+  left: 500px;
+  top: 100px;
+  background: #000;
+  opacity: 0.5;
+  min-height: 380px;
+}
+
+.card.card-login
+{
+  min-width:500px;
+  position: absolute;
+  left: 500px;
+  top: 100px;
+  min-height: 350px;
+  background: transparent;
+}
+
+.card.card-login img.logo{
+  float: right;
+  width: 300px;
+  height: 70px;
+  margin-bottom: 20px;
+}
+
+#login-overlay
+{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+#login-background{    
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;    
+  background-attachment: fixed;
+}
+
+
+
+.fileUpload {
+  position: relative;
+  overflow: hidden;
+  top:10px;
+  margin: 0;
+  width: 150px !important;
+  text-align: center;
+}
+
+.fileUpload input.upload {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}

@@ -1,0 +1,45 @@
+.login-card-background {
+    position: absolute;
+    min-width: 500px;
+    left: 500px;
+    top: 100px;
+    background: #000;
+    opacity: 0.5;
+    min-height: 380px;
+}
+
+.card.card-login
+{
+    min-width:500px;
+    position: absolute;
+    left: 500px;
+    top: 100px;
+    min-height: 350px;
+    background: transparent;
+}
+
+.card.card-login img.logo{
+    float: right;
+    width: 300px;
+    height: 70px;
+    margin-bottom: 20px;
+}
+
+#login-overlay
+{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+#login-background{    
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;    
+    background-attachment: fixed;
+}
+
+

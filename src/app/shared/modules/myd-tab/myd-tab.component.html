@@ -1,0 +1,12 @@
+<nav class="{{className}}">
+  <div class="nav nav-tabs border-0" id="nav-tab" role="tablist">
+    <ng-template ngFor let-tab [ngForOf]="_tabItems" let-i="index">
+      <a class="nav-item nav-link ripple" id="nav_tab_{{i}}" href="javascript:void(0)" role="tab" aria-selected="true"
+        [class.active]="tab.active" (click)="onTabChanged(tab)">{{tab.title}}</a>
+    </ng-template>
+  </div>
+</nav>
+
+<div class="tab-content" id="pills-tabContent">
+  <ng-content></ng-content>
+</div>

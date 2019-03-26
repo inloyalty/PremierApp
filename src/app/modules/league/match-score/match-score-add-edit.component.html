@@ -1,0 +1,285 @@
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-6">
+                League Name
+            </div>
+
+            <div class="col-4">
+                {{leagueMatch.venue}}
+            </div>
+            <div class="col-2">
+                {{leagueMatch.startDate}}
+
+            </div>
+        </div>
+    </div>
+
+    <div class="card-header">
+        Score Detail
+        <span class="float-right">
+            <button class="btn btn-danger ripple nav-button float-right" type="button" (click)="finishMatch()">
+                End Match <i class="fas fa-stop"></i>
+            </button>
+        </span>
+    </div>
+    <div class="card-body" *ngIf="leagueMatch.isTeamMatch">
+        <div class="row" style="height:50px;">
+            <div class="col-2 border">
+
+            </div>
+            <div class="col-2 border">
+                <h4>Total Points</h4>
+            </div>
+            <ng-template ngFor let-matchQuater [ngForOf]="matchQuaters" let-index="index">
+                <div class="col-2 border center-block text-center">
+                    <div class="float-left" style="padding: 4px;font-size: 24px;"> Q
+                        {{matchQuater.quarterNr}} </div>
+                    <div class="float-right" style="padding: 4px;" *ngIf="!matchQuater.start">
+                        <button class="btn btn-primary btn-sm float-right" type="button"
+                            (click)="onSessionStart(matchQuater.id)" style="font-size: 16px;">
+                            Start <i class="fas fa-play"></i>
+                        </button>
+                    </div>
+                    <span class="float-right" *ngIf="matchQuater.start && !matchQuater.end">
+                        <button class="btn btn-primary btn-sm float-right" type="button"
+                            (click)="onSessionEnd(matchQuater.id)" style="font-size: 16px;">
+                            Stop <i class="fas fa-stop"></i>
+                        </button>
+                    </span>
+                </div>
+            </ng-template>
+
+        </div>
+        <div *ngIf="leagueMatch.isTeamMatch">
+            <div class="row" style="height: 70px;">
+                <div class="col-2 border">
+                    <h4> {{teamA.name}}</h4>
+                </div>
+                <div class="col-2 border">
+                        {{teamATotalPoints}}
+                </div>
+                <ng-template ngFor let-matchQuater [ngForOf]="matchQuaters" let-index="index">
+                    <div class="col-2 border p-0"
+                        [ngClass]="{'bg-primary text-light': matchQuater.start == true && !matchQuater.end,'bg-secondary text-white': matchQuater.start == true && matchQuater.end == true}">
+                        <div class="row p-0 m-0 h-100" style="font-size: 44px;">
+                            <div class="col-6 bg-success text-ligh">
+                                <!-- <span>P {{matchQuater.teamATotalPoints}} </span> -->
+                                <span class="float-left ">P </span>
+                                <span class="float-right "> {{matchQuater.teamATotalPoints}} </span>
+                            </div>
+                            <div class="col-6 bg-danger text-light">
+                                <span class="float-left ">F </span>
+                                <span class="float-right "> {{matchQuater.teamATotalFouls}} </span>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+
+            </div>
+            <div class="row" style="height: 50px;">
+                <div class="col-2 border">
+                    <h4>{{teamB.name}}</h4>
+                </div>
+                <div class="col-2 border">
+                   {{teamBTotalPoints}}
+                </div>
+
+                <ng-template ngFor let-matchQuater [ngForOf]="matchQuaters" let-index="index">
+                    <div class="col-2 border p-0"
+                        [ngClass]="{'bg-primary text-light': matchQuater.start == true && !matchQuater.end,'bg-secondary text-white': matchQuater.start == true && matchQuater.end == true}">
+                        <div class="row p-0 m-0 h-100" style="font-size: 44px;">
+                            <div class="col-6 bg-success text-ligh">
+                                <!-- <span>P {{matchQuater.teamATotalPoints}} </span> -->
+                                <span class="float-left ">P </span>
+                                <span class="float-right "> {{matchQuater.teamBTotalPoints}} </span>
+                            </div>
+                            <div class="col-6 bg-danger text-light">
+                                <span class="float-left ">F </span>
+                                <span class="float-right "> {{matchQuater.teamBTotalFouls}} </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </ng-template>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div *ngIf="leagueMatch.isTeamMatch" class="row">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header text-light bg-info">
+                <h3>
+                    {{teamA.name}}
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="row border-bottom">
+                    <div class="col-3">
+                        <h3> Match Points</h3>
+                    </div>
+                    <div class="col-9">
+                        <div class="row">
+                            <ng-template ngFor let-scorePoint [ngForOf]="scorePoints" let-index="index">
+                                <div class="col-3">
+                                    <button class="btn btn-success ripple nav-button float-right w-100" type="button"
+                                        style="height: 100px;"
+                                        (click)="addTeamPoints('A',scorePoint.id,scorePoint.value)">
+                                        {{scorePoint.code}} <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </ng-template>
+                            <div class="col-3">
+                                <button class="btn btn-danger ripple nav-button float-right w-100"
+                                    style="height: 100px;" type="button" (click)="addTeamFouls('A',28,1)">
+                                    Foul <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header text-light bg-warning">
+                <h3>
+                    {{teamB.name}}
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="row border-bottom">
+                    <div class="col-3">
+                        <h3> Match Points</h3>
+                    </div>
+                    <div class="col-9">
+                        <div class="row">
+                            <ng-template ngFor let-scorePoint [ngForOf]="scorePoints" let-index="index">
+                                <div class="col-3">
+                                    <button class="btn btn-success ripple nav-button float-right w-100"
+                                        style="height: 100px;" type="button"
+                                        (click)="addTeamPoints('B',scorePoint.id,scorePoint.value)">
+                                        {{scorePoint.code}} <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </ng-template>
+                            <div class="col-3">
+                                <button class="btn btn-danger ripple nav-button float-right w-100"
+                                    style="height: 100px;" type="button" (click)="addTeamFouls('B',28,1)">
+                                    Foul <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row" *ngIf="showTeamDetail">
+    <div class="col-6">
+
+        <div class="card">
+
+            <div class="card-header text-light bg-primary">
+                <span> {{teamA.name}} </span>
+            </div>
+
+            <div class="card-body">
+                <div class="row border-bottom" style="font-weight: bold;">
+                    <div class="col-1"> Playing</div>
+                    <div class="col-3"> Name</div>
+                    <div class="col-1"> Nr. </div>
+                    <div class="col-3"> Fouls</div>
+                    <div class="col-4"> Points</div>
+                </div>
+
+                <ng-template ngFor let-player [ngForOf]="teamAPlayers" let-index="index">
+
+                    <div class="row" style="height: 50px">
+                        <div class="col-1 border-bottom border-right"> P</div>
+                        <div class="col-3 border-bottom border-right" style="padding-top: 10px;">
+                            <span class="align-middle"> {{player.firstName}} {{player.lastName}}</span>
+
+                        </div>
+                        <div class="col-1 border-bottom border-right" style="padding-top: 10px;"> {{player.shirtNr}}
+                        </div>
+                        <div class="col-3 border-bottom border-right" style="padding-top: 10px;">
+                            <span>1</span>
+                            <span class="float-right">
+                                <button class="btn btn-danger ripple nav-button float-right" type="button"
+                                    (click)="addFouls('A',player.id)">
+                                    Add <i class="fas fa-plus"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <div class="col border-bottom border-light" style="padding-top: 10px;">
+                            <button class="btn btn-success ripple nav-button float-right" type="button"
+                                (click)="addPoint('A',player.id)">
+                                Add <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </ng-template>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+
+        <div class="card">
+
+            <div class="card-header text-light bg-primary">
+                <span> {{teamB.name}} </span>
+            </div>
+
+            <div class="card-body">
+                <div class="row border-bottom" style="font-weight: bold;">
+                    <div class="col-1"> Playing</div>
+                    <div class="col-3"> Name</div>
+                    <div class="col-1"> Nr. </div>
+                    <div class="col-3"> Fouls</div>
+                    <div class="col-4"> Points</div>
+                </div>
+
+                <ng-template ngFor let-player [ngForOf]="teamBPlayers" let-index="index">
+
+                    <div class="row" style="height: 50px">
+                        <div class="col-1 border-bottom border-right"> P</div>
+                        <div class="col-3 border-bottom border-right" style="padding-top: 10px;">
+                            <span class="align-middle"> {{player.firstName}} {{player.lastName}}</span>
+
+                        </div>
+                        <div class="col-1 border-bottom border-right" style="padding-top: 10px;"> {{player.shirtNr}}
+                        </div>
+                        <div class="col-3 border-bottom border-right" style="padding-top: 10px;">
+                            <span>1</span>
+                            <span class="float-right">
+                                <button class="btn btn-danger ripple nav-button float-right" type="button"
+                                    (click)="addFouls('B',player.id)">
+                                    Add <i class="fas fa-plus"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <div class="col border-bottom border-light" style="padding-top: 10px;">
+                            <button class="btn btn-success ripple nav-button float-right" type="button"
+                                (click)="addPoint('B',player.id)">
+                                Add <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>

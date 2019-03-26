@@ -1,0 +1,53 @@
+<div class="el-card">
+  
+        <div>
+        <ng-template ngFor let-filterItem [ngForOf]="dataSource" let-i="index">
+
+            <div class="row margin-bottom-3">
+                <div class="col-md-6"> <label> {{filterItem.displayName}} </label> </div>
+                <div class="col-md-6">{{filterItem.searchText}}
+
+                    <input *ngIf="filterItem.dataType ==1 && !filterItem.isRange" class="el-txt el-txt-block" type="text" 
+                    [(ngModel)]="filterItem.value" name="{{i}}_{{filterItem.fieldName}}">
+                    <select *ngIf="filterItem.dataType ==8 && !filterItem.isRange" [(ngModel)]="filterItem.value" class="el-select el-select-block">
+                        <option *ngFor="let x of filterItem.options" [ngValue]="x.value">{{x.text}}</option>
+                    </select>
+
+                    <input *ngIf="filterItem.dataType ==4 && !filterItem.isRange" type="date" class="el-txt el-txt-block" [(ngModel)]="filterItem.value" name="{{i}}_{{filterItem.fieldName}}">
+                    <div *ngIf="filterItem.isRange" class="row">
+                        <div class="col-md-6">
+                            <label> From </label>
+                            <input *ngIf="filterItem.dataType ==1" type="text" class="el-txt el-txt-block" [(ngModel)]="filterItem.value" name="{{i}}_{{filterItem.fieldName}}_from">
+
+                        </div>
+                        <div class="col-md-6">
+                            <label> To </label>
+                            <input *ngIf="filterItem.dataType ==1" type="text"class="el-txt el-txt-block" [(ngModel)]="filterItem.toValue" name="{{i}}_{{filterItem.fieldName}}_to">
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <hr>
+
+        </ng-template>
+    </div>
+        <!-- <button class="el-btn el-btn-primary" type="button" (click)="applyFilter()">
+            <i class="fa fa-floppy-o"></i> Apply Filter
+        </button> -->
+
+        <div  class="right-aligned margin-top-10">
+            <button class="el-btn el-btn-default" type="button" (click)="onResetFilter()" >
+                <i class="fa fa-floppy-o"></i>Cancel
+            </button>
+            <button class="el-btn el-btn-primary" type="button" (click)="onApplyFilter()" >
+                <i class="fa fa-floppy-o"></i> Apply Filter
+            </button>
+    
+        </div>
+
+</div>

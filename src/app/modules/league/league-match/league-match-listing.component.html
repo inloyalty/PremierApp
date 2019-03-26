@@ -1,0 +1,89 @@
+<div class="row">
+    <div class="col border-bottom-0">
+        <command-bar>
+            <div class="form-row">
+                <div class=" form-group col-1 mb-0">
+
+                </div>
+                <div class="form-group col-4 mb-0">
+
+                </div>
+                <div class="form-group col-4 mb-0">
+
+                </div>
+                <div class="form-group col-3 mb-0">
+
+                    <button class="btn btn-primary ripple nav-button float-right" type="button" (click)="onAddNew()">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </command-bar>
+    </div>
+</div>
+<div class="row">
+    <div class="col  margin-top">
+        <div class="card shadow-sm">
+            <myd-list #mydList [dataSource]="leagueMatches" [serverSidePagination]="true" [totalRecord]="totalRecords"
+                [headerItems]="headerItems" [height]="cardHeight" (sort)="onSort($event)"
+                (pageChange)="onPageChange($event)">
+                <ng-template myd-select-option let-item>
+                    <div class="row pl-3">
+
+                        <div class="col">
+                            <h6 class="font-weight-normal text-muted">
+                                {{item.leagueName}}
+                            </h6>
+                        </div>
+                        <div class="col">
+                            <h6 class="font-weight-normal text-muted">
+                                {{item.mathcNr}}
+                            </h6>
+                        </div>
+                        <div class="col">
+                            <h6 class="font-weight-normal text-muted">
+                                {{item.venue}}
+                            </h6>
+                        </div>
+                        <div class="col">
+                                <h6 class="font-weight-normal text-muted">
+                                    {{item.startDate |dateFormat }}
+                                </h6>
+                            </div>
+                        <div class="col">
+                            <h6 class="font-weight-normal text-muted">
+                                {{item.isTeamMatch |booleanToText}}
+                            </h6>
+                        </div>
+                        <div class="col">
+                            <h6 class="font-weight-normal text-muted">
+                                {{item.teamAName}}
+                            </h6>
+                        </div>
+                        <div class="col">
+                                <h6 class="font-weight-normal text-muted">
+                                    {{item.teamBName}}
+                                </h6>
+                            </div>
+                      
+
+                        <div class="col">
+                            <div class="float-right">
+                                <button type="button" class="btn btn-outline-light btn-flat p-0 btn-icon" 
+                                (click)=onEdit(item.id)>
+                                    <i class="far fa-eye text-primary"></i>
+                                </button>
+                                
+                                <button type="button" (click)=onDelete(item.id)
+                                    class="btn btn-outline-light btn-flat btn-icon p-0">
+                                    <i class="fas fa-trash text-danger"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </myd-list>
+        </div>
+
+    </div>
+</div>

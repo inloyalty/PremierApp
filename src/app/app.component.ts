@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { LocalStorageService } from './shared/services/local-storage.service';
+import { AppConstant } from './modules/constants/app-constant';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'sport-app';
+   baseUrl = 'http://216.15.177.55/PremierApi/api/';
+  //baseUrl = 'http://localhost:55937/api/';
+
+
+  constructor(
+    private localStorageSvc: LocalStorageService
+  ) {
+    this.localStorageSvc.set(AppConstant.API_BASE_URL, this.baseUrl);
+  }
 }
