@@ -12,7 +12,6 @@ export class AppComponent {
    baseUrl = 'http://216.15.177.55/PremierApi/api/';
   //baseUrl = 'http://localhost:55937/api/';
 
-
   constructor(
     private localStorageSvc: LocalStorageService
   ) {
