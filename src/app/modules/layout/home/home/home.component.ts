@@ -17,8 +17,5 @@ export class HomeComponent
     }
 
 
-   async onUrlCilck(url:string)
-    {
-        await this.navigationSvc.navigateTo('login');
-    }
+   
 }

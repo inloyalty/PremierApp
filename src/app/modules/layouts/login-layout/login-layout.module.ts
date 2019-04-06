@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { LoginLayoutComponent } from "./login-layout.component";
 import { LoginLayoutRoutingModule } from "./login-layout.routing.module";
-import { LoginModule } from '../../login/login.module';
+import { LoginModule } from '../../layout/login/login.module';
 
 @NgModule({
     declarations : [LoginLayoutComponent],

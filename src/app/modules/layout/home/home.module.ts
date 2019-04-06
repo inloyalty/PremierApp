@@ -12,11 +12,13 @@ import { BsDatepickerModule } from "ngx-bootstrap";
 import { SharedDirectiveModule } from 'src/app/shared/directives/shared.directive.module';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home/home.component';
+import { TopNavModule } from '../../shared/modules/top-nav/top-nav.module';
+import { FooterModule } from '../../shared/modules/footer/footer.module';
 
 
 @NgModule({
     declarations: [HomeComponent],
-    imports: [ CommonModule, FormsModule,NgSelectModule,BsDatepickerModule.forRoot(),SharedDirectiveModule],
+    imports: [ CommonModule, FormsModule,NgSelectModule,FooterModule,TopNavModule,BsDatepickerModule.forRoot(),SharedDirectiveModule],
     exports: [HomeRoutingModule],
     providers: [NavigationService,HttpRestClientService,LocalStorageService],
     entryComponents: []

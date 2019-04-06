@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { LoginRoutingModule } from './login.routing.module';
-import { LoginComponent } from './login/login.component';
+import { LoginLayoutComponent } from './login-layout/login-layout.component';
 import { NavigationService } from 'src/app/shared/services/navigation.service';
 import { AuthService } from './auth.service';
 import { HttpRestClientService } from 'src/app/shared/services/http-rest-client.service';
@@ -13,13 +13,15 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
 import { SharedDirectiveModule } from 'src/app/shared/directives/shared.directive.module';
+import { TopNavModule } from '../../shared/modules/top-nav/top-nav.module';
+import { FooterModule } from '../../shared/modules/footer/footer.module';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
-    declarations: [LoginComponent,SignUpComponent,ForgotPasswordComponent,VerifyEmailComponent],
-    imports: [ CommonModule, FormsModule,NgSelectModule,BsDatepickerModule.forRoot(),SharedDirectiveModule],
-    exports: [LoginRoutingModule],
-    providers: [NavigationService,AuthService,HttpRestClientService,LocalStorageService],
+    declarations: [LoginLayoutComponent,LoginComponent, SignUpComponent, ForgotPasswordComponent, VerifyEmailComponent],
+    imports: [CommonModule,LoginRoutingModule,TopNavModule, FooterModule, FormsModule, NgSelectModule, BsDatepickerModule.forRoot(), SharedDirectiveModule],
+    providers: [NavigationService, AuthService, HttpRestClientService, LocalStorageService],
     entryComponents: []
 })
 

@@ -4,17 +4,16 @@ import { Routes, RouterModule } from '@angular/router';
 
 const ROUTES: Routes = [
   {
-    path: '',  loadChildren: './modules/home/home.module#HomeModule'
+    path: '', loadChildren: './modules/layout/home/home.module#HomeModule'
   },
   {
-    path: 'home',  loadChildren: './modules/home/home.module#HomeModule'
+    path: 'home', loadChildren: './modules/layout/home/home.module#HomeModule'
   },
   {
-    path: 'login', loadChildren: './modules/layouts/login-layout/login-layout.module#LoginLayoutModule'
-  }  
-  ,  
+    path: 'login', loadChildren: './modules/layout/login/login.module#LoginModule'
+  },
   {
-    path: '', loadChildren: './modules/layouts/secure-layout/secure-layout.module#SecureLayoutModule' 
+    path: '', loadChildren: './modules/layouts/secure-layout/secure-layout.module#SecureLayoutModule'
   }
 ];
 

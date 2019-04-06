@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpRestClientService } from 'src/app/shared/services/http-rest-client.service';
 import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
-import { AppConstant } from '../constants/app-constant';
 
 @Injectable()
 export class AuthService {

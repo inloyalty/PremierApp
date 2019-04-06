@@ -12,7 +12,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AuthInterceptor } from './shared/interceptors/request.interceptor';
 import { ConfirmationDialogComponent } from './shared/modules/confirmation-dialog/confirmation-dialog.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HomeModule } from './modules/home/home.module';
+
 @NgModule({
   declarations: [
     AppComponent,ConfirmationDialogComponent
