@@ -45,39 +45,49 @@
         </div>
     </div> -->
 
-    <div class="row card card-login">
-        <form id="msform" name="Form" #userForm="ngForm" method="post" enctype="multipart/form-data" novalidate>
-            <fieldset>
-                <h2 class="fs-title">Login</h2>
-                <div class="form-group">
-                    <label for="" class="float-left mb-2">UserName / Email <span>*</span> </label>
-                    <label *ngIf="(userForm.submitted || userName.touched) && !userName.valid"
-                        class="text-danger float-right">Email/User Name is required</label>
-                    <input [readonly]="loading" type="email" class="form-control" aria-describedby="emailHelp"
-                        placeholder="User Name" [(ngModel)]="loginModel.userName" #userName="ngModel" name="userName"
-                        required>
-                </div>
-                <div class="form-group">
-                    <label for="" class="float-left mb-2">Password <span>*</span> </label>
-                    <label *ngIf="(userForm.submitted || password.touched || password.dirty ) && !password.valid"
-                        class="text-danger float-right">Password is required</label>
+    <div class="row ">
+        <div class="col-3">
 
-                    <input [readonly]="loading" type="password" class="form-control" placeholder="Password"
-                        name="password" [(ngModel)]="loginModel.password" #password="ngModel" required>
-                </div>
-                <div class="row m-0">
-                    <div class="w-100">
-                        <button type="button" name="forgotpass" class="btn btn-link float-left mt-4"
-                            (click)="onForgotPassword()">forgot password ?</button>
-                        <input type="button" [disabled]="loading" name="login" class="next action-button float-right"
-                            value="Login" (click)="userForm.form.valid && onLogin()" />
+        </div>
+        <div class="col-6 card card-login">
+            <form id="msform" name="Form" #userForm="ngForm" method="post" enctype="multipart/form-data" novalidate>
+                <fieldset>
+                    <h2 class="fs-title">Login</h2>
+                    <div class="form-group">
+                        <label for="" class="float-left mb-2">UserName / Email <span>*</span> </label>
+                        <label *ngIf="(userForm.submitted || userName.touched) && !userName.valid"
+                            class="text-danger float-right">Email/User Name is required</label>
+                        <input [readonly]="loading" type="email" class="form-control" aria-describedby="emailHelp"
+                            placeholder="User Name" [(ngModel)]="loginModel.userName" #userName="ngModel"
+                            name="userName" required>
                     </div>
-                </div>
-                <div class="row m-0">
-                    <button (click)="onSignUpClick()" type="button" class="btn btn-link float-left">Don't have an
-                        account? Sign Up!</button>
-                </div>
-            </fieldset>
-        </form>
+                    <div class="form-group">
+                        <label for="" class="float-left mb-2">Password <span>*</span> </label>
+                        <label *ngIf="(userForm.submitted || password.touched || password.dirty ) && !password.valid"
+                            class="text-danger float-right">Password is required</label>
+
+                        <input [readonly]="loading" type="password" class="form-control" placeholder="Password"
+                            name="password" [(ngModel)]="loginModel.password" #password="ngModel" required>
+                    </div>
+                    <div class="row m-0">
+                        <div class="w-100">
+                            <button type="button" name="forgotpass" class="btn btn-link float-left mt-4"
+                                (click)="onForgotPassword()">forgot password ?</button>
+                            <input type="button" [disabled]="loading" name="login"
+                                class="next action-button float-right" value="Login"
+                                (click)="userForm.form.valid && onLogin()" />
+                        </div>
+                    </div>
+                    <div class="row m-0">
+                        <button (click)="onSignUpClick()" type="button" class="btn btn-link float-left">Don't have an
+                            account? Sign Up!</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <div class="col-3">
+
+        </div>
+
     </div>
 </div>
