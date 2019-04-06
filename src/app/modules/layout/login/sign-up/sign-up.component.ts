@@ -17,7 +17,7 @@ import { AuthService } from '../auth.service';
 export class SignUpComponent implements OnInit {
 
     public signUpModel: any = {}
-    public currentTabIndex = 1;
+    public currentTabIndex = 2;
     public countries = [];
     public states = [];
     public sports = [];

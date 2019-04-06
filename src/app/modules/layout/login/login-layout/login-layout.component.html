@@ -1,4 +1,3 @@
-
 <div class="container-fluid login bg-transparent" busy [showLoading]="loading">
     <!-- <div id="login-background" class="bg-gradient"
         style="background-image:url('../assets/images/bg1.jpg');  background-color: #2F3238;"></div>
@@ -66,12 +65,15 @@
                     <input [readonly]="loading" type="password" class="form-control" placeholder="Password"
                         name="password" [(ngModel)]="loginModel.password" #password="ngModel" required>
                 </div>
-                <div>
-                    <button type="button" name="forgotpass" class="btn btn-link float-left mt-2"
-                        (click)="onForgotPassword()">forgot password ?</button>
-
-                    <input type="button" [disabled]="loading" name="login" class="next action-button float-right"
-                        value="Login" (click)="userForm.form.valid && onLogin()" />
+                <div class="row m-0">
+                    <div class="w-100">
+                        <button type="button" name="forgotpass" class="btn btn-link float-left mt-4"
+                            (click)="onForgotPassword()">forgot password ?</button>
+                        <input type="button" [disabled]="loading" name="login" class="next action-button float-right"
+                            value="Login" (click)="userForm.form.valid && onLogin()" />
+                    </div>
+                </div>
+                <div class="row m-0">
                     <button (click)="onSignUpClick()" type="button" class="btn btn-link float-left">Don't have an
                         account? Sign Up!</button>
                 </div>

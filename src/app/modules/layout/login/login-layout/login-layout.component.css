@@ -9,7 +9,7 @@
 } */
 
 .login {
-    height : 530px;
+    height : 330px;
     margin-top: 5%;
 }
 
@@ -73,6 +73,7 @@ body {
     text-align: center;
     position: relative;
     margin-top: 30px;
+    margin-bottom : 30px;
 }
 
 #msform fieldset {

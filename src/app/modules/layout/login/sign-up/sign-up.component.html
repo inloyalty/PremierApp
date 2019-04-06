@@ -125,10 +125,9 @@
                         <div class="col-6 pl-0">
                             <div class="form-group ">
                                 <label for="" class="float-left mb-2">Country </label>
-
-                                <ng-select [items]="countries" [(ngModel)]="signUpModel.countryId"
+                                <ng-select style="display: inline;" [items]="countries" [(ngModel)]="signUpModel.countryId"
                                     (change)="onCountryChange($event)" bindLabel="name" bindValue="id" name="country"
-                                    [ngModelOptions]="{standalone: true}" class="custom form-control">
+                                    [ngModelOptions]="{standalone: true}" class="custom  form-control">
                                 </ng-select>
 
                             </div>
@@ -137,7 +136,7 @@
                             <div class="form-group ">
                                 <label for="" class="float-left mb-2">State </label>
 
-                                <ng-select [items]="states" [(ngModel)]="signUpModel.stateId" name="state"
+                                <ng-select [items]="states" style="display:inline;" [(ngModel)]="signUpModel.stateId" name="state"
                                     bindLabel="name" bindValue="id" [ngModelOptions]="{standalone: true}"
                                     class="custom form-control">
                                 </ng-select>
@@ -158,25 +157,23 @@
 
                     </div>
                     <div class="row m-0">
-                        <div class="col-6 pl-0">
-                            <div class="form-group custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck2"
-                                    [(ngModel)]="signUpModel.isAutoAccountTransfer" name="isAutoAccountTransfer">
-                                <label class="custom-control-label text-wrap" for="customCheck2">Would you like to
-                                    automatically
-                                    give possession
-                                    of records <br> and access to child when he is 13
-                                    years old</label>
-                            </div>
+                        <div class="form-group custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="customCheck2"
+                                [(ngModel)]="signUpModel.isAutoAccountTransfer" name="isAutoAccountTransfer">
+                            <label class="custom-control-label text-wrap text-left" for="customCheck2">Would you like to
+                                automatically
+                                give possession
+                                of records and access to child when he is 13
+                                years old</label>
                         </div>
-                        <div class="col-6 pl-0">
-                            <div class="form-group custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck1" name="isParent"
-                                    [(ngModel)]="signUpModel.isParent" name="isParent">
-                                <label class="custom-control-label" for="customCheck1">Are you parent who is registering
-                                    for
-                                    your child</label>
-                            </div>
+                    </div>
+                    <div class="row m-0">
+                        <div class="form-group custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="customCheck1" name="isParent"
+                                [(ngModel)]="signUpModel.isParent" name="isParent">
+                            <label class="custom-control-label" for="customCheck1">Are you parent who is registering
+                                for
+                                your child</label>
                         </div>
                     </div>
                     <div class="row m-0">

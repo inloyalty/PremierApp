@@ -9,15 +9,14 @@
 }
 
 .login {
-    height : 685px;
     margin-top: 5%;
 }
-
+  
 .card.card-signup
 {
     top: 80px;
-    height: 550px;
-    overflow: auto;
+    /* height: 550px;
+    overflow: auto; */
     background: transparent;
 }
 
