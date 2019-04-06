@@ -13,11 +13,12 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
 import { SharedDirectiveModule } from 'src/app/shared/directives/shared.directive.module';
+import { MydSegmentedButtonModue } from 'src/app/shared/modules/myd-segmented-button/myd-segmented-button.module';
 
 
 @NgModule({
     declarations: [LoginComponent,SignUpComponent,ForgotPasswordComponent,VerifyEmailComponent],
-    imports: [ CommonModule, FormsModule,NgSelectModule,BsDatepickerModule.forRoot(),SharedDirectiveModule],
+    imports: [ CommonModule, FormsModule,NgSelectModule,BsDatepickerModule.forRoot(),SharedDirectiveModule,MydSegmentedButtonModue],
     exports: [LoginRoutingModule],
     providers: [NavigationService,AuthService,HttpRestClientService,LocalStorageService],
     entryComponents: []

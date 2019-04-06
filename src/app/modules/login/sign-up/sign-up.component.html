@@ -64,8 +64,7 @@
                             class="text-danger float-right">Email is required</label>
                         <label *ngIf="(userForm.submitted || email.touched) && email.errors?.email"
                             class="text-danger float-right">Email not valid</label>
-                            <label *ngIf="isEmailExist"
-                            class="text-danger float-right">Email id already exist.</label>
+                        <label *ngIf="isEmailExist" class="text-danger float-right">Email id already exist.</label>
                         <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Email"
                             [(ngModel)]="signUpModel.email" #email="ngModel" name="email" required email
                             (change)="onEmailChange($event)">
@@ -104,8 +103,7 @@
                         <label for="">User Name <span>*</span> </label>
                         <label *ngIf="(userForm.submitted || userName.touched) && !userName.valid"
                             class="text-danger float-right">User name is required</label>
-                            <label *ngIf="isUserName"
-                            class="text-danger float-right">user Name already exist.</label>
+                        <label *ngIf="isUserName" class="text-danger float-right">user Name already exist.</label>
                         <input type="text" class="form-control" placeholder="User Name"
                             [(ngModel)]="signUpModel.userName" #userName="ngModel" name="userName" required
                             (change)="onUserNameChange($event)">
@@ -164,13 +162,24 @@
                         <input type="text" class="form-control" placeholder="Zip Code" [(ngModel)]="signUpModel.zipCode"
                             #zipCode="ngModel" name="zipCode" required>
                     </div>
-                    <div class="form-group custom-control custom-checkbox">
+                    <div class="form-group ">
+                        <label>Register As</label>
+                        <span style="padding-left: 10px;">
+
+                            <myd-segmented-button [buttons]="segmentedButtons"
+                                (buttonChanged)="onRegistrationChanged($event)"></myd-segmented-button>
+                        </span>
+
+                    </div>
+
+                    <!-- <div class="form-group custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" id="customCheck1" name="isParent"
                             [(ngModel)]="signUpModel.isParent" name="isParent">
                         <label class="custom-control-label" for="customCheck1">Are you parent who is registering for
                             your child</label>
-                    </div>
-                    <div class="form-group custom-control custom-checkbox">
+                    </div> -->
+
+                    <div class="form-group custom-control custom-checkbox" *ngIf="rigistrationType ==1">
                         <input type="checkbox" class="custom-control-input" id="customCheck2"
                             [(ngModel)]="signUpModel.isAutoAccountTransfer" name="isAutoAccountTransfer">
                         <label class="custom-control-label text-wrap" for="customCheck2">Would you like to automatically
@@ -178,18 +187,29 @@
                             of records <br> and access to child when he is 13
                             years old</label>
                     </div>
-                    <div class="form-group" *ngIf="signUpModel.isParent">
-                            <label for="">Child Email<span>*</span> </label>
-                            <label *ngIf="(userForm.submitted || childEmail.touched) && !childEmail.valid"
-                                class="text-danger float-right">Child Email is required</label>
+                    <div class="form-group" *ngIf="rigistrationType ==1">
+                        <label for="">Child Email<span>*</span> </label>
+                        <label *ngIf="(userForm.submitted || childEmail.touched) && !childEmail.valid"
+                            class="text-danger float-right">Child Email is required</label>
 
-                            <label *ngIf="isChildEmailExist"
-                            class="text-danger float-right">Child email already exist.</label>
+                        <label *ngIf="isChildEmailExist" class="text-danger float-right">Child email already
+                            exist.</label>
 
-                        <input type="text" class="form-control" placeholder="Child Email" 
+                        <input type="text" class="form-control" placeholder="Child Email"
                             [(ngModel)]="signUpModel.childEmail" #childEmail="ngModel" name="childEmail" required
                             (change)="onChildEmailChange($event)">
                     </div>
+                    <div class="form-group" *ngIf="rigistrationType ==3">
+                        <label for="">School Name</label>
+                        <input type="text" class="form-control" placeholder="School Name"
+                            [(ngModel)]="signUpModel.schoolName" #schoolName="ngModel" name="schoolName" >
+                    </div>
+                    <div class="form-group" *ngIf="rigistrationType ==3">
+                        <label for="">Grade</label>
+                        <input type="text" class="form-control" placeholder="Grade"
+                            [(ngModel)]="signUpModel.grade" #grade="ngModel" name="grade" >
+                    </div>
+
                 </div>
                 <div *ngIf="currentTabIndex ==3" class="row">
 
@@ -207,8 +227,8 @@
                         <input type="text" class="form-control" placeholder="Reward Received"
                             [(ngModel)]="signUpModel.rewardReceived" #rewardReceived="ngModel" name="rewardReceived">
                         <div class="input-group-append">
-                            <button [disabled]="loading" class="btn btn-primary" type="button" id="button-addon1" 
-                            (click) ="addUserReward()">
+                            <button [disabled]="loading" class="btn btn-primary" type="button" id="button-addon1"
+                                (click)="addUserReward()">
                                 <i class="fas fa-plus"></i>
                             </button>
                         </div>
@@ -216,7 +236,7 @@
                     <div class="mb-4">
                         <div class="chip chip-sm bg-primary" *ngFor="let reward of userRewards; let i= index;">
                             {{reward.name}}
-                            <span  class="close" (click)="removeSelectedItem(reward)">×</span>
+                            <span class="close" (click)="removeSelectedItem(reward)">×</span>
                         </div>
                     </div>
 
@@ -225,18 +245,18 @@
                             [(ngModel)]="signUpModel.clubJoind" #clubJoind="ngModel" name="clubJoind">
                         <div class="input-group-append">
                             <button [disabled]="loading" class="btn btn-primary" type="button" id="button-addon1"
-                            (click)="addUserClud()">
+                                (click)="addUserClud()">
                                 <i class="fas fa-plus"></i>
                             </button>
                         </div>
 
                     </div>
                     <div class="mb-4">
-                            <div class="chip chip-sm bg-primary" *ngFor="let reward of userClubs; let i= index;">
-                                {{reward.name}}
-                                <span  class="close" (click)="removeSelectedItem(reward)">×</span>
-                            </div>
+                        <div class="chip chip-sm bg-primary" *ngFor="let reward of userClubs; let i= index;">
+                            {{reward.name}}
+                            <span class="close" (click)="removeSelectedItem(reward)">×</span>
                         </div>
+                    </div>
                 </div>
 
                 <div class="form-group clearfix mb-3">

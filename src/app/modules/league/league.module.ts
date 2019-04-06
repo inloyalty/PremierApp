@@ -25,12 +25,13 @@ import { LeagueMatchEventsComponent } from './league-events/league-events.compon
 import { MatchScoreAddEditComponent } from './match-score/match-score-add-edit.component';
 import { MatchScoreResultComponent } from './match-score/match-score-result.component';
 import { MatchScoreIndividualAddEditComponent } from './match-score/match-score-individual-add-edit.component';
+import { MatchScoreResultIndividualComponent } from './match-score/match-score-result-individual.component';
 
 
 @NgModule({
     declarations: [LeagueComponent, LeagueMatchListingComponent, LeageMatchAddEditComponent
         , LeagueMatchEventsComponent, MatchScoreAddEditComponent, MatchScoreResultComponent
-    ,MatchScoreIndividualAddEditComponent],
+    ,MatchScoreIndividualAddEditComponent,MatchScoreResultIndividualComponent],
     imports: [CommonModule, FormsModule, NgSelectModule, BsDatepickerModule.forRoot(), CommandBarModule,
         MydTabModule, MydSideDrawerModule, MydListModule, ImageModule, SharedDirectiveModule, SharedPipeModule
         , MydSegmentedButtonModue],

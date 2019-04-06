@@ -84,7 +84,7 @@ export class LeagueMatchEventsComponent implements AfterViewChecked, OnInit {
 
     }
     ngOnInit(): void {
-        this.getLeagueMatches();
+      //  this.getLeagueMatches();
 
         this.getUpComingMatches();
         this.getPastMatches();
@@ -124,25 +124,25 @@ export class LeagueMatchEventsComponent implements AfterViewChecked, OnInit {
 
 
         }
-        this.getLeagueMatches();
+       // this.getLeagueMatches();
         this.mydList.clear();
         this.showDrader = false;
     }
 
-    async  getLeagueMatches() {
+    // async  getLeagueMatches() {
 
-        let apiResponse = await this.leageSvc.getLeagueMatches();
-        console.log(apiResponse)
-        if (apiResponse && apiResponse.data && apiResponse.data.length > 0) {
+    //     let apiResponse = await this.leageSvc.getLeagueMatches();
+    //     console.log(apiResponse)
+    //     if (apiResponse && apiResponse.data && apiResponse.data.length > 0) {
 
-            apiResponse.data.forEach(item => {
-                item.image = this.remoteImagePipe.transform(item.image, "Leagues");
-            });
-            this.leagueMatches = apiResponse.data;
-            console.log(this.leagueMatches)
-        }
-        this.totalRecords = apiResponse.filter.page.totalRecords;
-    }
+    //         apiResponse.data.forEach(item => {
+    //             item.image = this.remoteImagePipe.transform(item.image, "Leagues");
+    //         });
+    //         this.leagueMatches = apiResponse.data;
+    //         console.log(this.leagueMatches)
+    //     }
+    //     this.totalRecords = apiResponse.filter.page.totalRecords;
+    // }
 
     onUserImage(fileInput: any) {
         this.UserImage = fileInput.target.files[0];
@@ -172,8 +172,16 @@ export class LeagueMatchEventsComponent implements AfterViewChecked, OnInit {
         }
     }
 
-    onMatchScoreResult(id: number) {
-        this.navigationSvc.navigateByUrl(`league/match-score-result?id=${id}`);
+    onMatchScoreResult(match: any) {
+        if(match.isTeamMatch)
+        {
+            this.navigationSvc.navigateByUrl(`league/match-score-result?id=${match.id}`);
+        }
+        else
+        {
+            this.navigationSvc.navigateByUrl(`league/match-score-result-individual?id=${match.id}`);
+
+        }
     }
 
     public async onTabChanged(event: any) {

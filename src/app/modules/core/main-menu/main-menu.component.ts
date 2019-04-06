@@ -114,10 +114,6 @@ export class MainMenuComponent implements OnInit, OnDestroy {
             }
             ,
             {
-                id: 5, "name": "Score", "title": "Score", "url": "/help", "active": false, "order": 150, "iconImage": "", "iconClass": "fas fa-baseball-ball"
-            }
-            ,
-            {
                 id: 6, "name": "My Account", "title": "MyAccount", "url": "/my-account", "active": false, "order": 150, "iconImage": "", "iconClass": "fas fa-user-alt"
             }
         ];
