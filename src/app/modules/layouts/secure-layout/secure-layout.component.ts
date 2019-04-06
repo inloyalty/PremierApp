@@ -38,6 +38,7 @@ export class SecureLayoutComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this.doCleanUp();
     }
+    
     collapesSidenav() { }
     sidenavMenu(event: any) { }
 

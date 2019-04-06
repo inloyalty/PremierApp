@@ -12,8 +12,8 @@
 }
 
 .fixed-navbar.nav-fix {
-    background-color: rgba(13, 7, 25, 0.9);
-    height: 80px
+    background-color: #fff;
+    height: 65px
 }
 
 .fixed-navbar.nav-open {
@@ -27,7 +27,7 @@
 }
 
 .navbar-lockup {
-    max-width: 1180px;
+    max-width: 1050px;
     margin: 0 auto;
     padding: 0 30px;
     line-height: 120px;
@@ -36,7 +36,7 @@
 }
 
 .navbar-lockup.nav-fix {
-    line-height: 80px
+    line-height: 65px
 }
 
 .navbar-lockup .logo {
@@ -64,16 +64,17 @@
 }
 
 .navbar-lockup .nav li a {
-    color: #fff;
+    color: #021644;
     font-size: 13px;
     text-transform: uppercase;
     letter-spacing: .8px;
+    cursor: pointer;
     -webkit-transition: color .2s ease-in-out;
     transition: color .2s ease-in-out
 }
 
 .navbar-lockup .nav li a:hover {
-    color: #c8e474;
+    color: #4c5261;
     text-decoration: none
 }
 
@@ -182,7 +183,7 @@
 }
 
 .slide-out-nav .mobile-nav li a {
-    color: #fff;
+    color: #000;
     font-size: 13px;
     text-transform: uppercase;
     letter-spacing: .8px;
@@ -203,7 +204,7 @@
     transform-origin: bottom right;
     width: 100%;
     height: 125%;
-    background-color: #fff;
+    background-color: #000;
     opacity: .05
 }
 
@@ -229,7 +230,7 @@
     width: 100%;
     height: 2px;
     margin-bottom: 8px;
-    background-color: #fff
+    background-color: #000
 }
 
 @media (max-width: 1024px) {

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Output, EventEmitter } from "@angular/core";
 import { RemoteImagePipe } from 'src/app/shared/pipes/remote-image.pipe';
 import { NavigationService } from 'src/app/shared/services/navigation.service';
- 
+
 
 @Component({
     selector: 'main-menu',
@@ -13,7 +13,7 @@ export class MainMenuComponent implements OnInit, OnDestroy {
 
     // declare the public variables
     mainMenuItems: any = [];
-    isOpen: boolean;
+    isOpen: boolean = true;
     footerMenuItems: any = [];
     userProfileImage: string;
     public loading: boolean = false;
@@ -21,11 +21,11 @@ export class MainMenuComponent implements OnInit, OnDestroy {
 
     @Output() titleChange: EventEmitter<any> = new EventEmitter();
 
-    
+
     constructor(
-       private navigationSvc:NavigationService
-        ) {
-         
+        private navigationSvc: NavigationService
+    ) {
+
 
         this.footerMenuItems = [
             {
@@ -44,7 +44,7 @@ export class MainMenuComponent implements OnInit, OnDestroy {
         this.getMainMenu();
     }
     ngOnInit(): void {
-         
+
     }
 
 
@@ -54,27 +54,32 @@ export class MainMenuComponent implements OnInit, OnDestroy {
 
     onToggleNav() {
         this.isOpen = !this.isOpen;
+        if(this.isOpen == true) {
+            document.getElementById('content-wrapper').style.paddingLeft = '200px';
+        }
+        else {
+            document.getElementById('content-wrapper').style.paddingLeft = '0px';
+        }
     }
-     
 
-   async onMenuItemClick(menuItem: any) {
-      
+
+    async onMenuItemClick(menuItem: any) {
+
         console.log(menuItem);
-        if(menuItem.id==103)
-        {
+        if (menuItem.id == 103) {
             this.signOut();
         }
-        else{
+        else {
             this.titleChange.emit(menuItem.title)
             await this.navigationSvc.navigateTo(menuItem.url);
         }
-         
+
     }
 
     async signOut() {
         console.log('logout');
         // this.apiResponseModel = await this.authSvc.signOut();
-         await this.navigationSvc.navigateTo('login');
+        await this.navigationSvc.navigateTo('login');
     }
 
     lockOut() {
@@ -90,8 +95,7 @@ export class MainMenuComponent implements OnInit, OnDestroy {
 
     /* Helper Methods */
 
-    private getMainMenu()
-    {
+    private getMainMenu() {
         this.mainMenuItems = [
             {
                 id: 1, "name": "Dashboard", "title": "Dashboard", "url": "/dashboard", "active": false, "order": 150, "iconImage": "", "iconClass": "fas fa-tachometer-alt"
