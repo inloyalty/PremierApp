@@ -1,32 +1,255 @@
 <div class="card">
+    <div class="card-header">
+
+    </div>
+
     <div class="card-body">
         <div class="row">
             <div class="col-6">
-                League Name
+                <h1 class="text-center">
+                    Basketball ({{userType}})
+                </h1>
             </div>
-
-            <div class="col-4">
-                {{leagueMatch.venue}}
-            </div>
-            <div class="col-2">
-                {{leagueMatch.startDate}}
-
+            <div class="col-6">
+                <span class="float-right">
+                    <button class="btn btn-danger ripple nav-button float-right" type="button" (click)="finishMatch()">
+                        End Match <i class="fas fa-stop"></i>
+                    </button>
+                </span>
             </div>
         </div>
-    </div>
+        <div class="row mt-3" style="height:50px;">
+            <div class="col-4 bg-dark text-white" style="padding-top: 10px;">
+                <h4 *ngIf="userInfo">
+                    Type: <span> {{userInfo.schoolName}}</span> <span *ngIf="userInfo.grade">/{{userInfo.grade}} </span>
+                </h4>
+            </div>
+            <div class="col">
+                <span class="align-middle"></span>
+            </div>
+        </div>
+        <div class="row mt-3" style="height:50px;">
+            <div class="col-2 bg-dark text-white" style="padding-top: 10px;">
+                <h4>
+                    Game {{leagueMatch.mathcNr}}
+                </h4>
+            </div>
+            <div class="col-8">
+                <span class="text-light"></span>
+            </div>
+            <div class="col-2 bg-dark text-white" style="padding-top: 10px;">
+                <h4>
+                    Name : {{leagueMatch.userAFullName}}
+                </h4>
+            </div>
 
-    <div class="card-header">
-        Score Detail
-        <span class="float-right">
-            <button class="btn btn-danger ripple nav-button float-right" type="button" (click)="finishMatch()">
-                End Match <i class="fas fa-stop"></i>
-            </button>
-        </span>
-    </div>
-    <div class="card-body">
-        <div class="row" style="height:50px;">
+        </div>
+        <div class="row mt-3">
+            <div class="col" > <button class="btn btn-150 bg-point m-2"
+                    type="button" (click)="addPoints(1,1)">
+                    1 Point
+                </button></div>
+            <div class="col" > <button class="btn btn-150 bg-point m-2 margin-left"
+                    type="button" (click)="addPoints(5,2)">
+                    2 Points
+                </button></div>
+            <div class="col" ><button class="btn btn-150 bg-point m-2 margin-left"
+                    type="button" (click)="addPoints(8,3)">
+                    3 Point
+                </button></div>
+            <div class="col" ><button class="btn btn-150 bg-rebound m-2 margin-left"
+                    type="button" (click)="addPoints(29,1)">
+                    Rebound
+                </button></div>
+            <div class="col" > <button class="btn btn-150 bg-assist m-2 margin-left"
+                    type="button" (click)="addPoints(17,1)">
+                    Assist
+                </button></div>
+            <div class="col" ><button class="btn btn-150 bg-steal m-2 margin-left"
+                    type="button" (click)="addPoints(20,1)">
+                    Steal
+                </button></div>
+            <div class="col" ><button class="btn btn-150 bg-block m-2 margin-left"
+                    type="button" (click)="addPoints(18,1)">
+                    Block
+                </button></div>
+            <div class="col" ><button class="btn btn-150 bg-foul m-2 margin-left"
+                    type="button" (click)="addPoints(24,1)">
+                    Foul
+                </button></div>
+
+        </div>
+        <div class="row mt-3">
+            <ng-template ngFor let-matchQuater [ngForOf]="matchQuaters" let-index="index">
+                <div class="col-3 m-0 p-0">
+                    <div class="row " style="padding-left: 0px; margin-right: 15px;">
+                        <div class="col bg-dark text-white ml-1 text-center" style="height:50px; padding-top: 10px;"
+                            style="padding-top: 10px;">
+                            <div class="row">
+                                <div class="col-8">
+                                    <h4>
+                                        Q {{matchQuater.quarterNr}}
+                                    </h4>
+                                </div>
+                                <div class="col-4" style="height:42px;">
+                                    <div class="float-right" *ngIf="!matchQuater.start">
+                                        <button class="btn btn-primary btn-sm float-right" type="button"
+                                            (click)="onSessionStart(matchQuater.id)" style="font-size: 16px;">
+                                            Start <i class="fas fa-play"></i>
+                                        </button>
+                                    </div>
+                                    <div class="float-right" *ngIf="matchQuater.start && !matchQuater.end">
+                                        <button class="btn btn-primary btn-sm float-right" type="button"
+                                            (click)="onSessionEnd(matchQuater.id)" style="font-size: 16px;">
+                                            Stop <i class="fas fa-stop"></i>
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-1" style="height:50px; padding-left: 5px; margin-left: 0px;">
+                        <div class="col p-0">
+                            <button type="button" class="btn btn-outline bg-point"
+                                style="margin-left: 5px; width: 40px;">
+                                <span>{{matchQuater.totalPoints}} </span> </button>
+                            <button type="button" class="btn btn-outline bg-rebound"
+                                style="margin-left: 25px;  width: 40px; "><span>{{matchQuater.totalRebounds}}
+                                </span></button>
+                            <button type="button" class="btn btn-outline bg-assist"
+                                style="margin-left: 25px;  width: 40px;"><span>{{matchQuater.totalAssists}}
+                                </span></button>
+                            <button type="button" class="btn btn-outline bg-steal"
+                                style="margin-left: 25px;  width: 40px;"><span>{{matchQuater.totalSteals}}
+                                </span></button>
+                            <button type="button" class="btn btn-outline bg-block"
+                                style="margin-left: 25px;  width: 40px;"><span>{{matchQuater.totalBlocks}}
+                                </span></button>
+                            <button type="button" class="btn btn-outline bg-foul"
+                                style="margin-left: 25px;  width: 40px;"><span>{{matchQuater.totalFouls}}
+                                </span></button>
+                        </div>
+                    </div>
+                </div>
+
+            </ng-template>
+            <!-- <div class="col-3">
+                <div class="row">
+                    <div class="col bg-dark text-white ml-1 text-center" style="padding-left: 20px; margin-left: 0px;"
+                        style="padding-top: 10px;">
+                        <h4>
+                            Q1
+                        </h4>
+                    </div>
+                </div>
+                <div class="row mt-1" style="height:50px">
+                    <div class="col p-0">
+                        <button type="button" class="btn btn-outline bg-point" style="margin-left: 5px;">10</button>
+                        <button type="button" class="btn btn-outline bg-rebound" style="margin-left: 25px;">10</button>
+                        <button type="button" class="btn btn-outline bg-assist" style="margin-left: 25px;">10</button>
+                        <button type="button" class="btn btn-outline bg-steal" style="margin-left: 25px;">10</button>
+                        <button type="button" class="btn btn-outline bg-block" style="margin-left: 25px;">10</button>
+                        <button type="button" class="btn btn-outline bg-foul" style="margin-left: 25px;">10</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3 m-0 p-0">
+                <div class="row" style="padding-left: 20px; margin-left: 0px;">
+                    <div class="col bg-dark text-white ml-1 text-center" style="height:50px; padding-top: 10px;"
+                        style="padding-top: 10px;">
+                        <h4>
+                            Q3
+                        </h4>
+                    </div>
+                </div>
+                <div class="row mt-1" style="height:50px; padding-left: 5px; margin-left: 0px;">
+                    <div class="col p-0">
+                        <button type="button" class="btn btn-outline bg-point" style="margin-left: 20px;">10</button>
+                        <button type="button" class="btn btn-outline bg-rebound" style="margin-left: 25px;">10</button>
+                        <button type="button" class="btn btn-outline bg-assist" style="margin-left: 25px;">10</button>
+                        <button type="button" class="btn btn-outline bg-steal" style="margin-left: 25px;">10</button>
+                        <button type="button" class="btn btn-outline bg-block" style="margin-left: 25px;">10</button>
+                        <button type="button" class="btn btn-outline bg-foul" style="margin-left: 25px;">10</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="row" style="padding-left: 5px; margin-left: 0px;">
+                    <div class="col bg-dark text-white ml-1 text-center" style="height:50px; padding-top: 10px;"
+                        style="padding-top: 10px;">
+                        <h4>
+                            Q4
+                        </h4>
+                    </div>
+                </div>
+                <div class="row mt-1" style="height:50px; padding-left: 5px; margin-left: 0px;">
+                    <div class="col p-0">
+                        <button type="button" class="btn btn-outline bg-point" style="margin-left: 5px;">10</button>
+                        <button type="button" class="btn btn-outline bg-rebound" style="margin-left: 23px;">10</button>
+                        <button type="button" class="btn btn-outline bg-assist" style="margin-left: 23px;">10</button>
+                        <button type="button" class="btn btn-outline bg-steal" style="margin-left: 23px;">10</button>
+                        <button type="button" class="btn btn-outline bg-block" style="margin-left: 23px;">10</button>
+                        <button type="button" class="btn btn-outline bg-foul" style="margin-left: 23px;">10</button>
+                    </div>
+                </div>
+            </div> -->
+
+
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-1 border text-center" style="padding-top:30px;">
+                <strong> Total</strong>
+            </div>
+            <div class="col">
+                <div class="row" style="height:40px;">
+                    <div class="col-2 bg-point text-center">
+                        Points
+                    </div>
+                    <div class="col-2 bg-rebound text-center">
+                        Rebound
+                    </div>
+                    <div class="col-2 bg-assist text-center">
+                        Assist
+                    </div>
+                    <div class="col-2 bg-steal text-center">
+                        Steal
+                    </div>
+                    <div class="col-2 bg-block text-center">
+                        Block
+                    </div>
+                    <div class="col-2 bg-foul text-center">
+                        Foul
+                    </div>
+                </div>
+                <div class="row" style="height:40px;">
+                    <div class="col-2 text-center border">
+                        {{totalPoints}}
+                    </div>
+                    <div class="col-2 text-center border">
+                        {{totalRebounds}}
+                    </div>
+                    <div class="col-2 text-center border">
+                        {{totalAssists}}
+                    </div>
+                    <div class="col-2 text-center border">
+                        {{totalSteals}}
+                    </div>
+                    <div class="col-2 text-center border">
+                        {{totalBlocks}}
+                    </div>
+                    <div class="col-2 text-center border">
+                        {{totalFouls}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- <div class="row" style="height:50px;">
             <div class="col-2 border text-center" style="padding: 4px;font-size: 24px;">
-               <span> Total </span>
+                <span> Total </span>
             </div>
             <ng-template ngFor let-matchQuater [ngForOf]="matchQuaters" let-index="index">
                 <div class="col-2 border center-block text-center">
@@ -54,7 +277,8 @@
                     <div class="row p-0 m-0 h-100" style="font-size: 44px;">
                         <div class="col-6 bg-success text-ligh">
                             <span class="float-left ">P </span>
-                            <span class="float-right " *ngIf="totalPoints && totalPoints != null"> {{totalPoints}} </span>
+                            <span class="float-right " *ngIf="totalPoints && totalPoints != null"> {{totalPoints}}
+                            </span>
                         </div>
                         <div class="col-6 bg-danger text-light">
                             <span class="float-left ">F </span>
@@ -67,13 +291,14 @@
                         [ngClass]="{'bg-primary text-light': matchQuater.start == true && !matchQuater.end,'bg-secondary text-white': matchQuater.start == true && matchQuater.end == true}">
                         <div class="row p-0 m-0 h-100" style="font-size: 44px;">
                             <div class="col-6 bg-success text-ligh">
-                                <!-- <span>P {{matchQuater.teamATotalPoints}} </span> -->
                                 <span class="float-left ">P </span>
-                                <span class="float-right " *ngIf="matchQuater.totalPoints > 0"> {{matchQuater.totalPoints}} </span>
+                                <span class="float-right " *ngIf="matchQuater.totalPoints > 0">
+                                    {{matchQuater.totalPoints}} </span>
                             </div>
                             <div class="col-6 bg-danger text-light">
                                 <span class="float-left ">F </span>
-                                <span class="float-right " *ngIf="matchQuater.totalFouls > 0"> {{matchQuater.totalFouls}} </span>
+                                <span class="float-right " *ngIf="matchQuater.totalFouls > 0">
+                                    {{matchQuater.totalFouls}} </span>
                             </div>
                         </div>
                     </div>
@@ -81,48 +306,7 @@
 
             </div>
 
-        </div>
+        </div> -->
     </div>
-
-</div>
-
-<div class="row">
-    <div class="col-6">
-        <div class="card">
-            <div class="card-header text-light bg-info">
-                <h3>
-                   {{leagueMatch.userAFullName}}
-                </h3>
-            </div>
-            <div class="card-body">
-                <div class="row border-bottom">
-                    <div class="col-3">
-                        <h3> Match Points</h3>
-                    </div>
-                    <div class="col-9">
-                        <div class="row">
-                            <ng-template ngFor let-scorePoint [ngForOf]="scorePoints" let-index="index">
-                                <div class="col-3">
-                                    <button class="btn btn-success ripple nav-button float-right w-100" type="button"
-                                        style="height: 100px;" (click)="addPoints(scorePoint.id,scorePoint.value)">
-                                        {{scorePoint.code}} <i class="fas fa-plus"></i>
-                                    </button>
-                                </div>
-                            </ng-template>
-                            <div class="col-3">
-                                <button class="btn btn-danger ripple nav-button float-right w-100"
-                                    style="height: 100px;" type="button" (click)="addFouls(28,1)">
-                                    Foul <i class="fas fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-
 
 </div>

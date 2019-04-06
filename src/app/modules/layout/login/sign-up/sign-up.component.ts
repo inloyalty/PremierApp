@@ -39,7 +39,18 @@ export class SignUpComponent implements OnInit {
     public userRewards: any = []
     public userClubs: any = []
     public loading = false;
+    public segmentedButtons:any=[
+        {id:1, name:'Parent', label:'Parent',active:true},
+        {id:2, name:'Individual', label:'Individual',active:false},
+        {id:3, name:'Kid', label:'Kid',active:false},
+    ]
 
+
+    public id: number;
+    public name: string;
+    public label: string;
+    public active: boolean = false;
+    rigistrationType: any=1;
 
     constructor(
         private authSvc: AuthService,
@@ -86,6 +97,7 @@ export class SignUpComponent implements OnInit {
             this.signUpModel.sports = selectedSports;
             this.signUpModel.userRewards = this.userRewards
             this.signUpModel.userClubs = this.userClubs
+            this.signUpModel.userType = this.rigistrationType;
 
             let apiResponse = await this.authSvc.register(this.signUpModel);
             this.loading = false;
@@ -220,6 +232,11 @@ export class SignUpComponent implements OnInit {
         this.userClubCurrentIndex = this.userClubCurrentIndex + 1;
         this.signUpModel.clubJoind = ''
         console.log(this.userClubs)
+    }
+
+    public onRegistrationChanged(registrationType:any)
+    {
+        this.rigistrationType = registrationType.id;
     }
 
 

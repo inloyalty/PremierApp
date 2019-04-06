@@ -333,13 +333,24 @@
                         <input type="text" class="form-control" placeholder="Zip Code" [(ngModel)]="signUpModel.zipCode"
                             #zipCode="ngModel" name="zipCode" required>
                     </div>
-                    <div class="form-group custom-control custom-checkbox">
+                    <div class="form-group ">
+                        <label>Register As</label>
+                        <span style="padding-left: 10px;">
+
+                            <myd-segmented-button [buttons]="segmentedButtons"
+                                (buttonChanged)="onRegistrationChanged($event)"></myd-segmented-button>
+                        </span>
+
+                    </div>
+
+                    <!-- <div class="form-group custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" id="customCheck1" name="isParent"
                             [(ngModel)]="signUpModel.isParent" name="isParent">
                         <label class="custom-control-label" for="customCheck1">Are you parent who is registering for
                             your child</label>
-                    </div>
-                    <div class="form-group custom-control custom-checkbox">
+                    </div> -->
+
+                    <div class="form-group custom-control custom-checkbox" *ngIf="rigistrationType ==1">
                         <input type="checkbox" class="custom-control-input" id="customCheck2"
                             [(ngModel)]="signUpModel.isAutoAccountTransfer" name="isAutoAccountTransfer">
                         <label class="custom-control-label text-wrap" for="customCheck2">Would you like to automatically
@@ -359,6 +370,17 @@
                             [(ngModel)]="signUpModel.childEmail" #childEmail="ngModel" name="childEmail" required
                             (change)="onChildEmailChange($event)">
                     </div>
+                    <div class="form-group" *ngIf="rigistrationType ==3">
+                        <label for="">School Name</label>
+                        <input type="text" class="form-control" placeholder="School Name"
+                            [(ngModel)]="signUpModel.schoolName" #schoolName="ngModel" name="schoolName" >
+                    </div>
+                    <div class="form-group" *ngIf="rigistrationType ==3">
+                        <label for="">Grade</label>
+                        <input type="text" class="form-control" placeholder="Grade"
+                            [(ngModel)]="signUpModel.grade" #grade="ngModel" name="grade" >
+                    </div>
+
                 </div>
                 <div *ngIf="currentTabIndex ==3" class="row">
                     <div *ngFor="let item of sports" [class.card-selected]="item.selected == true"

@@ -41,4 +41,19 @@ export class UtilService {
         let date = new Date();
         return name + "_" + `${(date.getMonth() + 1)}_${date.getDate()}_${date.getFullYear()} ${date.getHours()}_${date.getMinutes()}_${date.getSeconds()}_${date.getTime()}` + fileType;
     }
+
+    copyObject(obj:any)
+    {
+        let retval={};
+        let keys = Object.keys(obj);
+        if(keys && keys.length >0)
+        {
+            keys.forEach(key =>{
+                retval[key]= obj[key];
+            })
+        }
+    
+        return retval;
+
+    } 
 }

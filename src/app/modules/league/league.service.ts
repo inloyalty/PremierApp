@@ -53,9 +53,9 @@ export class LeageService {
         return responseModel;
     }
 
-    async getLeagueMatches() {
+    async getLeagueMatches(filter:any) {
         let responseModel: any;
-        await this.httpRestClientSvc.get(`Leagues/LeagueMatches`, null).then(
+        await this.httpRestClientSvc.get(`Leagues/LeagueMatches`, filter).then(
             result => {
                 responseModel = result;
                 return responseModel;
@@ -162,5 +162,17 @@ export class LeageService {
         )
         return responseModel;
     }
+
+    async saveBasketBallSession(model: any) {
+        let responseModel: any;
+        await this.httpRestClientSvc.post('Leagues/LeagueMatchBasketBallSession/Save', model).then(
+            result => {
+                responseModel = result;
+                return responseModel;
+            },
+        )
+        return responseModel;
+    }
+    
 
 }

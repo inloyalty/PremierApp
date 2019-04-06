@@ -7,6 +7,7 @@ import { LeagueMatchEventsComponent } from './league-events/league-events.compon
 import { MatchScoreAddEditComponent } from './match-score/match-score-add-edit.component';
 import { MatchScoreResultComponent } from './match-score/match-score-result.component';
 import { MatchScoreIndividualAddEditComponent } from './match-score/match-score-individual-add-edit.component';
+import { MatchScoreResultIndividualComponent } from './match-score/match-score-result-individual.component';
  
 
 const LOGIN_ROUTES: Routes = [
@@ -30,6 +31,9 @@ const LOGIN_ROUTES: Routes = [
     }, 
     {
         path: 'match-score-individual-add-edit', component: MatchScoreIndividualAddEditComponent
+    },
+    {
+        path: 'match-score-result-individual', component: MatchScoreResultIndividualComponent
     },
 ]
 

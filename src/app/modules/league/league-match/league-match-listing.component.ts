@@ -8,10 +8,13 @@ import { MydListComponent } from 'src/app/shared/modules/myd-list/myd-list.compo
 import { LeageService } from '../league.service';
 import { NavigationService } from 'src/app/shared/services/navigation.service';
 import { ConfirmationDialogService } from 'src/app/shared/modules/confirmation-dialog/confirmation-dialog.service';
+import { AppConstant } from '../../constants/app-constant';
+import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
+import { Filter } from 'src/app/models/filter';
 
 @Component({
     templateUrl: './league-match-listing.component.html',
-    providers: [LookupService, UtilService,NavigationService,ConfirmationDialogService]
+    providers: [LookupService, UtilService,NavigationService,ConfirmationDialogService,LocalStorageService]
 })
 
 export class LeagueMatchListingComponent implements AfterViewChecked, OnInit {
@@ -43,6 +46,9 @@ export class LeagueMatchListingComponent implements AfterViewChecked, OnInit {
     dateOfBirth: any;
     @ViewChild('mydList') public mydList: MydListComponent;
     public loading=false;
+    logedInUserInfo: any;
+    public filter: any = new Filter();
+
 
     constructor(
         private cdRef: ChangeDetectorRef,
@@ -52,11 +58,15 @@ export class LeagueMatchListingComponent implements AfterViewChecked, OnInit {
         private lookupSvc: LookupService,
         private utilSvc: UtilService,
         private navigationSvc:NavigationService,
-        private confirmationDialogSvc: ConfirmationDialogService
+        private confirmationDialogSvc: ConfirmationDialogService,
+        private localStorageSvc: LocalStorageService
 
 
     ) {
+        this.filter.OrderBy = 'StartDate';
+        this.filter.SortOrder = 'DESC';
         this.bsConfig = this.utilSvc.getBsDatepickerConfig();
+        this.logedInUserInfo = this.localStorageSvc.get(AppConstant.LOGGED_IN_USER_INFO).toJSON();
     }
     ngOnInit(): void {
         this.getLeagueMatches();
@@ -103,7 +113,8 @@ export class LeagueMatchListingComponent implements AfterViewChecked, OnInit {
 
     async  getLeagueMatches() {
 
-        let apiResponse = await this.leageSvc.getLeagueMatches();
+        this.filter.userId=this.logedInUserInfo.userId
+        let apiResponse = await this.leageSvc.getLeagueMatches(this.filter);
         console.log(apiResponse)
         if (apiResponse && apiResponse.data && apiResponse.data.length > 0) {
 

@@ -11,7 +11,7 @@ export class AccountService {
 
     async getUserDetail(userId : number){
         let responseModel : any;
-        await this.httpRestClientSvc.get(`Accounts/${userId}`,null).then(
+        await this.httpRestClientSvc.get(`Accounts/Users/${userId}`,null).then(
             result => {
                 responseModel = result;
                 return responseModel;
@@ -23,7 +23,7 @@ export class AccountService {
     async saveUserDetail(userModel : any){
         console.log(userModel);
         let responseModel : any;
-        await this.httpRestClientSvc.post('Accounts', userModel).then(
+        await this.httpRestClientSvc.post('Accounts/Users', userModel).then(
             result => {
                 responseModel = result;
                 return responseModel;
@@ -34,7 +34,7 @@ export class AccountService {
 
     async getUsers(){
         let responseModel : any;
-        await this.httpRestClientSvc.get(`Accounts`,null).then(
+        await this.httpRestClientSvc.get(`Accounts/Users`,null).then(
             result => {
                 responseModel = result;
                 return responseModel;

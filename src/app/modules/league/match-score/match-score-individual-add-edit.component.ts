@@ -10,10 +10,12 @@ import { NavigationService } from 'src/app/shared/services/navigation.service';
 import { ActivatedRoute } from '@angular/router';
 import { AccountService } from '../../user/account/account.service';
 import { BsDatepickerConfig } from 'ngx-bootstrap';
+import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
+import { AppConstant } from '../../constants/app-constant';
 
 @Component({
     templateUrl: './match-score-individual-add-edit.component.html',
-    providers: [LookupService, UtilService, TeamService, NavigationService, AccountService]
+    providers: [LookupService, UtilService, TeamService, NavigationService, AccountService, LocalStorageService]
 
 })
 
@@ -37,6 +39,13 @@ export class MatchScoreIndividualAddEditComponent implements OnInit {
     scorePoints: any;
     totalPoints: number;
     totalFouls: number;
+    totalRebounds: any;
+    totalAssists: any;
+    totalSteals: any;
+    totalBlocks: any;
+    userInfo: any = {}
+    loginedUserDetail: any;
+    userType: string = 'Individual'
 
     constructor(
         private cdRef: ChangeDetectorRef,
@@ -47,7 +56,8 @@ export class MatchScoreIndividualAddEditComponent implements OnInit {
         private teamSvc: TeamService,
         private navigationSvc: NavigationService,
         private route: ActivatedRoute,
-        private accountSvc: AccountService
+        private accountSvc: AccountService,
+        private localStorageSvc: LocalStorageService
 
     ) {
         this.bsConfig = this.utilSvc.getBsDatepickerConfig();
@@ -56,11 +66,13 @@ export class MatchScoreIndividualAddEditComponent implements OnInit {
 
     ngOnInit(): void {
         this.id = this.route.snapshot.queryParamMap.get('id');
+        this.loginedUserDetail = JSON.parse(this.localStorageSvc.get(AppConstant.LOGGED_IN_USER_INFO));
 
 
         if (this.id) {
             this.getLeagueMatch();
             this.getScoringPoints();
+            this.getUserInfo();
         }
     }
 
@@ -76,7 +88,10 @@ export class MatchScoreIndividualAddEditComponent implements OnInit {
                 this.matchQuaters.forEach(item => {
                     item.totalPoints = 0;
                     item.totalFouls = 0;
-
+                    item.totalRebounds = 0;
+                    item.totalAssists = 0;
+                    item.totalSteals = 0;
+                    item.totalBlocks = 0
                 });
             }
         }
@@ -84,6 +99,23 @@ export class MatchScoreIndividualAddEditComponent implements OnInit {
 
 
 
+    async getUserInfo() {
+        let userId = this.loginedUserDetail.userId;
+        let apiResponse = await this.accountSvc.getUserDetail(userId);
+        if (apiResponse && apiResponse.message && apiResponse.message.code == 200) {
+            this.userInfo = apiResponse.data;
+            if (this.userInfo.userType == 1) {
+                this.userType = 'Parent'
+            }
+            else if (this.userInfo.userType == 2) {
+                this.userType = 'Individual'
+            }
+            else if (this.userInfo.userType == 3) {
+                this.userType = 'Kid '
+            }
+            console.log(this.userInfo);
+        }
+    }
 
 
     onSessionStart(id: number) {
@@ -128,6 +160,8 @@ export class MatchScoreIndividualAddEditComponent implements OnInit {
 
     async  addPoints(scorePointId: number, scorePointValue: number) {
 
+        console.log(`scorePointId ${scorePointId} scorePointValue ${scorePointValue}`)
+        // this.currentSessionid = this.matchQuaters[0].id;
         if (this.currentSessionid <= 0) {
             this.toastrSvc.error('Please start the match session.');
             return false;
@@ -143,19 +177,68 @@ export class MatchScoreIndividualAddEditComponent implements OnInit {
 
         let quater = _.find(this.matchQuaters, (item) => { return item.id == this.currentSessionid; });
 
-        console.log(quater)
-        if (quater.totalPoints == null) {
-            quater.totalPoints = scorePointValue
-        }
-        else {
+        // Points 
+        if (scorePointId == 1 || scorePointId == 5 || scorePointId == 8) {
+            console.log()
             let _totalPoints: number = Number(quater.totalPoints);
             let _sumTotal: number = +Number(_totalPoints) + Number(scorePointValue);
             quater.totalPoints = _sumTotal;
+            this.totalPoints = _.sumBy(this.matchQuaters, function (x) { return x.totalPoints; });
+        }
+        //Rebound
+        else if (scorePointId == 29) {
+            let _totalRebounds: number = Number(quater.totalRebounds);
+            let _sumTotal: number = +Number(_totalRebounds) + Number(scorePointValue);
+            quater.totalRebounds = _sumTotal;
+            this.totalRebounds = _.sumBy(this.matchQuaters, function (x) { return x.totalRebounds; });
+
+        }
+        // Assist 
+        else if (scorePointId == 17) {
+            let _totalAssists: number = Number(quater.totalAssists);
+            let _sumTotal: number = +Number(_totalAssists) + Number(scorePointValue);
+            quater.totalAssists = _sumTotal;
+            this.totalAssists = _.sumBy(this.matchQuaters, function (x) { return x.totalAssists; });
+
+        }
+        //Steal
+        else if (scorePointId == 20) {
+            let _totalSteals: number = Number(quater.totalSteals);
+            let _sumTotal: number = +Number(_totalSteals) + Number(scorePointValue);
+            quater.totalSteals = _sumTotal;
+            this.totalSteals = _.sumBy(this.matchQuaters, function (x) { return x.totalSteals; });
+
+        }
+        //Block
+        else if (scorePointId == 18) {
+            let _totalBlocks: number = Number(quater.totalBlocks);
+            let _sumTotal: number = +Number(_totalBlocks) + Number(scorePointValue);
+            quater.totalBlocks = _sumTotal;
+            this.totalBlocks = _.sumBy(this.matchQuaters, function (x) { return x.totalBlocks; });
+
+        }
+        //Foul
+        else if (scorePointId == 24) {
+            let _totalFouls: number = Number(quater.totalFouls);
+            let _sumTotal: number = +Number(_totalFouls) + Number(scorePointValue);
+            quater.totalFouls = _sumTotal;
+            this.totalFouls = _.sumBy(this.matchQuaters, function (x) { return x.totalFouls; });
+
         }
 
-        this.totalPoints = _.sumBy(this.matchQuaters, function (x) { return x.totalPoints; });
+        // if (quater.totalPoints == null) {
+        //     quater.totalPoints = scorePointValue
+        // }
+        // else {
+        //     let _totalFouls: number = Number(quater.totalFouls);
+        //     let _sumTotal: number = +Number(_totalFouls) + Number(scorePointValue);
+        //     quater.totalFouls = _sumTotal;
+        // }
+
+
 
         let apiResponse = await this.leageSvc.saveBasketBallMatchScorePoints(scoreModel);
+        console.log(apiResponse)
 
     }
 
@@ -185,7 +268,7 @@ export class MatchScoreIndividualAddEditComponent implements OnInit {
             quater.totalFouls = _sumTotal;
 
         }
-       
+
         let apiResponse = await this.leageSvc.saveBasketBallMatchScorePoints(scoreModel);
 
         this.totalFouls = _.sumBy(this.matchQuaters, function (x) { return x.totalFouls; });
