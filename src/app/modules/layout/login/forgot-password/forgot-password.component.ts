@@ -5,7 +5,8 @@ import { ToastrService } from 'ngx-toastr';
 import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
 
 @Component({
-    templateUrl: './forgot-password.component.html'
+    templateUrl: './forgot-password.component.html',
+    styleUrls : ['./forgot-password.component.css']
 })
 
 export class ForgotPasswordComponent {

@@ -122,10 +122,10 @@
                         </div>
                     </div>
                     <div class="row m-0">
-                        <div class="col-6 pl-0">
+                        <div class="col-6 pl-0 text-left">
                             <div class="form-group ">
-                                <label for="" class="float-left mb-2">Country </label>
-                                <ng-select style="display: inline;" [items]="countries" [(ngModel)]="signUpModel.countryId"
+                                <label for="" class="mb-2">Country </label>
+                                <ng-select [items]="countries" [(ngModel)]="signUpModel.countryId"
                                     (change)="onCountryChange($event)" bindLabel="name" bindValue="id" name="country"
                                     [ngModelOptions]="{standalone: true}" class="custom  form-control">
                                 </ng-select>
@@ -133,10 +133,9 @@
                             </div>
                         </div>
                         <div class="col-6 pl-0">
-                            <div class="form-group ">
-                                <label for="" class="float-left mb-2">State </label>
-
-                                <ng-select [items]="states" style="display:inline;" [(ngModel)]="signUpModel.stateId" name="state"
+                            <div class="form-group text-left">
+                                <label for="" class="mb-2">State </label>
+                                <ng-select [items]="states" [(ngModel)]="signUpModel.stateId" name="state"
                                     bindLabel="name" bindValue="id" [ngModelOptions]="{standalone: true}"
                                     class="custom form-control">
                                 </ng-select>
@@ -149,7 +148,6 @@
                                 <label for="" class="float-left mb-2">Zip Code <span>*</span> </label>
                                 <label *ngIf="(userForm.submitted || zipCode.touched) && !zipCode.valid"
                                     class="text-danger float-right">Zip Code is required</label>
-
                                 <input type="text" class="form-control" placeholder="Zip Code"
                                     [(ngModel)]="signUpModel.zipCode" #zipCode="ngModel" name="zipCode" required>
                             </div>

@@ -113,6 +113,7 @@ export class SignUpComponent implements OnInit {
         console.log(event);
         this.getState(event.id);
     }
+
     public async getCountries() {
         try {
             let apiResponse = await this.lookupSvc.getCoutries();

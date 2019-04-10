@@ -288,10 +288,10 @@ top-navbar .top-navbar .ngxp__container>.ngxp__arrow {
 }
 
 .card.card-login {
-  min-width: 500px;
-  position: absolute;
-  left: 500px;
-  top: 100px;
+  /* min-width: 500px; */
+  /* position: absolute; */
+  /* left: 500px; */
+  /* top: 100px; */
   min-height: 350px;
   background: transparent;
 }
