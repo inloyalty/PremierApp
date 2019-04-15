@@ -26,7 +26,7 @@ export class LeageMatchAddEditComponent implements OnInit {
     public leagueMatch: any = {}
     public stepTitle = 'Match Detail';
     public currentTabIndex = 1;
-    leagues: any;
+    leagues: any =[];
     countries: any;
     states: any;
     matchFormat = 1;
@@ -48,6 +48,19 @@ export class LeageMatchAddEditComponent implements OnInit {
     public bsConfig: Partial<BsDatepickerConfig>;
     public lookupFilter: any = new LookupFilter();
     logedInUserInfo: any = {};
+    sports: any =[];
+    gameTypes: any =[];
+    leagueImage: any;
+    leageImageData: any;
+    showResetButton: boolean;
+    showLeagueDrader: boolean;
+    league: any ={};
+    schools: any =[];
+    school:any= {};
+    showSchoolDrader: boolean;
+    schoolImage: any;
+    schoolImageData: any;
+    userSports: any;
 
     constructor(
         private cdRef: ChangeDetectorRef,
@@ -64,17 +77,20 @@ export class LeageMatchAddEditComponent implements OnInit {
     ) {
         this.bsConfig = this.utilSvc.getBsDatepickerConfig();
         this.logedInUserInfo = this.localStorageSvc.get(AppConstant.LOGGED_IN_USER_INFO).toJSON();
-        console.log(this.logedInUserInfo);
 
     }
 
     ngOnInit(): void {
         this.id = this.route.snapshot.queryParamMap.get('id');
 
+        this.getSchools();
         this.getLeagues();
         this.getCountries();
         this.getTeams();
-        this.getUsers();
+       // this.getUsers();
+     //   this.getSports();
+     this.getUserSports();
+        this.getGameTypes();
         if (this.id) {
             this.getLeagueMatch();
         }
@@ -84,10 +100,14 @@ export class LeageMatchAddEditComponent implements OnInit {
     async  getLeagueMatch() {
 
         let apiResponse = await this.leageSvc.getLeagueMatch(this.id);
-        console.log(apiResponse)
         if (apiResponse && apiResponse.data) {
             this.leagueMatch = apiResponse.data;
             this.matchFormat = this.leagueMatch.isTeamMatch ? 2 : 1;
+
+            if(this.leagueMatch.startDate)
+            {
+                this.matchDate = new Date(this.leagueMatch.startDate) 
+            }
             if (this.leagueMatch.isTeamMatch) {
                 this.matchFormat = 2;
                 this.matchFormats[0].active = false;
@@ -129,9 +149,6 @@ export class LeageMatchAddEditComponent implements OnInit {
 
             }
 
-            console.log(this.leagueMatch)
-            console.log(this.selectedTeamAPlayers)
-            console.log(this.selectedTeamBPlayers)
 
 
         }
@@ -150,7 +167,6 @@ export class LeageMatchAddEditComponent implements OnInit {
     }
 
     onViewChanged(event: any) {
-        console.log(event);
         this.matchFormat = event.id;
         this.leagueMatch.isTeamMatch = event.id == 1 ? false : true;
     }
@@ -169,31 +185,25 @@ export class LeageMatchAddEditComponent implements OnInit {
     async  getLeagues() {
 
         let apiResponse = await this.leageSvc.getLeagues(this.lookupFilter);
-        console.log(apiResponse)
         if (apiResponse && apiResponse.data && apiResponse.data.length > 0) {
             this.leagues = apiResponse.data;
-            console.log(this.leagues)
         }
     }
 
     async  getTeams() {
 
         let apiResponse = await this.teamSvc.getTeams();
-        console.log(apiResponse)
         if (apiResponse && apiResponse.data && apiResponse.data.length > 0) {
             this.teams = apiResponse.data;
-            console.log(this.teams)
         }
     }
 
     onCountryChange(event: any) {
-        console.log(event);
         this.getState(event.id);
     }
     public async getCountries() {
         try {
             let apiResponse = await this.lookupSvc.getCoutries();
-            console.log(apiResponse)
             this.countries = apiResponse.data;
         } catch (error) {
 
@@ -201,6 +211,33 @@ export class LeageMatchAddEditComponent implements OnInit {
 
     }
 
+    public async getSports() {
+        try {
+            let apiResponse = await this.lookupSvc.getSports();
+            this.sports = apiResponse.data;
+        } catch (error) {
+
+        }
+    }
+
+    public async getGameTypes() {
+        try {
+            let apiResponse = await this.lookupSvc.getGameTypes();
+            this.gameTypes = apiResponse.data;
+        } catch (error) {
+
+        }
+
+    }
+
+    public async getSchools() {
+        try {
+            let apiResponse = await this.lookupSvc.getSchools();
+            this.schools = apiResponse.data;
+        } catch (error) {
+
+        }
+    }
     public async getState(countryId: null) {
         try {
             let apiResponse = await this.lookupSvc.getStatesByCountryId(countryId);
@@ -311,7 +348,6 @@ export class LeageMatchAddEditComponent implements OnInit {
 
             }
 
-            console.log(this.selectedTeamAPlayers);
         }
         else {
             if (!player.selected) {
@@ -338,7 +374,6 @@ export class LeageMatchAddEditComponent implements OnInit {
                 }
 
             }
-            console.log(this.selectedTeamBPlayers);
 
         }
     }
@@ -349,7 +384,6 @@ export class LeageMatchAddEditComponent implements OnInit {
     async  getUsers() {
 
         let apiResponse = await this.accountSvc.getUsers();
-        console.log(apiResponse)
         if (apiResponse && apiResponse.data && apiResponse.data.length > 0) {
 
             if (apiResponse.data && apiResponse.data.length > 0) {
@@ -392,4 +426,111 @@ export class LeageMatchAddEditComponent implements OnInit {
         }
 
     }
+
+   
+
+    onAddNewLeage()
+    {
+        this.league ={};
+        this.showLeagueDrader = true;
+    }
+
+    onUserImage(fileInput: any) {
+        this.leagueImage = fileInput.target.files[0];
+        let reader = new FileReader();
+        reader.onload = (e: any) => {
+            this.leageImageData = e.target.result;
+        };
+        // this.userModel.Picture = fileInput.target.files[0].name;
+        reader.readAsDataURL(fileInput.target.files[0]);
+        this.showResetButton = true;
+    }
+
+
+    async onLeagueSave() {
+
+        const formData = {
+            'dto': JSON.stringify(this.league),
+            'file': this.leagueImage,
+        };
+        this.leagueImage = null;
+        this.leageImageData = null
+
+        let apiResponse = await this.leageSvc.saveLeague(formData);
+        if (apiResponse && apiResponse.message && apiResponse.message.code == 200) {
+            this.toastrSvc.success('Saved successfully');
+        }
+        this.getLeagues();
+        
+        this.showSchoolDrader = false;
+    }
+
+
+    onAddNewSchool()
+    {
+        this.school ={};
+        this.showSchoolDrader = true;
+
+    }
+
+    onSchoolImage(fileInput: any) {
+        this.schoolImage = fileInput.target.files[0];
+        let reader = new FileReader();
+        reader.onload = (e: any) => {
+            this.schoolImageData = e.target.result;
+        };
+        // this.userModel.Picture = fileInput.target.files[0].name;
+        reader.readAsDataURL(fileInput.target.files[0]);
+        this.showResetButton = true;
+    }
+
+    async onSchoolSave() {
+
+        try {
+            const formData = {
+                'dto': JSON.stringify(this.school),
+                'file': this.schoolImageData,
+            };
+            this.schoolImage = null;
+            this.schoolImageData = null
+    
+            let apiResponse = await this.leageSvc.saveSchool(formData);
+            if (apiResponse && apiResponse.message && apiResponse.message.code == 200) {
+                this.toastrSvc.success('Saved successfully');
+            }
+        this.showSchoolDrader = false;
+
+            this.getSchools();
+        } catch (error) {
+        this.showSchoolDrader = false;
+            
+        }
+       
+        
+    }
+
+   
+    public async getUserSports() {
+        try {
+            let userId = this.logedInUserInfo.userId;
+            let apiResponse = await this.accountSvc.getUserSports(userId);
+            // if (apiResponse.data && apiResponse.data.length > 0) {
+            //     apiResponse.data.forEach(item => {
+            //         item.image = this.remoteImagePipe.transform(item.image, "Sport");
+
+            //     });
+            // }
+            this.sports = apiResponse.data;
+            
+
+        } catch (error) {
+
+        }
+    }
+
+
+   
+    
+
+     
 }

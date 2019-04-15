@@ -1,4 +1,3 @@
-
 <div class="card mt-5">
     <myd-tab (tabChanged)="onTabChanged($event)" [tabItems]="tabs"> </myd-tab>
 </div>
@@ -7,124 +6,270 @@
     <div class="tab-pane fade show active" *ngIf="selectedTab == 1" id="analyst" role="tabpanel"
         aria-labelledby="analyst-tab">
         <div class="card shadow-sm fade-in mt-3">
-                <div class="card-body">
-            
-            
-                    <div class="row mt-3">
-                        <div class="col-md-6" *ngIf="userModel">
-                            <form name="Form" #userForm="ngForm" method="post" enctype="multipart/form-data" novalidate>
-                                <div class="form-group ">
-                                    <label for="">User Name </label>
-                                    <input type="text" class="form-control" placeholder="User Name" [(ngModel)]="userModel.userName"
-                                        #userName="ngModel" name="userName" disabled>
-                                </div>
-                                <div class="form-group ">
-                                    <label for="">First Name <span>*</span> </label>
-                                    <label *ngIf="(userForm.submitted || firstName.touched) && !firstName.valid"
-                                        class="text-danger float-right">First name is required</label>
-                                    <input type="text" class="form-control" placeholder="First Name"
-                                        [(ngModel)]="userModel.firstName" #firstName="ngModel" name="firstName" required>
-                                </div>
-                                <div class="form-group ">
-                                    <label for="">Middle Name </label>
-                                    <input type="text" class="form-control" placeholder="Middle Name"
-                                        [(ngModel)]="userModel.middleName" #middleName="ngModel" name="middleName">
-                                </div>
-                                <div class="form-group ">
-                                    <label for="">Last Name </label>
-                                    <input type="text" class="form-control" placeholder="Last Name" [(ngModel)]="userModel.lastName"
-                                        #astName="ngModel" name="astName">
-                                </div>
-                                <div class="form-group ">
-                                    <label for="">Date Of Birth </label>
-                                    <input id="dateOfBirth" class="form-control" bsDatepicker [bsConfig]="bsConfig"
-                                        [(ngModel)]="dateOfBirth" name="dateOfBirth">
-                                </div>
-                                <div class="form-group ">
-                                    <label for="">Email </label>
-                                    <input type="text" class="form-control" placeholder="Email" [(ngModel)]="userModel.email"
-                                        #email="ngModel" name="email">
-                                </div>
-                                <div class="form-group ">
-                                    <label for="">Mobile </label>
-                                    <input type="text" class="form-control" placeholder="Mobile" [(ngModel)]="userModel.mobile"
-                                        #mobile="ngModel" name="mobile">
-                                </div>
-                                <div class="form-group ">
-                                        <label for="">School Name </label>
-                                        <input type="text" class="form-control" placeholder="School Name" [(ngModel)]="userModel.schoolName"
-                                            #schoolName="ngModel" name="schoolName">
-                                    </div>
-                                    <div class="form-group ">
-                                            <label for="">Grade </label>
-                                            <input type="text" class="form-control" placeholder="Grade" [(ngModel)]="userModel.grade"
-                                                #grade="ngModel" name="grade">
-                                        </div>
+            <div class="card-body">
 
-            
-                                <div class="form-group ">
-                                    <label for="">Address<span>*</span> </label>
-                                    <label *ngIf="(userForm.submitted || address.touched) && !address.valid"
-                                        class="text-danger float-right">Address is required</label>
-                                    <input type="text" class="form-control" placeholder="Address" [(ngModel)]="userModel.address"
-                                        #address="ngModel" name="address" required>
-                                </div>
-                                <div class="form-group " *ngIf="countries && countries.length>0">
-                                    <label for="">Country </label>
-            
-                                    <ng-select [items]="countries" [(ngModel)]="userModel.countryId"
-                                        (change)="onCountryChange($event)" bindLabel="name" bindValue="id" name="country"
-                                        [ngModelOptions]="{standalone: true}" class="custom form-control">
-                                    </ng-select>
-            
-                                </div>
-                                <div class="form-group " *ngIf="states && states.length>0">
-                                    <label for="">State </label>
-                                    <ng-select [items]="states" [(ngModel)]="userModel.stateId" name="state" bindLabel="name"
-                                        [ngModelOptions]="{standalone: true}" bindValue="id" class="custom form-control">
-                                    </ng-select>
-                                </div>
-                                <div class="form-group ">
-                                    <label for="">Zip Code </label>
-            
-                                    <input type="text" class="form-control" placeholder="Zip Code" [(ngModel)]="userModel.zipCode"
-                                        #zipCode="ngModel" name="zipCode" required>
-                                </div>
-                                <div class="form-group custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck1" name="isParent"
-                                        [(ngModel)]="userModel.isParent">
-                                    <label class="custom-control-label" for="customCheck1">Are you parent who is registering for
-                                        your child</label>
-                                </div>
-                                <div class="form-group custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck2"
-                                        name="isAutoAccountTransfer" [(ngModel)]="userModel.isAutoAccountTransfer">
-                                    <label class="custom-control-label text-wrap" for="customCheck2">Would you like to automatically
-                                        give possession
-                                        of records <br> and access to child when he is 13
-                                        years old</label>
-                                </div>
-                                <div class="form-group" *ngIf="userModel.isParent">
-                                    <input type="text" class="form-control" placeholder="Child Email"
-                                        [(ngModel)]="userModel.childEmail" #childEmail="ngModel" name="childEmail" required>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col">
-                                <button class="btn btn-primary ripple float-left btn-w-100">Cancel</button>
-                                <button class="btn btn-primary ripple float-right btn-w-100" (click)="onDone()">Done</button>
-                        </div>
+
+                 
+                    <div class="" *ngIf="userModel">
+                        <form name="Form" #userForm="ngForm" method="post" enctype="multipart/form-data" novalidate>
+                          <div class="row">
+                                <div class="col-md-6 form-group ">
+                                        <label for="">User Name </label>
+                                        <input type="text" class="form-control" placeholder="User Name"
+                                            [(ngModel)]="userModel.userName" #userName="ngModel" name="userName" disabled>
+                                    </div>
+                                    <div class="col-md-6 form-group ">
+                                        <label for="">First Name <span>*</span> </label>
+                                        <label *ngIf="(userForm.submitted || firstName.touched) && !firstName.valid"
+                                            class="text-danger float-right">First name is required</label>
+                                        <input type="text" class="form-control" placeholder="First Name"
+                                            [(ngModel)]="userModel.firstName" #firstName="ngModel" name="firstName" required>
+                                    </div>
+                                    <div class="col-md-6 form-group ">
+                                        <label for="">Middle Name </label>
+                                        <input type="text" class="form-control" placeholder="Middle Name"
+                                            [(ngModel)]="userModel.middleName" #middleName="ngModel" name="middleName">
+                                    </div>
+                          
+                           
+                            <div class="col-md-6 form-group ">
+                                <label for="">Last Name </label>
+                                <input type="text" class="form-control" placeholder="Last Name"
+                                    [(ngModel)]="userModel.lastName" #astName="ngModel" name="astName">
+                            </div>
+                            <div class="col-md-6 form-group ">
+                                <label for="">Date Of Birth </label>
+                                <input id="dateOfBirth" class="form-control" bsDatepicker [bsConfig]="bsConfig"
+                                    [(ngModel)]="dateOfBirth" name="dateOfBirth">
+                            </div>
+                            <div class="col-md-6 form-group ">
+                                <label for="">Email </label>
+                                <input type="text" class="form-control" placeholder="Email"
+                                    [(ngModel)]="userModel.email" #email="ngModel" name="email">
+                            </div>
+                            <div class="col-md-6 form-group ">
+                                <label for="">Mobile </label>
+                                <input type="text" class="form-control" placeholder="Mobile"
+                                    [(ngModel)]="userModel.mobile" #mobile="ngModel" name="mobile">
+                            </div>
+                            <div class="col-md-6 form-group ">
+                                <label for="">School Name </label>
+                                <input type="text" class="form-control" placeholder="School Name"
+                                    [(ngModel)]="userModel.schoolName" #schoolName="ngModel" name="schoolName">
+                            </div>
+                            <div class="col-md-6 form-group ">
+                                <label for="">Grade </label>
+                                <input type="text" class="form-control" placeholder="Grade"
+                                    [(ngModel)]="userModel.grade" #grade="ngModel" name="grade">
+                            </div>
+
+
+                            <div class="col-md-6 form-group ">
+                                <label for="">Address<span>*</span> </label>
+                                <label *ngIf="(userForm.submitted || address.touched) && !address.valid"
+                                    class="text-danger float-right">Address is required</label>
+                                <input type="text" class="form-control" placeholder="Address"
+                                    [(ngModel)]="userModel.address" #address="ngModel" name="address" required>
+                            </div>
+                            <div class="col-md-6 form-group " *ngIf="countries && countries.length>0">
+                                <label for="">Country </label>
+
+                                <ng-select [items]="countries" [(ngModel)]="userModel.countryId"
+                                    (change)="onCountryChange($event)" bindLabel="name" bindValue="id" name="country"
+                                    [ngModelOptions]="{standalone: true}" class="custom form-control">
+                                </ng-select>
+
+                            </div>
+                            <div class="col-md-6 form-group " >
+                                <label for="">State </label>
+                                <ng-select [items]="states" [(ngModel)]="userModel.stateId" name="state"
+                                    bindLabel="name" [ngModelOptions]="{standalone: true}" bindValue="id"
+                                    class="custom form-control">
+                                </ng-select>
+                            </div>
                             
+                            
+                            <div class="col-md-6 form-group ">
+                                <label for="">Zip Code </label>
+
+                                <input type="text" class="form-control" placeholder="Zip Code"
+                                    [(ngModel)]="userModel.zipCode" #zipCode="ngModel" name="zipCode" required>
+                            </div>
+                            <div class="col-md-6 form-group custom-control custom-checkbox">
+                                    
+                                <input type="checkbox" class="custom-control-input" id="customCheck1" name="isParent"
+                                    [(ngModel)]="userModel.isParent">
+                                <label class="custom-control-label" for="customCheck1">Are you parent who is registering
+                                    for your child</label>
+                            </div>
+                            <div class="col-md-6 form-group custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customCheck2"
+                                    name="isAutoAccountTransfer" [(ngModel)]="userModel.isAutoAccountTransfer">
+                                <label class="custom-control-label text-wrap" for="customCheck2">Would you like to
+                                    automatically
+                                    give possession
+                                    of records <br> and access to child when he is 13
+                                    years old</label>
+                            </div>
+                         
+
+                            <div class="col-md-6 form-group" *ngIf="userModel.isParent">
+                                <input type="text" class="form-control" placeholder="Child Email"
+                                    [(ngModel)]="userModel.childEmail" #childEmail="ngModel" name="childEmail" required>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                 
+                <div class="row mt-3">
+                    <div class="col">
+                        <button class="btn btn-primary ripple float-left btn-w-100">Cancel</button>
+                        <button class="btn btn-primary ripple float-right btn-w-100" (click)="onDone()">Done</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade show active" *ngIf="selectedTab == 2" id="analyst" role="tabpanel"
+        aria-labelledby="analyst-tab">
+        <div class="card shadow-sm fade-in mt-3">
+                <div class="card-body">
+                    <div class="row">
+                         
+                        <div class="input-group col">
+                                <input type="text" class="form-control" name="reward" placeholder="Reward" [(ngModel)]="reward"  aria-describedby="basic-reward">
+                                <div class="input-group-append">
+                                  <button class="btn btn-outline-secondary" type="button" (click)="onAddReward()">Add</button>
+                                </div>
+                              </div>
+                    </div>
+    
+                    <div class="row mt-3">
+                        <ng-template ngFor let-reward [ngForOf]="userRewards" let-index="index">
+                            <div class="col-2">
+                                <div class="card" >
+                                    <div class="card-body">
+                                        <h5 class="card-title text-center">{{reward.name}}</h5>
+                                    </div>
+                                    <div class="card-footer ">
+                                            <button class="btn btn-danger float-right" (click)="deleteUserReward(reward)" >Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+    <div class="tab-pane fade show active" *ngIf="selectedTab == 3" id="analyst" role="tabpanel"
+        aria-labelledby="analyst-tab">
+        <div class="card shadow-sm fade-in mt-3">
+                <div class="card-body">
+                    <div class="row">
+                         
+                        <div class="input-group col">
+                                <input type="text" class="form-control" name="clubName" placeholder="Reward" [(ngModel)]="clubName"  aria-describedby="basic-reward">
+                                <div class="input-group-append">
+                                  <button class="btn btn-outline-secondary" type="button" (click)="onAddUserClubJoin()">Add</button>
+                                </div>
+                              </div>
+                    </div>
+    
+                    <div class="row mt-3">
+                        <ng-template ngFor let-club [ngForOf]="userClubJoins" let-index="index">
+                            <div class="col-2">
+                                <div class="card" >
+                                    <div class="card-body">
+                                        <h5 class="card-title text-center">{{club.name}}</h5>
+                                    </div>
+                                    <div class="card-footer ">
+                                            <button class="btn btn-danger float-right" (click)="deleteUserClubJoin(club)" >Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
                     </div>
                 </div>
             </div>
     </div>
-    <div class="tab-pane fade show active" *ngIf="selectedTab == 2" id="analyst" role="tabpanel"
+
+    <div class="tab-pane fade show active" *ngIf="selectedTab == 4" id="analyst" role="tabpanel"
         aria-labelledby="analyst-tab">
+
+        <div class="card shadow-sm fade-in mt-3">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <button [disabled]="loading" type="submit" class="btn btn-primary float-right "
+                            (click)="onAddEditSport()"> Add/Edit Sport
+                            <i class="far fa-long-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+
+                    <ng-template ngFor let-sport [ngForOf]="userSports" let-index="index">
+                        <div class="col">
+                            <div class="card" style="width: 18rem;">
+                                <image [src]="sport.image" [height]="100" [imgHeight]="100" [padding]="0"
+                                    [caption]="sport.name" [rounded]="false" [captionFontSize]="10"
+                                    [captionFontSize]="10">
+                                </image>
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">{{sport.name}}</h5>
+                                </div>
+                                <div class="card-footer ">
+                                        <button class="btn btn-danger float-right" (click)="deleteUserSport(sport)" >Delete</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+
+
+
+                </div>
+            </div>
+        </div>
+
     </div>
-    <div class="tab-pane fade show active" *ngIf="selectedTab == 3" id="analyst" role="tabpanel"
-        aria-labelledby="analyst-tab">
-    </div>
+
 </div>
+
+
+<myd-side-drawer [title]="'Sports'" (close)="onClose($event)" [showDrawer]="showDrader">
+    <div body>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item list-group-item-action" *ngFor="let sport of sports">
+                <div class="row">
+                    <div class="col-4">
+                            <image [src]="sport.image" [height]="50" [imgHeight]="50" [padding]="0"
+                            [caption]="sport.name" [rounded]="true" [captionFontSize]="10"
+                            [captionFontSize]="10">
+                        </image>
+
+                    </div>
+                    <div class="col-5">
+                        <h5 class="font-weight-normal pl-0 padding-top">
+                            <span> {{sport.name}} </span>
+                        </h5>
+                    </div>
+                    <div class="col-3 pr-0">
+                        <button type="button" class="btn btn-outline-light btn-flat btn-rounded float-right"
+                            style="height:40px;">
+                            <i class="far fa-star text-secondary" style="font-size:16px;" *ngIf="!sport.selected"
+                                (click)="onSubscribedToggle(sport)"></i>
+                            <!-- <i class="far fa-check-circle text-primary" style="font-size:16px;"
+                                *ngIf="sport.selected"></i> -->
+                        </button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div footer>
+
+    </div>
+</myd-side-drawer>

@@ -9,21 +9,36 @@
                 <ng-template ngFor let-matchQuater [ngForOf]="matchQuaters" let-index="index">
                     <div class="col border">
                         <div class="row">
-                            <div class="col-8">
-                                <h3> Q{{matchQuater.quarterNr}} </h3>
-                            </div>
-                            <div class="col-4">
+                            <div class="col-sm-5">
+                                <h5 *ngIf="!matchQuater.isOverTime"> Q{{matchQuater.quarterNr}} </h5>
+                                <h5 *ngIf="matchQuater.isOverTime"> OT </h5>
 
-                                <div class="float-right" *ngIf="!matchQuater.start">
-                                    <button class="btn btn-primary btn-sm float-right" type="button"
-                                        (click)="onSessionStart(matchQuater.id)" style="font-size: 16px;">
-                                        Start <i class="fas fa-play"></i>
-                                    </button>
+                            </div>
+                            <div class="col-sm-7">
+
+                                <div class="float-right">
+
+
                                 </div>
-                                <div class="float-right" *ngIf="matchQuater.start && !matchQuater.end">
-                                    <button class="btn btn-primary btn-sm float-right" type="button"
+                                <div class="float-right">
+                                    <button *ngIf="!matchQuater.start || matchQuater.isPaused == true" title="Start"
+                                        class="btn btn-primary btn-sm float-right" type="button"
+                                        (click)="onSessionStart(matchQuater.id)" style="font-size: 16px;">
+                                        <i class="fas fa-play"></i>
+                                    </button>
+
+                                    <button title="Paused" *ngIf="matchQuater.start  && !matchQuater.end "
+                                        class="btn btn-warning btn-sm text-white" type="button"
+                                        (click)="onSessionPause(matchQuater.id)"
+                                        style="font-size: 16px; margin-right: 3px;">
+                                        <i class="fas fa-pause"></i>
+                                    </button>
+
+                                    <button
+                                        *ngIf="( matchQuater.start && !matchQuater.end && matchQuater.isPaused == false)  "
+                                        title="Stop" class="btn btn-danger btn-sm float-right" type="button"
                                         (click)="onSessionEnd(matchQuater.id)" style="font-size: 16px;">
-                                        Stop <i class="fas fa-stop"></i>
+                                        <i class="fas fa-stop"></i>
                                     </button>
                                 </div>
 
@@ -35,18 +50,7 @@
                     </div>
 
                 </ng-template>
-                <!-- <div class="col border">
-                    <h3> Q1 </h3>
-                </div>
-                <div class="col border">
-                    <h3> Q2 </h3>
-                </div>
-                <div class="col border">
-                    <h3> Q3 </h3>
-                </div>
-                <div class="col border">
-                    <h3> Q4 </h3>
-                </div> -->
+
                 <div class="col border">
                     <h3> Total </h3>
                 </div>
@@ -54,7 +58,7 @@
             </div>
             <div class="row ml-1 mr-1">
                 <div class="col border" style="min-height:50px;">
-                    <h3> Home </h3>
+                    <h3> {{teamA.name}} </h3>
                 </div>
                 <ng-template ngFor let-matchQuater [ngForOf]="matchQuaters" let-index="index">
                     <div class="col border">
@@ -62,24 +66,24 @@
                     </div>
 
                 </ng-template>
- 
+
                 <div class="col border">
-                        <h3 *ngIf="teamAMatchSummary"> {{teamAMatchSummary.TPTS}} </h3>
+                    <h3 *ngIf="teamAMatchSummary"> {{teamAMatchSummary.TPTS}} </h3>
                 </div>
 
             </div>
             <div class="row ml-1 mr-1">
                 <div class="col border" style="min-height:50px;">
-                    <h3> Vistor </h3>
+                    <h3> {{teamB.name}} </h3>
                 </div>
                 <ng-template ngFor let-matchQuater [ngForOf]="matchQuaters" let-index="index">
-                        <div class="col border">
-                            <h3> {{matchQuater.teamBMatchSummary.TPTS}} </h3>
-                        </div>
-    
-                    </ng-template>
+                    <div class="col border">
+                        <h3> {{matchQuater.teamBMatchSummary.TPTS}} </h3>
+                    </div>
+
+                </ng-template>
                 <div class="col border">
-                        <h3 *ngIf="teamBMatchSummary"> {{teamBMatchSummary.TPTS}} </h3>
+                    <h3 *ngIf="teamBMatchSummary"> {{teamBMatchSummary.TPTS}} </h3>
                 </div>
 
             </div>
@@ -87,31 +91,21 @@
         </div>
     </div>
     <div class="col-3">
-        <div class="card">
-            <div class="row">
-                <div class="col-4">
-                    <h3> Time </h3>
-                </div>
-                <div class="col text-center" style="min-height:50px;">
-                    <button type="button" class="btn btn-outline-secondary disabled">10</button>
-                    <span> : </span>
-                    <button type="button" class="btn btn-outline-secondary disabled">00</button>
-                </div>
-
-            </div>
-            <div class="row">
-                <div class="col-4">
-                    <h3> Quarters </h3>
-                </div>
-                <div class="col text-center" style="min-height:40px; min-width: 40px">
-                    <button type="button" class="btn btn-outline-secondary">Q1</button>
-                    <button type="button" class="btn btn-outline-secondary">Q2</button>
-                    <button type="button" class="btn btn-outline-secondary">Q3</button>
-                    <button type="button" class="btn btn-outline-secondary">Q4</button>
-
-                </div>
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-danger ripple nav-button float-right" type="button" (click)="finishMatch()">
+                    End Match <i class="fas fa-stop"></i>
+                </button>
             </div>
         </div>
+        <div class="row mt-1" *ngIf="showOverTime">
+            <div class="col">
+                <button class="btn btn-info ripple nav-button float-right" type="button" (click)="saveBasketBallOverTimeSession()">
+                    Start Overtime <i class="far fa-clock"></i>
+                </button>
+            </div>
+        </div>
+
     </div>
 
 
@@ -127,7 +121,16 @@
                     </div>
                 </div>
                 <div class="row" *ngIf="selectedTab ==1">
-                    Play by Play
+                    <div class="col" style="max-height:500px;overflow-y: scroll;">
+                        <ng-template ngFor let-playByPlay [ngForOf]="playByPlays" let-index="index">
+                            <div class="row border-bottom">
+                                <div class="col">
+                                    <h3> {{playByPlay.field3}}</h3>
+                                    <h5>{{playByPlay.field4}}</h5>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </div>
                 </div>
                 <div class="row" *ngIf="selectedTab ==2">
                     <div class="card-body">
@@ -256,11 +259,7 @@
                                 [class.btn-selected]="player.selected"
                                 (click)="onSelectScorePlayer('A',player)">{{player.shirtNr}}</button>
                         </ng-template>
-                        <!-- <button type="button" class="btn btn-dark btn-score btn-margin-l-10">1</button>
-                        <button type="button" class="btn btn-dark btn-score btn-margin-l-10">2</button>
-                        <button type="button" class="btn btn-dark btn-score btn-margin-l-10">3</button>
-                        <button type="button" class="btn btn-dark btn-score btn-margin-l-10">4</button>
-                        <button type="button" class="btn btn-dark btn-score btn-margin-l-10">5</button> -->
+
 
                     </div>
                 </div>
@@ -360,6 +359,26 @@
 
                     </div>
                 </div>
+
+                <div class="row mt-2">
+                    <div class="col">
+                        <button type="button" class="btn  btn-score" (click)="addScore('FTM')"> Free Throws
+                            <br> Attempted
+                        </button>
+                        <button type="button" class="btn  btn-score btn-margin-l-10" (click)="addScore('FTA')">
+                            Free Throws <br> Attempted</button>
+                        <button type="button" class="btn  btn-score btn-margin-l-10" (click)="addScore('OFF')">
+                            Offensive <br> Fouls </button>
+                        <button type="button" class="btn  btn-score btn-margin-l-10" (click)="addScore('FFF')"> Flagrant
+                            <br> Foul </button>
+                        <button type="button" class="btn  btn-score btn-margin-l-10" (click)="addScore('TEF')">
+                            Technical<br> Fouls </button>
+                        <button type="button" class="btn btn-outline  btn-score btn-margin-l-10"
+                            (click)="addScore('DFF')"> Deflect</button>
+
+                    </div>
+                </div>
+
 
             </div>
 

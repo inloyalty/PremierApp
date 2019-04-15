@@ -173,6 +173,52 @@ export class LeageService {
         )
         return responseModel;
     }
+
+    async saveBasketBallOverTimeSession(model: any) {
+        let responseModel: any;
+        await this.httpRestClientSvc.post('Leagues/LeagueMatchBasketBallSession/Save/OverTime', model).then(
+            result => {
+                responseModel = result;
+                return responseModel;
+            },
+        )
+        return responseModel;
+    }
+
+
     
+    async saveBasketBallLineup(model: any) {
+        let responseModel: any;
+        await this.httpRestClientSvc.post('Leagues/LeagueMatchBasketBallLineups/Save', model).then(
+            result => {
+                responseModel = result;
+                return responseModel;
+            },
+        )
+        return responseModel;
+    }
+
+    async saveLeagueMatchPlayByPlay(model: any) {
+        let responseModel: any;
+        await this.httpRestClientSvc.post('Leagues/LeagueMatchPlayByPlays/Save', model).then(
+            result => {
+                responseModel = result;
+                return responseModel;
+            },
+        )
+        return responseModel;
+    }
+ 
+    async saveSchool(model: any) {
+        let responseModel: any;
+        await this.httpRestClientSvc.postFormData('Leagues/LeagueSchools', model).then(
+            result => {
+                responseModel = result;
+                return responseModel;
+            },
+        )
+        return responseModel;
+    }
+
 
 }

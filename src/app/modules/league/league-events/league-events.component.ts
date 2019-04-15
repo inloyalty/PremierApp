@@ -49,8 +49,6 @@ export class LeagueMatchEventsComponent implements AfterViewChecked, OnInit {
     public tabs = [
         { id: 1, 'title': 'Up Coming', 'active': true },
         { id: 2, 'title': 'Past Match', 'active': false }
-
-
     ]
 
     selectedTab: any = 1;

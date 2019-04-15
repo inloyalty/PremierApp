@@ -186,7 +186,7 @@ export class MatchScoreIndividualAddEditComponent implements OnInit {
             this.totalPoints = _.sumBy(this.matchQuaters, function (x) { return x.totalPoints; });
         }
         //Rebound
-        else if (scorePointId == 29) {
+        else if (scorePointId == 14) {
             let _totalRebounds: number = Number(quater.totalRebounds);
             let _sumTotal: number = +Number(_totalRebounds) + Number(scorePointValue);
             quater.totalRebounds = _sumTotal;

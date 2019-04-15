@@ -19,12 +19,52 @@
 
             <div *ngIf="currentTabIndex == 1">
                 <div class="form-group ">
-                    <label for="">League </label>
-                    <ng-select [items]="leagues" [(ngModel)]="leagueMatch.leagueId" bindLabel="name" bindValue="id"
-                        name="leagueId" [ngModelOptions]="{standalone: true}" class="custom form-control">
+                    <label for="">Sport <span>*</span></label>
+                    <label *ngIf="(userForm.submitted || sportId.touched) && !sportId.valid"
+                        class="text-danger float-right"> Sport is required</label>
+
+                    <ng-select [items]="sports" [(ngModel)]="leagueMatch.sportId" bindLabel="name" bindValue="sportId"
+                        name="sportId" [ngModelOptions]="{standalone: true}" class="custom form-control"
+                        #sportId="ngModel" required>
                     </ng-select>
+                </div>
+                <div class="form-group ">
+                    <label for="">Game Type </label>
+                    <ng-select [items]="gameTypes" [(ngModel)]="leagueMatch.gameTypeId" bindLabel="name" bindValue="id"
+                        name="gameTypeId" [ngModelOptions]="{standalone: true}" class="custom form-control">
+                    </ng-select>
+                </div>
+
+                <div class="form-group ">
+                    <label for="">League/School </label>
+                    <div class="input-group">
+                        <ng-select [items]="leagues" [(ngModel)]="leagueMatch.leagueId" bindLabel="name" bindValue="id"
+                            name="leagueId" [ngModelOptions]="{standalone: true}" class="custom form-control"
+                            aria-describedby="basic-addon2">
+                        </ng-select>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-primary" type="button" (click)="onAddNewLeage()">
+                                Add New</button>
+                        </div>
+                    </div>
 
                 </div>
+
+                <!-- <div class="form-group ">
+                    <label for="">School </label>
+                    <div class="input-group">
+                        <ng-select [items]="schools" [(ngModel)]="leagueMatch.schoolId" bindLabel="name" bindValue="id"
+                            name="schoolId" [ngModelOptions]="{standalone: true}" class="custom form-control"
+                            aria-describedby="basic-addon2">
+                        </ng-select>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-primary" type="button" (click)="onAddNewSchool()">Add
+                                New</button>
+                        </div>
+                    </div>
+
+                </div> -->
+
                 <div class="form-group">
                     <label for=""> Venue <span>*</span> </label>
                     <label *ngIf="(userForm.submitted || venue.touched) && !venue.valid"
@@ -35,16 +75,27 @@
                         #venue="ngModel" name="venue" required>
                 </div>
                 <div class="form-group ">
-                        <label for="">Match Date </label>
-                        <input id="matchDate" class="form-control" bsDatepicker [bsConfig]="bsConfig"
-                            [(ngModel)]="matchDate" name="matchDate">
-                    </div>
+                    <label for="">Match Date </label>
+                    <input id="matchDate" class="form-control" bsDatepicker [bsConfig]="bsConfig"
+                        [(ngModel)]="matchDate" name="matchDate">
+                </div>
                 <div class="form-group">
                     <label for="">Mathc Nr </label>
                     <input type="text" class="form-control" placeholder="mathcNr" name="Mathc Nr"
                         [(ngModel)]="leagueMatch.mathcNr" #mathcNr="ngModel">
                 </div>
-                <div class="form-group ">
+                <div class="form-group" *ngIf="leagueMatch.sportId == 1">
+                    <label for="">Total Quarter </label>
+                    <input type="text" class="form-control" placeholder="Total Quarter" name="totalQuarters"
+                        [(ngModel)]="leagueMatch.totalQuarters" #totalQuarters="ngModel">
+                </div>
+                <div class="form-group" *ngIf="leagueMatch.sportId == 1">
+                    <label for="">Minutes Per Quarter </label>
+                    <input type="text" class="form-control" placeholder="Minutes Per Quarter" name="Minutes Per Quarter"
+                        [(ngModel)]="leagueMatch.minutesPerQuarter" #minutesPerQuarter="ngModel">
+                </div>
+
+                <!-- <div class="form-group ">
                     <label for="">Country </label>
 
                     <ng-select [items]="countries" [(ngModel)]="leagueMatch.countryId"
@@ -65,7 +116,7 @@
 
                     <input type="text" class="form-control" placeholder="Zip Code" [(ngModel)]="leagueMatch.zipCode"
                         #zipCode="ngModel" name="zipCode" required>
-                </div>
+                </div> -->
                 <div class="form-group">
 
                     <myd-segmented-button [buttons]="matchFormats"
@@ -78,124 +129,119 @@
 
             </div>
 
-            <div *ngIf="currentTabIndex == 2" >
+            <div *ngIf="currentTabIndex == 2">
 
                 <div *ngIf="matchFormat ==1" class="col-12">
-                      <form>
-                          <div class="card">
-                    <div class="card-body">
-                        <div class="col-12">
-                            <div class="form-group ">
+                    <form>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="col-12">
+                                    <div class="form-group ">
 
-                              <span>
-                                   
-                                 <h4>  User Name : {{logedInUserInfo.firstName}}
-                                  {{logedInUserInfo.lastName}} </h4>
-                              </span>
+                                        <span>
 
+                                            <h4> User Name : {{logedInUserInfo.firstName}}
+                                                {{logedInUserInfo.lastName}} </h4>
+                                        </span>
+
+                                    </div>
+
+
+                                </div>
                             </div>
-
-                            <!-- <div class="form-group ">
-                                <label for="">User B </label>
-
-                                <ng-select [items]="users" [(ngModel)]="leagueMatch.userBId" bindLabel="fullName"
-                                    bindValue="id" name="userB" [ngModelOptions]="{standalone: true}"
-                                    class="custom form-control">
-                                </ng-select>
-
-                            </div> -->
                         </div>
-                    </div>
-                </div>
-                </form>
+                    </form>
                 </div>
                 <div *ngIf="matchFormat ==2">
-                     <div class="row">
-                    <div class=" col-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="row">
-                                    <div class="col">Team A</div>
-                                    <div class="col">
-                                        <div class="form-group ">
-                                            <ng-select [items]="teams" [(ngModel)]="leagueMatch.teamAId"
-                                                bindLabel="name" bindValue="id" name="teamAId"
-                                                [ngModelOptions]="{standalone: true}" placeholder="Select team"
-                                                class="custom form-control" name="teamA"
-                                                (change)="onTeamChange($event,true)">
-                                            </ng-select>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <button type="submit" class="btn btn-primary float-right "
-                                            (click)="openTeamPlayerDrawer(true)">Add
-                                            Player
-                                            <i class="fas fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="card-body">
-                                <ul class="list-group list-group-flush">
-
-                                    <ng-template ngFor let-player [ngForOf]="selectedTeamAPlayers" let-i="index">
-                                        <li *ngIf="!player.isDeleted" class="list-group-item list-group-item-action">
-                                            <div class="row">
-                                                <h6 class="col-9 font-weight-normal pl-0 padding-top">
-                                                    {{player.firstName}}
-                                                    {{player.middleName}} {{player.lastName}}</h6>
-                                                    <h5>Nr: {{player.shirtNr}}</h5>
+                    <div class="row">
+                        <div class=" col-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="row">
+                                        <div class="col">Team A</div>
+                                        <div class="col">
+                                            <div class="form-group ">
+                                                <ng-select [items]="teams" [(ngModel)]="leagueMatch.teamAId"
+                                                    bindLabel="name" bindValue="id" name="teamAId"
+                                                    [ngModelOptions]="{standalone: true}" placeholder="Select team"
+                                                    class="custom form-control" name="teamA"
+                                                    (change)="onTeamChange($event,true)">
+                                                </ng-select>
                                             </div>
-                                        </li>
-                                    </ng-template>
-                                </ul>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class=" col-6">
-
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="row">
-                                    <div class="col">Team B</div>
-                                    <div class="col">
-                                        <div class="form-group ">
-                                            <ng-select [items]="teams" [(ngModel)]="leagueMatch.teamBId"
-                                                bindLabel="name" bindValue="id" [ngModelOptions]="{standalone: true}"
-                                                placeholder="Select team" class="custom form-control" name="teamB"
-                                                (change)="onTeamChange($event,false)">
-                                            </ng-select>
+                                        </div>
+                                        <div class="col">
+                                            <button type="submit" class="btn btn-primary float-right "
+                                                (click)="openTeamPlayerDrawer(true)">Add
+                                                Player
+                                                <i class="fas fa-plus"></i>
+                                            </button>
                                         </div>
                                     </div>
-                                    <div class="col">
-                                        <button type="submit" class="btn btn-primary float-right "
-                                            (click)="openTeamPlayerDrawer(false)">Add
-                                            Player
-                                            <i class="fas fa-plus"></i>
-                                        </button>
-                                    </div>
+
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-group list-group-flush">
+
+                                        <ng-template ngFor let-player [ngForOf]="selectedTeamAPlayers" let-i="index">
+                                            <li *ngIf="!player.isDeleted"
+                                                class="list-group-item list-group-item-action">
+                                                <div class="row">
+                                                    <h6 class="col-9 font-weight-normal pl-0 padding-top">
+                                                        {{player.firstName}}
+                                                        {{player.middleName}} {{player.lastName}}</h6>
+                                                    <h5>Nr: {{player.shirtNr}}</h5>
+                                                </div>
+                                            </li>
+                                        </ng-template>
+                                    </ul>
                                 </div>
                             </div>
 
-                            <div class="card-body">
-                                <ul class="list-group list-group-flush">
-                                    <ng-template ngFor let-player [ngForOf]="selectedTeamBPlayers" let-i="index">
-                                        <li *ngIf="!player.isDeleted" class="list-group-item list-group-item-action">
-                                            <div class="row">
-                                                <h6 class="col-9 font-weight-normal pl-0 padding-top">
-                                                    {{player.firstName}}
-                                                    {{player.middleName}} {{player.lastName}}</h6>
-                                                    <h5>Nr: {{player.shirtNr}}</h5>
+                        </div>
+                        <div class=" col-6">
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="row">
+                                        <div class="col">Team B</div>
+                                        <div class="col">
+                                            <div class="form-group ">
+                                                <ng-select [items]="teams" [(ngModel)]="leagueMatch.teamBId"
+                                                    bindLabel="name" bindValue="id"
+                                                    [ngModelOptions]="{standalone: true}" placeholder="Select team"
+                                                    class="custom form-control" name="teamB"
+                                                    (change)="onTeamChange($event,false)">
+                                                </ng-select>
                                             </div>
-                                        </li>
-                                    </ng-template>
-                                </ul>
+                                        </div>
+                                        <div class="col">
+                                            <button type="submit" class="btn btn-primary float-right "
+                                                (click)="openTeamPlayerDrawer(false)">Add
+                                                Player
+                                                <i class="fas fa-plus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card-body">
+                                    <ul class="list-group list-group-flush">
+                                        <ng-template ngFor let-player [ngForOf]="selectedTeamBPlayers" let-i="index">
+                                            <li *ngIf="!player.isDeleted"
+                                                class="list-group-item list-group-item-action">
+                                                <div class="row">
+                                                    <h6 class="col-9 font-weight-normal pl-0 padding-top">
+                                                        {{player.firstName}}
+                                                        {{player.middleName}} {{player.lastName}}</h6>
+                                                    <h5>Nr: {{player.shirtNr}}</h5>
+                                                </div>
+                                            </li>
+                                        </ng-template>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 </div>
             </div>
         </div>
@@ -228,10 +274,10 @@
             <li class="list-group-item list-group-item-action" *ngFor="let player of players">
                 <div class="row" (click)="onSubscribedToggle(player)">
                     <div class="col-9">
-                    <h5 class="font-weight-normal pl-0 padding-top">
-                     <span>  {{player.firstName}} {{player.middleName}}  {{player.lastName}} </span>  
-                       
-                     <span style="padding-left: 30px;">  Shirt Nr: {{player.shirtNr}} </span>   </h5>
+                        <h5 class="font-weight-normal pl-0 padding-top">
+                            <span> {{player.firstName}} {{player.middleName}} {{player.lastName}} </span>
+
+                            <span style="padding-left: 30px;"> Shirt Nr: {{player.shirtNr}} </span> </h5>
                     </div>
                     <div class="col-3 pr-0">
                         <button type="button" class="btn btn-outline-light btn-flat btn-rounded float-right"
@@ -248,4 +294,102 @@
     <div footer>
 
     </div>
+</myd-side-drawer>
+
+
+
+<myd-side-drawer [title]="'Add league'" (close)="onClose($event)" [showDrawer]="showLeagueDrader">
+
+    <div body>
+        <form name="Form" #leageForm="ngForm" method="post" enctype="multipart/form-data" novalidate>
+
+            <div class="row">
+                <div class="col-sm-12 col-sm-3 form-group">
+                    <img alt="User Image" [src]="leageImageData" onerror='this.src="assets/images/no-image.png";'
+                        class="el-image el-framed el-circled"
+                        style="min-width: 150px; max-width: 150px; min-height: 150px; max-height: 150px;">
+                    <br>
+                    <label class="fileUpload btn btn-outline-secondary btn-rounded">
+                        <i class="fa fa-folder-open-o" aria-hidden="true"></i> Browse
+                        <input type="file" name="userImage" class="upload"
+                            accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|images/*" (change)="onUserImage($event)"
+                            hidden />
+                    </label>
+                    <br>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for=""> Name <span>*</span> </label>
+                <label *ngIf="(leageForm.submitted || name.touched) && !name.valid" class="text-danger float-right">
+                    Name is required</label>
+                <input type="text" class="form-control" aria-describedby="emailHelp" placeholder=" name"
+                    [(ngModel)]="league.name" #name="ngModel" name="name" required>
+
+            </div>
+            <div class="form-group">
+                <label for="">Description </label>
+                <input type="text" class="form-control" placeholder="description" name="description"
+                    [(ngModel)]="league.description" #description="ngModel">
+            </div>
+
+
+
+        </form>
+    </div>
+    <div footer>
+        <button [disabled]="loading" type="submit" class="btn btn-primary float-right "
+            (click)="leageForm.form.valid && onLeagueSave()">Save
+            <i class="far fa-long-arrow-right"></i></button>
+    </div>
+
+</myd-side-drawer>
+
+
+
+<myd-side-drawer [title]="'Add School'" (close)="onClose($event)" [showDrawer]="showSchoolDrader">
+
+    <div body>
+        <form name="Form" #schoolForm="ngForm" method="post" enctype="multipart/form-data" novalidate>
+
+            <div class="row">
+                <div class="col-sm-12 col-sm-3 form-group">
+                    <img alt="User Image" [src]="leageImageData" onerror='this.src="assets/images/no-image.png";'
+                        class="el-image el-framed el-circled"
+                        style="min-width: 150px; max-width: 150px; min-height: 150px; max-height: 150px;">
+                    <br>
+                    <label class="fileUpload btn btn-outline-secondary btn-rounded">
+                        <i class="fa fa-folder-open-o" aria-hidden="true"></i> Browse
+                        <input type="file" name="userImage" class="upload"
+                            accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|images/*" (change)="onUserImage($event)"
+                            hidden />
+                    </label>
+                    <br>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for=""> Name <span>*</span> </label>
+                <label *ngIf="(schoolForm.submitted || name.touched) && !name.valid" class="text-danger float-right">
+                    Name is required</label>
+                <input type="text" class="form-control" aria-describedby="emailHelp" placeholder=" name"
+                    [(ngModel)]="school.name" #name="ngModel" name="name" required>
+
+            </div>
+            <div class="form-group">
+                <label for="">Description </label>
+                <input type="text" class="form-control" placeholder="description" name="description"
+                    [(ngModel)]="school.description" #description="ngModel">
+            </div>
+
+
+
+        </form>
+    </div>
+    <div footer>
+        <button [disabled]="loading" type="submit" class="btn btn-primary float-right "
+            (click)="schoolForm.form.valid && onSchoolSave()">Save
+            <i class="far fa-long-arrow-right"></i></button>
+    </div>
+
 </myd-side-drawer>

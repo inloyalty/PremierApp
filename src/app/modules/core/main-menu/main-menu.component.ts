@@ -104,17 +104,17 @@ export class MainMenuComponent implements OnInit, OnDestroy {
                 id: 3, "name": "Team", "title": "Team", "url": "/team", "active": false, "order": 150, "iconImage": "", "iconClass": "fas fa-users"
             },
             {
-                id: 31, "name": "Team Player", "title": "Team Player", "url": "/team/team-player", "active": false, "order": 150, "iconImage": "", "iconClass": "fas fa-user"
+                id: 31, "name": "Player", "title": "Player", "url": "/team/team-player", "active": false, "order": 150, "iconImage": "", "iconClass": "fas fa-user"
             },
             {
-                id: 31, "name": "League", "title": "League", "url": "/league", "active": false, "order": 150, "iconImage": "", "iconClass": "fas fa-basketball-ball"
+                id: 31, "name": "School/League", "title": "School/League", "url": "/league", "active": false, "order": 150, "iconImage": "", "iconClass": "fas fa-basketball-ball"
             },
             {
-                id: 31, "name": "League Match", "title": "League Match", "url": "/league/league-match", "active": false, "order": 150, "iconImage": "", "iconClass": "fas fa-basketball-ball"
+                id: 31, "name": "Games", "title": "Games", "url": "/league/league-match", "active": false, "order": 150, "iconImage": "", "iconClass": "fas fa-basketball-ball"
             },
 
             {
-                id: 4, "name": "MyEvent", "title": "My Event", "url": "/league/my-events", "active": false, "order": 150, "iconImage": "", "iconClass": "far fa-calendar-alt"
+                id: 4, "name": "My Event", "title": "My Event", "url": "/league/my-events", "active": false, "order": 150, "iconImage": "", "iconClass": "far fa-calendar-alt"
             }
             ,
             {

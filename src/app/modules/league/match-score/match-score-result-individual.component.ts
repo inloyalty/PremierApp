@@ -55,6 +55,7 @@ export class MatchScoreResultIndividualComponent implements OnInit {
     loginedUserDetail: any;
     userInfo: any;
     userType: string ='Individual';
+    userABasketBallScoreSummary:any={};
 
 
     constructor(
@@ -93,16 +94,18 @@ export class MatchScoreResultIndividualComponent implements OnInit {
         console.log(apiResponse)
         if (apiResponse && apiResponse.data) {
             this.leagueMatch = apiResponse.data;
-            this.matchQuaters = this.leagueMatch.userABasketBallScoreSummaries;
-            if (this.matchQuaters && this.matchQuaters.length > 0) {
-                this.totalPoints = _.sumBy(this.matchQuaters, function (x) { return x.totalPoints; });
-                this.totalRebounds = _.sumBy(this.matchQuaters, function (x) { return x.totalRebounds; });
-                this.totalAssists = _.sumBy(this.matchQuaters, function (x) { return x.totalAssists; });
-                this.totalSteals = _.sumBy(this.matchQuaters, function (x) { return x.totalSteals; });
-                this.totalBlocks = _.sumBy(this.matchQuaters, function (x) { return x.totalBlocks; });
-                this.totalFouls = _.sumBy(this.matchQuaters, function (x) { return x.totalFouls; });
-                console.log(this.totalFouls)
-            }
+            this.matchQuaters = this.leagueMatch.basketBallScoreMatchQuaterSummaries;
+            this.userABasketBallScoreSummary = this.leagueMatch.userABasketBallScoreSummary;
+
+            // if (this.matchQuaters && this.matchQuaters.length > 0) {
+            //     this.totalPoints = _.sumBy(this.matchQuaters, function (x) { return x.totalPoints; });
+            //     this.totalRebounds = _.sumBy(this.matchQuaters, function (x) { return x.totalRebounds; });
+            //     this.totalAssists = _.sumBy(this.matchQuaters, function (x) { return x.totalAssists; });
+            //     this.totalSteals = _.sumBy(this.matchQuaters, function (x) { return x.totalSteals; });
+            //     this.totalBlocks = _.sumBy(this.matchQuaters, function (x) { return x.totalBlocks; });
+            //     this.totalFouls = _.sumBy(this.matchQuaters, function (x) { return x.totalFouls; });
+            //     console.log(this.totalFouls)
+            // }
 
 
 

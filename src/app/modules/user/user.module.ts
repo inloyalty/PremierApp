@@ -12,12 +12,14 @@ import { AccountComponent } from './account/account.component';
 import { CommandBarModule } from '../core/command-bar/command-bar.module';
 import { ToastrService } from 'ngx-toastr';
 import { MydTabModule } from 'src/app/shared/modules/myd-tab/myd-tab.module';
-
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { MydSideDrawerModule } from 'src/app/shared/modules/myd-side-drawer/myd-side-drawer.module';
+import { ImageModule } from 'src/app/shared/modules/image/image.module';
 
 @NgModule({
     declarations: [DashboardComponet, AccountComponent],
     imports: [CommonModule, FormsModule, NgSelectModule, BsDatepickerModule.forRoot(), CommandBarModule,
-        MydTabModule],
+        MydTabModule,ModalModule.forRoot(), MydSideDrawerModule, ImageModule ],
     exports: [UserRoutingModule],
     providers: [NavigationService, HttpRestClientService, LocalStorageService, ToastrService],
     entryComponents: []

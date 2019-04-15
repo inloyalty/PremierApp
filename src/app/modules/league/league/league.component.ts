@@ -79,11 +79,6 @@ export class LeagueComponent implements AfterViewChecked, OnInit {
     }
     async onSave() {
 
-        if (this.dateOfBirth) {
-            this.league.dateOfBirth = this.dateOfBirth.toyyyymmdd()
-        }
-
-
         const formData = {
             'dto': JSON.stringify(this.league),
             'file': this.UserImage,

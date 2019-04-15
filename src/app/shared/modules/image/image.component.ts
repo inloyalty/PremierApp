@@ -30,6 +30,7 @@ export class ImageComponent implements OnInit {
   ngOnInit() {
     this.setSize();
     this.initials = this.label ? this.label : this.getInitials(this.caption);
+    console.log( this.initials )
     if (!this.backgroundColor) {
       this.backgroundClass = 'bg-primary'
     }

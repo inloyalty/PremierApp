@@ -53,7 +53,28 @@ export class LookupService {
         return responseModel;
     }
 
+    async getGameTypes(){
+        let responseModel : any;
+        await this.httpRestClientSvc.get('Lookups/GameTypes', this.filterModel).then(
+            result => {
+                responseModel = result;
+                return responseModel;
+            },
+        )
+        return responseModel;
+    }
     
+    async getSchools(){
+        let responseModel : any;
+        await this.httpRestClientSvc.get('Lookups/Schools', this.filterModel).then(
+            result => {
+                responseModel = result;
+                return responseModel;
+            },
+        )
+        return responseModel;
+    }
+
 
      
 }

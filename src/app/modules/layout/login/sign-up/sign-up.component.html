@@ -15,10 +15,10 @@
         <div class="col-6 card card-signup">
             <form id="msform" name="Form" #userForm="ngForm" method="post" enctype="multipart/form-data" novalidate>
                 <ul id="progressbar">
-                    <li class="active">Login Details</li>
-                    <li>Personal Details</li>
-                    <li>Account Setup</li>
-                    <li>Account Setup</li>
+                    <li  [ngClass]="{'active': currentTabIndex >=  1}">Login Details</li>
+                    <li [ngClass]="{'active': currentTabIndex >=  2}">Personal Details</li>
+                    <li [ngClass]="{'active': currentTabIndex >=  3}">Account Setup</li>
+                    <li [ngClass]="{'active': currentTabIndex >=  4}">Account Setup</li>
                 </ul>
                 <fieldset *ngIf="currentTabIndex == 1">
                     <h2 class="fs-title">Login Details</h2>
@@ -152,9 +152,23 @@
                                     [(ngModel)]="signUpModel.zipCode" #zipCode="ngModel" name="zipCode" required>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="row m-0">
+                        <div class="col-6 pl-0">
+                            <div class="form-group ">
+                                    <label for="" class="float-left mb-2">Register As </label>
+                                <span >
+                                    <myd-segmented-button [buttons]="segmentedButtons"
+                                        (buttonChanged)="onRegistrationChanged($event)"></myd-segmented-button>
+                                </span>
+                            </div>
+                        </div>
 
                     </div>
-                    <div class="row m-0">
+
+
+                    <div class="row m-0" *ngIf="rigistrationType ==1">
                         <div class="form-group custom-control custom-checkbox">
                             <input type="checkbox" class="custom-control-input" id="customCheck2"
                                 [(ngModel)]="signUpModel.isAutoAccountTransfer" name="isAutoAccountTransfer">
@@ -165,17 +179,9 @@
                                 years old</label>
                         </div>
                     </div>
-                    <div class="row m-0">
-                        <div class="form-group custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="customCheck1" name="isParent"
-                                [(ngModel)]="signUpModel.isParent" name="isParent">
-                            <label class="custom-control-label" for="customCheck1">Are you parent who is registering
-                                for
-                                your child</label>
-                        </div>
-                    </div>
-                    <div class="row m-0">
-                        <div class="col-6 pl-0" *ngIf="signUpModel.isParent">
+                    
+                    <div class="row m-0" *ngIf="rigistrationType ==1">
+                        <div class="col-6 pl-0" *ngIf="signUpModel.isAutoAccountTransfer">
                             <div class="form-group">
                                 <label for="" class="float-left mb-2">Child Email<span>*</span> </label>
                                 <label *ngIf="(userForm.submitted || childEmail.touched) && !childEmail.valid"
@@ -190,6 +196,31 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="row m-0">
+                            <div class="col-6 pl-0">
+                                    <div class="form-group" *ngIf="rigistrationType ==3">
+                                            <label class="float-left mb-2" for="">School Name</label>
+                                            <input  type="text" class="form-control" placeholder="School Name"
+                                                [(ngModel)]="signUpModel.schoolName" #schoolName="ngModel" name="schoolName" >
+                                        </div>   
+                            </div>
+                        </div>
+
+                        <div class="row m-0">
+                                <div class="col-6 pl-0">
+                                        <div class="form-group" *ngIf="rigistrationType ==3">
+                                                <label class="float-left mb-2" for="">Grade</label>
+                                                <input type="text" class="form-control" placeholder="Grade"
+                                                    [(ngModel)]="signUpModel.grade" #grade="ngModel" name="grade" >
+                                            </div> 
+                                </div>
+                            </div>
+
+                   
+                      
+
+
                 </fieldset>
                 <fieldset *ngIf="currentTabIndex == 3">
                     <h2 class="fs-title">Create your account</h2>
@@ -205,9 +236,10 @@
                 </fieldset>
                 <fieldset *ngIf="currentTabIndex == 4">
                     <h2>Details</h2>
-                    <div class="form-group input-group mb-4">
+                    <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="Reward Received"
-                            [(ngModel)]="signUpModel.rewardReceived" #rewardReceived="ngModel" name="rewardReceived">
+                            [(ngModel)]="signUpModel.rewardReceived" #rewardReceived="ngModel" name="rewardReceived"
+                            aria-describedby="basic-addon2">
                         <div class="input-group-append">
                             <button [disabled]="loading" class="btn btn-primary" type="button" id="button-addon1"
                                 (click)="addUserReward()">
@@ -215,16 +247,19 @@
                             </button>
                         </div>
                     </div>
-                    <div class="mb-4">
-                        <div class="chip chip-sm bg-primary" *ngFor="let reward of userRewards; let i= index;">
+                    <div class="mb-3" style="text-align: left">
+                        <div class="chip chip-sm bg-warning text-white" *ngFor="let reward of userRewards; let i= index;">
                             {{reward.name}}
                             <span class="close" (click)="removeSelectedItem(reward)">×</span>
                         </div>
                     </div>
 
-                    <div class="form-group input-group mb-4">
+                    
+
+                    <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="Club Joined"
-                            [(ngModel)]="signUpModel.clubJoind" #clubJoind="ngModel" name="clubJoind">
+                            [(ngModel)]="signUpModel.clubJoind" #clubJoind="ngModel" name="clubJoind"
+                            aria-describedby="basic-clubJoind">
                         <div class="input-group-append">
                             <button [disabled]="loading" class="btn btn-primary" type="button" id="button-addon1"
                                 (click)="addUserClud()">
@@ -233,8 +268,8 @@
                         </div>
 
                     </div>
-                    <div class="mb-4">
-                        <div class="chip chip-sm bg-primary" *ngFor="let reward of userClubs; let i= index;">
+                    <div class="mb-3" style="text-align: left">
+                        <div class="chip chip-sm bg-info text-white" *ngFor="let reward of userClubs; let i= index;">
                             {{reward.name}}
                             <span class="close" (click)="removeSelectedItem(reward)">×</span>
                         </div>
@@ -252,6 +287,11 @@
                         [disabled]="!userForm.form.valid" (click)="userForm.form.valid && onNextClick()">Next
                         <i class="fas fa-arrow-right"></i>
                     </button>
+
+                    <button *ngIf="currentTabIndex == 4" type="submit" class="btn next action-button float-right "
+                    (click)="onSave()" [disabled]="loading==true">Save
+                    <i class="fas fa-save"></i>
+                </button>
 
                 </div>
             </form>
