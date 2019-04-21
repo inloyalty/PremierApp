@@ -95,6 +95,10 @@ export class AccountComponent implements OnInit {
         }
     }
 
+    onClose(event:any)
+    {
+        this.showDrader=false;
+    }
     public async getUserSports() {
         try {
             let userId = this.loginDetail.userId;

@@ -148,7 +148,7 @@
                 <ng-template ngFor let-stat [ngForOf]="statics" let-index="index">
                     <div class="row border-bottom" style="min-height:35px; padding-top: 6px">
                         <div class="col-8">
-                            <h5> {{stat.name}} </h5>
+                            <span> {{stat.name}} </span>
                         </div>
                         <div class="col-2"> <span
                                 *ngIf="teamASummary && teamASummary[stat.code]">{{teamASummary[stat.code]}} </span>
@@ -207,19 +207,31 @@
                     <thead>
                         <tr>
                             <th scope="col-6">Player</th>
+                            <th scope="col">MIN</th>
                             <th scope="col">PTS</th>
                             <th scope="col">REB</th>
-                            <th scope="col">MIN</th>
-                            <th scope="col">1P</th>
-                            <th scope="col">2P</th>
-                            <th scope="col">3P</th>
-                            <th scope="col">FT</th>
-                            <th scope="col">OR</th>
-                            <th scope="col">DR</th>
-                            <th scope="col">PE</th>
-                            <th scope="col">TO</th>
                             <th scope="col">BLK</th>
                             <th scope="col">AST</th>
+                            <th scope="col">STL</th>
+
+                            <th scope="col">FGM</th>
+                            <th scope="col">FGA</th>
+                            <th scope="col">FG%</th>
+
+                            <th scope="col">2PM</th>
+                            <th scope="col">2PA</th>
+                            <th scope="col">2P%</th>
+
+                            <th scope="col">3PM</th>
+                            <th scope="col">3PA</th>
+                            <th scope="col">3P%</th>
+
+                            <th scope="col">FTM</th>
+                            <th scope="col">FTA</th>
+                            <th scope="col">FT%</th>
+
+                             
+                            
 
 
                         </tr>
@@ -229,19 +241,31 @@
                             let-index="index">
                             <tr>
                                 <th scope="col-6"> {{player.firstName}} {{player.lastName}} - {{player.shirtNr}} </th>
+                                <td scope="col">{{player.minp | secondFormat}}</td>
                                 <td scope="col"> {{player.tpm}} </td>
                                 <td scope="col">{{player.treb}}</td>
-                                <td scope="col">{{player.minp}}</td>
-                                <td scope="col">{{player.pA1}}</td>
-                                <td scope="col">{{player.pA2}}</td>
-                                <td scope="col">{{player.pA3}}</td>
-                                <td scope="col">{{player.ftm}}</td>
-                                <td scope="col">{{player.oreb}}</td>
-                                <td scope="col">{{player.dreb}}</td>
-                                <td scope="col">{{player.pef}}</td>
-                                <td scope="col">{{player.tov}}</td>
                                 <td scope="col">{{player.blk}}</td>
                                 <td scope="col">{{player.ast}}</td>
+                                <td scope="col">{{player.stl}}</td>
+                                <td scope="col">{{player.fgm}}</td>
+                                <td scope="col">{{player.fga}}</td>
+                                <td scope="col">{{player.fgper}}</td>
+                               
+                                <td scope="col">{{player.pM2}}</td>
+                                <td scope="col">{{player.pA2}}</td>
+                                <td scope="col">{{player.pM2PER}}</td>
+
+                                <td scope="col">{{player.pM3}}</td>
+                                <td scope="col">{{player.pA3}}</td>
+                                <td scope="col">{{player.pM3PER}}</td>
+
+                               
+                                <td scope="col">{{player.ftm}}</td>
+                                <td scope="col">{{player.fta}}</td>
+                                <td scope="col">{{player.ftper}}</td>
+
+                              
+                                
                             </tr>
                         </ng-template>
                     </tbody>
@@ -250,19 +274,28 @@
                         <ng-template ngFor let-player [ngForOf]="teamAPlayerSummaries" let-index="index">
                             <tr>
                                 <th scope="col-6"> {{player.firstName}} {{player.lastName}} - {{player.shirtNr}} </th>
+                                <td scope="col">{{player.minp | secondFormat}}</td>
                                 <td scope="col"> {{player.tpm}} </td>
                                 <td scope="col">{{player.treb}}</td>
-                                <td scope="col">{{player.minp}}</td>
-                                <td scope="col">{{player.pA1}}</td>
-                                <td scope="col">{{player.pA2}}</td>
-                                <td scope="col">{{player.pA3}}</td>
-                                <td scope="col">{{player.ftm}}</td>
-                                <td scope="col">{{player.oreb}}</td>
-                                <td scope="col">{{player.dreb}}</td>
-                                <td scope="col">{{player.pef}}</td>
-                                <td scope="col">{{player.tov}}</td>
                                 <td scope="col">{{player.blk}}</td>
                                 <td scope="col">{{player.ast}}</td>
+                                <td scope="col">{{player.stl}}</td>
+                                <td scope="col">{{player.fgm}}</td>
+                                <td scope="col">{{player.fga}}</td>
+                                <td scope="col">{{player.fgper}}</td>
+                               
+                                <td scope="col">{{player.pM2}}</td>
+                                <td scope="col">{{player.pA2}}</td>
+                                <td scope="col">{{player.pM2PER}}</td>
+
+                                <td scope="col">{{player.pM3}}</td>
+                                <td scope="col">{{player.pA3}}</td>
+                                <td scope="col">{{player.pM3PER}}</td>
+
+                               
+                                <td scope="col">{{player.ftm}}</td>
+                                <td scope="col">{{player.fta}}</td>
+                                <td scope="col">{{player.ftper}}</td>
                             </tr>
                         </ng-template>
                     </tbody>
@@ -270,19 +303,28 @@
                         <ng-template ngFor let-player [ngForOf]="teamBPlayerSummaries" let-index="index">
                             <tr>
                                 <th scope="col-6"> {{player.firstName}} {{player.lastName}} - {{player.shirtNr}} </th>
+                                <td scope="col">{{player.minp | secondFormat}}</td>
                                 <td scope="col"> {{player.tpm}} </td>
                                 <td scope="col">{{player.treb}}</td>
-                                <td scope="col">{{player.minp}}</td>
-                                <td scope="col">{{player.pA1}}</td>
-                                <td scope="col">{{player.pA2}}</td>
-                                <td scope="col">{{player.pA3}}</td>
-                                <td scope="col">{{player.ftm}}</td>
-                                <td scope="col">{{player.oreb}}</td>
-                                <td scope="col">{{player.dreb}}</td>
-                                <td scope="col">{{player.pef}}</td>
-                                <td scope="col">{{player.tov}}</td>
                                 <td scope="col">{{player.blk}}</td>
                                 <td scope="col">{{player.ast}}</td>
+                                <td scope="col">{{player.stl}}</td>
+                                <td scope="col">{{player.fgm}}</td>
+                                <td scope="col">{{player.fga}}</td>
+                                <td scope="col">{{player.fgper}}</td>
+                               
+                                <td scope="col">{{player.pM2}}</td>
+                                <td scope="col">{{player.pA2}}</td>
+                                <td scope="col">{{player.pM2PER}}</td>
+
+                                <td scope="col">{{player.pM3}}</td>
+                                <td scope="col">{{player.pA3}}</td>
+                                <td scope="col">{{player.pM3PER}}</td>
+
+                               
+                                <td scope="col">{{player.ftm}}</td>
+                                <td scope="col">{{player.fta}}</td>
+                                <td scope="col">{{player.ftper}}</td>
                             </tr>
                         </ng-template>
                     </tbody>

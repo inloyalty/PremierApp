@@ -68,6 +68,7 @@ export class MatchScoreAddEditComponent implements OnInit, OnDestroy {
     public totalPlayedTime: number = 0;
     public playByPlays = [];
     public showOverTime = false;
+    public overtimeSessionSummary = {};
 
 
 
@@ -141,12 +142,13 @@ export class MatchScoreAddEditComponent implements OnInit, OnDestroy {
                 this.teamA = this.leagueMatch.teamA;
                 this.teamB = this.leagueMatch.teamB;
                 this.matchQuaters = this.leagueMatch.matchSessions;
+                this.matchQuaters = _.filter(this.leagueMatch.matchSessions, (item) => { return !item.isOverTime; });
 
-                let overTime = _.find(this.leagueMatch.matchSessions, (item) => { return item.isOverTime == true; });
+                // let overTime = _.find(this.leagueMatch.matchSessions, (item) => { return item.isOverTime == true; });
 
-                if (overTime) {
-                    this.showOverTime = false;
-                }
+                // if (overTime) {
+                //     this.showOverTime = false;
+                // }
                 //this.matchQuaters = _.filter(this.leagueMatch.matchSessions, (item) => { return item.quarterNr != null; });
                 this.teamAQuaters = this.matchQuaters;
                 this.teamBQuaters = this.matchQuaters;
@@ -288,11 +290,18 @@ export class MatchScoreAddEditComponent implements OnInit, OnDestroy {
         quater.isPaused = false;
         let apiResponse = this.leageSvc.saveBasketBallSession(quater);
         let quaterLeft = _.filter(this.matchQuaters, (item) => { return item.end == null || item.end == false; });
-        if (quaterLeft && quaterLeft.length) {
+       console.log(quaterLeft);
+        if (quaterLeft && quaterLeft.length > 0) {
             this.showOverTime = false;
         }
         else {
-            this.showOverTime = true;
+            console.log(`this.teamAMatchSummary['TPTS'] ${this.teamAMatchSummary['TPTS']} this.teamBMatchSummary['TPTS'] ${this.teamBMatchSummary['TPTS']}`)
+            if (this.teamAMatchSummary['TPTS'] == this.teamBMatchSummary['TPTS']) {
+                this.showOverTime = true;
+            }
+            else {
+                this.showOverTime = false;
+            }
         }
     }
     onSessionPause(id: number) {
@@ -344,7 +353,7 @@ export class MatchScoreAddEditComponent implements OnInit, OnDestroy {
         let quater = _.find(this.matchQuaters, (item) => { return item.id == this.currentSessionid; });
         // let quater = this.matchQuaters[0];
 
-        let player:any ={};
+        let player: any = {};
 
         if (this.selectedScorePlayer != null && this.selectedScoreTeam != null) {
             let _stat = _.find(this.matchStatKeys, (item) => { return item.name == statName; });
@@ -364,7 +373,7 @@ export class MatchScoreAddEditComponent implements OnInit, OnDestroy {
                 let _qtySumTotal = +Number(quater.teamAMatchSummary[statName]) + _stat.value;
                 quater.teamAMatchSummary[statName] = _qtySumTotal;
 
-                  player = _.find(this.teamAPlayers, (item) => { return item.id == this.selectedScorePlayer.id; });
+                player = _.find(this.teamAPlayers, (item) => { return item.id == this.selectedScorePlayer.id; });
 
                 if (player != null) {
                     let _playerStatSumTotal = +Number(player.statics[statName]) + _stat.value;
@@ -373,15 +382,33 @@ export class MatchScoreAddEditComponent implements OnInit, OnDestroy {
                 scoreModel.teamId = this.teamA.id;
                 scoreModel.teamPlayerId = player.id;
 
+                console.log(player);
                 // calculate the total points 
 
-                this.teamAMatchSummary['TPTS'] = +Number(this.teamAMatchSummary['PTM1']) + Number(this.teamAMatchSummary['PTM2']) + Number(this.teamAMatchSummary['PTM3']);
-                let _quaterPointsSumTotal = +Number(quater.teamAMatchSummary['PTM1']) + (Number(quater.teamAMatchSummary['PTM2'])) + Number(quater.teamAMatchSummary['PTM3']);
-                quater.teamAMatchSummary['TPTS'] = +Number(quater.teamAMatchSummary['PTM1']) + Number(quater.teamAMatchSummary['PTM2']) + Number(quater.teamAMatchSummary['PTM3']);
-                player.statics['TPTS'] = +Number(player.statics['PTM1']) + Number(player.statics['PTM2']) + Number(player.statics['PTM3']);
+                let total2Points = + Number(this.teamAMatchSummary['PTM2']) * 2;
+                let total3Points = + Number(this.teamAMatchSummary['PTM3']) * 3;
+
+                this.teamAMatchSummary['TPTS'] = + total2Points + total3Points;
+
+                // this.teamAMatchSummary['TPTS'] = + Number(this.teamAMatchSummary['PTM2']) + Number(this.teamAMatchSummary['PTM3']);
+                // let _quaterPointsSumTotal =  + (Number(quater.teamAMatchSummary['PTM2'])) + Number(quater.teamAMatchSummary['PTM3']);
+
+                let qtytotal2Points = + Number(this.teamAMatchSummary['PTM2']) * 2;
+                let qtytotal3Points = + Number(this.teamAMatchSummary['PTM3']) * 3;
+                quater.teamAMatchSummary['TPTS'] = + qtytotal2Points + qtytotal3Points;
+
+
+             //   quater.teamAMatchSummary['TPTS'] = +Number(quater.teamAMatchSummary['PTM1']) + Number(quater.teamAMatchSummary['PTM2']) + Number(quater.teamAMatchSummary['PTM3']);
+               
+               let playertotal2Points = + Number(player.statics['PTM2']) * 2;
+                let playertotal3Points = + Number(player.statics['PTM3']) * 3;
+                player.statics['TPTS'] = + playertotal2Points + playertotal3Points;
+
+            // player.statics['TPTS'] = +Number(player.statics['PTM1']) + Number(player.statics['PTM2']) + Number(player.statics['PTM3']);
 
 
                 //calculate the total fouls
+
                 this.teamAMatchSummary['TFLS'] = +Number(this.teamAMatchSummary['PEF']) + Number(this.teamAMatchSummary['DEF']) + Number(this.teamAMatchSummary['OFF'])
                     + Number(this.teamAMatchSummary['FFF']) + Number(this.teamAMatchSummary['TEF']);
 
@@ -407,7 +434,7 @@ export class MatchScoreAddEditComponent implements OnInit, OnDestroy {
                 let _qtySumTotal = +Number(quater.teamBMatchSummary[statName]) + _stat.value;
                 quater.teamBMatchSummary[statName] = _qtySumTotal;
 
-                  player = _.find(this.teamBPlayers, (item) => { return item.id == this.selectedScorePlayer.id; });
+                player = _.find(this.teamBPlayers, (item) => { return item.id == this.selectedScorePlayer.id; });
 
                 if (player != null) {
                     let _playerStatSumTotal = +Number(player.statics[statName]) + _stat.value;
@@ -417,9 +444,23 @@ export class MatchScoreAddEditComponent implements OnInit, OnDestroy {
                 scoreModel.teamPlayerId = player.id;
 
                 // calculate the total points 
-                this.teamBMatchSummary['TPTS'] = +Number(this.teamBMatchSummary['PTM1']) + Number(this.teamBMatchSummary['PTM2']) + Number(this.teamBMatchSummary['PTM3']);
-                quater.teamBMatchSummary['TPTS'] = +Number(quater.teamBMatchSummary['PTM1']) + Number(quater.teamBMatchSummary['PTM2']) + Number(quater.teamBMatchSummary['PTM3']);
-                player.statics['TPTS'] = +Number(player.statics['PTM1']) + Number(player.statics['PTM2']) + Number(player.statics['PTM3']);
+                let total2Points = + Number(this.teamBMatchSummary['PTM2']) * 2;
+                let total3Points = + Number(this.teamBMatchSummary['PTM3']) * 3;
+
+                this.teamBMatchSummary['TPTS'] = + total2Points + total3Points;
+
+
+                let qtytotal2Points = + Number(this.teamBMatchSummary['PTM2']) * 2;
+                let qtytotal3Points = + Number(this.teamBMatchSummary['PTM3']) * 3;
+                quater.teamBMatchSummary['TPTS'] = + qtytotal2Points + qtytotal3Points;
+
+                let playertotal2Points = + Number(player.statics['PTM2']) * 2;
+                let playertotal3Points = + Number(player.statics['PTM3']) * 3;
+                player.statics['TPTS'] = + playertotal2Points + playertotal3Points;
+
+                //this.teamBMatchSummary['TPTS'] = +Number(this.teamBMatchSummary['PTM1']) + Number(this.teamBMatchSummary['PTM2']) + Number(this.teamBMatchSummary['PTM3']);
+              //  quater.teamBMatchSummary['TPTS'] = +Number(quater.teamBMatchSummary['PTM1']) + Number(quater.teamBMatchSummary['PTM2']) + Number(quater.teamBMatchSummary['PTM3']);
+               // player.statics['TPTS'] = +Number(player.statics['PTM1']) + Number(player.statics['PTM2']) + Number(player.statics['PTM3']);
 
                 //calculate the total fouls
                 this.teamBMatchSummary['TFLS'] = +Number(this.teamBMatchSummary['PEF']) + Number(this.teamBMatchSummary['DEF']) + Number(this.teamBMatchSummary['OFF'])
@@ -441,11 +482,11 @@ export class MatchScoreAddEditComponent implements OnInit, OnDestroy {
 
             let apiResponse = this.leageSvc.saveBasketBallMatchScorePoints(scoreModel);
 
-             this.saveLeagueMatchPlayByPlay(_stat.playByPlayDesc, player, this.selectedScoreTeam);
+            this.saveLeagueMatchPlayByPlay(_stat.playByPlayDesc, player, this.selectedScoreTeam);
 
 
         }
-    
+
         this.selectedScorePlayer = null;
         this.selectedScoreTeam = null;
         this.teamBInMatchPlayers.forEach(item => { item.selected = false });
@@ -472,8 +513,8 @@ export class MatchScoreAddEditComponent implements OnInit, OnDestroy {
     private getMatchStats() {
         this.matchStatKeys = [
             { id: 2, name: 'PTM1', value: 1, playByPlayDesc: '1pt Made' },
-            { id: 5, name: 'PTM2', value: 2, playByPlayDesc: '2pt Made' },
-            { id: 8, name: 'PTM3', value: 3, playByPlayDesc: '3pt Made' },
+            { id: 5, name: 'PTM2', value: 1, playByPlayDesc: '2pt Made' },
+            { id: 8, name: 'PTM3', value: 1, playByPlayDesc: '3pt Made' },
             { id: 1, name: 'FGA1', value: 1, playByPlayDesc: '1pt Miss' },
             { id: 4, name: 'FGA2', value: 1, playByPlayDesc: '2pt Miss' },
             { id: 7, name: 'FGA3', value: 1, playByPlayDesc: '3pt Miss' },
@@ -501,6 +542,9 @@ export class MatchScoreAddEditComponent implements OnInit, OnDestroy {
             { id: 37, name: 'TFLS', value: 0, playByPlayDesc: '' },
             { id: 10, name: 'FTA', value: 1, playByPlayDesc: 'Free Throws Attempted' },
             { id: 11, name: 'FTM', value: 1, playByPlayDesc: 'Free Throws Made' },
+            { id: 38, name: 'LAYM', value: 1, playByPlayDesc: 'Layup Made' },
+            { id: 39, name: 'LAYA', value: 1, playByPlayDesc: 'Layup Miss' },
+
         ]
 
 
@@ -586,7 +630,7 @@ export class MatchScoreAddEditComponent implements OnInit, OnDestroy {
             matchId: this.leagueMatch.id,
             isOverTime: true
         }
-        let apiResponse = await this.leageSvc.saveBasketBallOverTimeSession(overTimeSessionModel);
+        let apiResponse = await this.leageSvc.saveBasketBallSession(overTimeSessionModel);
         if (apiResponse && apiResponse.data) {
             apiResponse.data.start = true
             apiResponse.data.end = false
@@ -595,6 +639,10 @@ export class MatchScoreAddEditComponent implements OnInit, OnDestroy {
             apiResponse.data.isInMatch = false;
             apiResponse.data.statics = await this.getMatchSummaryObject();
             this.showOverTime = false;
+            this.currentSessionid = apiResponse.data.id;
+            apiResponse.data.teamAMatchSummary = this.getMatchSummaryObject();
+            apiResponse.data.teamBMatchSummary = this.getMatchSummaryObject();
+
             console.log(apiResponse.data)
             this.matchQuaters.push(apiResponse.data)
         }

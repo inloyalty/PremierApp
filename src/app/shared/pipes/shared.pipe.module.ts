@@ -9,13 +9,14 @@ import { DatePipe } from "@angular/common";
 import { LocalizationPipe } from "./localization.pipe";
 import { BooleanToTextPipe } from "./boolean-totext.pipe";
 import { AlternateTextPipe } from "./alternate-text.pipe";
+import { SecondFormatPipe } from './second-format.pipe';
 
 @NgModule({
     declarations: [MydFilterPipe, RemoteImagePipe, RemoteFilePipe,DateFormatterPipe,CurencyFormatterPipe
-                   ,ShortNumberPipe,LocalizationPipe,BooleanToTextPipe,AlternateTextPipe],
+                   ,ShortNumberPipe,LocalizationPipe,BooleanToTextPipe,AlternateTextPipe,SecondFormatPipe],
     imports: [],
     exports: [MydFilterPipe, RemoteImagePipe, RemoteFilePipe,DateFormatterPipe,CurencyFormatterPipe
-              ,ShortNumberPipe,LocalizationPipe,BooleanToTextPipe,AlternateTextPipe],
+              ,ShortNumberPipe,LocalizationPipe,BooleanToTextPipe,AlternateTextPipe,SecondFormatPipe],
      providers:[DatePipe]         
 
 })

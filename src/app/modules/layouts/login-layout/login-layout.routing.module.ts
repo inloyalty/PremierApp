@@ -8,10 +8,10 @@ const SECURED_LAYOUT_ROUTES: Routes = [
         children:
             [
                 {
-                    path: '', loadChildren: '../../../../../login/login.module#LoginModule'
+                    path: '', loadChildren: '../../layout/login/login.module#LoginModule'
                 },
                 {
-                    path: 'login', loadChildren: '../../login/login.module#LoginModule'
+                    path: 'login', loadChildren: '../../layout/login/login.module#LoginModule'
                 }  
             ]
     }

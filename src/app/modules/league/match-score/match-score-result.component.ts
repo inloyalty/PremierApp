@@ -122,7 +122,6 @@ export class MatchScoreResultComponent implements OnInit {
                     this.leagueMatch.teamB.image = this.remoteImagePipe.transform(this.leagueMatch.teamB.image, "Teams");
                 }
 
-                console.log(this.leagueMatch.teamA)
                 this.teamA = this.leagueMatch.teamA;
                 this.teamB = this.leagueMatch.teamB;
                 this.matchQuaters = _.filter(this.leagueMatch.matchSessions, (item) => { return item.quarterNr != null; });
@@ -137,6 +136,9 @@ export class MatchScoreResultComponent implements OnInit {
                     this.tabsQuaters.push({ id: item.id, 'title': `Quater ${item.quarterNr}`, 'active': false });
 
                 });
+
+                let overTime = _.filter(this.leagueMatch.matchSessions, (item) => { return item.isOverTime == true; });
+
                 this.teamAQuaters.forEach(item => {
                     let id = item.id;
                     item.teamAscore = _.find(this.leagueMatch.basketBallScoreMatchQuaterSummaries, (item) => { return item.leagueMatchBasketBallSessionId == id && item.teamId == this.teamA.id; });
@@ -146,6 +148,23 @@ export class MatchScoreResultComponent implements OnInit {
                     let id = item.id;
                     item.teamBscore = _.find(this.leagueMatch.basketBallScoreMatchQuaterSummaries, (item) => { return item.leagueMatchBasketBallSessionId == id && item.teamId == this.teamB.id; });;
                 });
+
+
+                if(overTime && overTime.length >0)
+                {
+                    this.tabsQuaters.push({ id: -1, title: `OverTime`, active: false });
+                    this.matchQuaters.push({ id: -1, quarterNr: `OT`, 'active': false });
+                    let teamAOverTimeQuater :any={ id:-1,quarterNr:'OverTime'};
+                    teamAOverTimeQuater.teamAscore = _.find(this.leagueMatch.basketBallScoreMatchQuaterSummaries, (item) => { return item.leagueMatchBasketBallSessionId == -1 && item.teamId == this.teamA.id; });
+
+                    let teamBOverTimeQuater :any={ id:-1,quarterNr:'OverTime'};
+                    teamBOverTimeQuater.teamBscore = _.find(this.leagueMatch.basketBallScoreMatchQuaterSummaries, (item) => { return item.leagueMatchBasketBallSessionId == -1 && item.teamId == this.teamB.id; });
+
+                    this.teamAQuaters.push(teamAOverTimeQuater);
+                    this.teamBQuaters.push(teamBOverTimeQuater);
+
+
+                }
 
                 this.teamASummary = _.find(this.leagueMatch.basketBallScoreMatchSummaries, (item) => { return item.teamId == this.teamA.id; });
                 this.teamBSummary = _.find(this.leagueMatch.basketBallScoreMatchSummaries, (item) => { return item.teamId == this.teamB.id; });
@@ -161,7 +180,7 @@ export class MatchScoreResultComponent implements OnInit {
                 this.tabsQuaters[0].active = true;
                 this.selectedQuaterTab = this.tabsQuaters[0].id;
                 this.selectedPlayByPlayQuaterId = this.tabsQuaters[0].id;;
-                this.tabsPlayByPlayQuaters.push({ id: 0, 'title': `Overall`, 'active': true });
+               // this.tabsPlayByPlayQuaters.push({ id: 0, 'title': `Overall`, 'active': true });
                 this.tabsQuaters.forEach(item => {
                     this.tabsPlayByPlayQuaters.push({ id: item.id, 'title': item.title, 'active': false });
 
@@ -187,7 +206,7 @@ export class MatchScoreResultComponent implements OnInit {
         }
 
         if (this.selectedTab == 5) {
-            this.selectedPlayByPlayQuaterId = this.tabsQuaters[0].id;
+            this.selectedPlayByPlayQuaterId = this.tabsPlayByPlayQuaters[0].id;
             this.getSelectedPlayByPlayQuater(this.selectedPlayByPlayQuaterId);
         }
     }
@@ -202,16 +221,18 @@ export class MatchScoreResultComponent implements OnInit {
     }
 
     onPlayByPlayTabChanged(event: any) {
-        console.log(event);
         this.selectedPlayByPlayQuaterId = event.id;
-        this.getSelectedPlayByPlayQuater(this.selectedQuaterTab);
+        this.getSelectedPlayByPlayQuater(this.selectedPlayByPlayQuaterId);
     }
 
     getSelectedPlayByPlayQuater(id: number) {
-        console.log(id)
-        this.selectedPlayByPlays = _.filter(this.leagueMatch.playByPlays, (item) => { return item.field2 == id; });
-
-        console.log(this.selectedPlayByPlays);
+        if(id >0)
+        {
+            this.selectedPlayByPlays = _.filter(this.leagueMatch.playByPlays, (item) => { return item.field2 == id; });
+        }
+        else{
+            this.selectedPlayByPlays = _.filter(this.leagueMatch.playByPlays, (item) => { return item.field9 == 'OT'; });
+        }
 
     }
     changedSelectedQuater(quaterId: number) {
@@ -247,28 +268,27 @@ export class MatchScoreResultComponent implements OnInit {
         // {name:'Free Throws %',code:'',isHeader:false},
 
         this.statics = [
-            { name: 'Total Goals Made', code: 'tpm', isHeader: true },
-            { name: 'Goals Made %', code: 'ss', isHeader: true },
-            { name: '1-Point Field Goals Made', code: 'pM1', isHeader: false },
-            { name: '2-Point Field Goals Made', code: 'pM2', isHeader: false },
-            { name: '3-Point Field Goals Made', code: 'pM3', isHeader: false },
-            { name: '1 Point Field Goal Attempted', code: 'pA1', isHeader: false },
-            { name: '2 Point Field Goal. Attempted', code: 'pA2', isHeader: false },
+            { name: 'Points', code: 'tpm', isHeader: true },
+            { name: 'Goals Made', code: 'fgm', isHeader: true },
+            { name: 'Goals Attempted', code: 'fga', isHeader: true },
+            { name: 'Goals Made %', code: 'fgper', isHeader: true },
+            { name: '3-Point Field Goal Made', code: 'pM3', isHeader: false },
             { name: '3 Point Field Goal Attempted', code: 'pA2', isHeader: false },
-            { name: '1-Point Field Goals %', code: 'pT1PER', isHeader: false },
+            { name: '3-Point Field Goal %', code: 'pM3PER', isHeader: false },
+            { name: '2 Point Field Goal Made', code: 'pM2', isHeader: false },
+            { name: '2 Point Field Goal Attempted', code: 'pA2', isHeader: false },
             { name: '2-Point Field Goals %', code: 'pT2PER', isHeader: false },
-            { name: '3-Point Field Goals %', code: 'pT3PER', isHeader: false },
-            { name: 'Free Throws Attempted', code: 'fta', isHeader: false },
             { name: 'Free Throws Made', code: 'ftm', isHeader: false },
-            { name: 'Free Throws %', code: 'fta', isHeader: false },
-            { name: 'Offensive Rebounds', code: 'oreb', isHeader: false },
-            { name: 'Defensive Rebounds', code: 'dreb', isHeader: false },
+            { name: 'Free Throws Attempted', code: 'fta', isHeader: false },
+            { name: 'Free Throws %', code: 'ftper', isHeader: false },
+            { name: 'Offensive Rebound', code: 'oreb', isHeader: false },
+            { name: 'Defensive Rebound', code: 'dreb', isHeader: false },
             { name: 'Total Rebounds', code: 'treb', isHeader: false },
-            { name: 'Assists', code: 'ast', isHeader: false },
-            { name: 'Blocks', code: 'blk', isHeader: false },
-            { name: 'Turnovers', code: 'tov', isHeader: false },
-            { name: 'Steals', code: 'stl', isHeader: false },
-            { name: 'Personal Fouls', code: 'pef', isHeader: false }
+            { name: 'Assist', code: 'ast', isHeader: false },
+            { name: 'Block', code: 'blk', isHeader: false },
+            { name: 'Turnover', code: 'tov', isHeader: false },
+            { name: 'Steal', code: 'stl', isHeader: false },
+            { name: 'Total Fouls', code: 'tfl', isHeader: false }
         ]
 
     }

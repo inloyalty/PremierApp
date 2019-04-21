@@ -62,7 +62,7 @@
                 </div>
                 <ng-template ngFor let-matchQuater [ngForOf]="matchQuaters" let-index="index">
                     <div class="col border">
-                        <h3> {{matchQuater.teamAMatchSummary.TPTS}} </h3>
+                        <h3 *ngIf="matchQuater.teamAMatchSummary"> {{matchQuater.teamAMatchSummary.TPTS}} </h3>
                     </div>
 
                 </ng-template>
@@ -78,7 +78,7 @@
                 </div>
                 <ng-template ngFor let-matchQuater [ngForOf]="matchQuaters" let-index="index">
                     <div class="col border">
-                        <h3> {{matchQuater.teamBMatchSummary.TPTS}} </h3>
+                        <h3 *ngIf="matchQuater.teamBMatchSummary"> {{matchQuater.teamBMatchSummary.TPTS}} </h3>
                     </div>
 
                 </ng-template>
@@ -100,7 +100,8 @@
         </div>
         <div class="row mt-1" *ngIf="showOverTime">
             <div class="col">
-                <button class="btn btn-info ripple nav-button float-right" type="button" (click)="saveBasketBallOverTimeSession()">
+                <button class="btn btn-info ripple nav-button float-right" type="button"
+                    (click)="saveBasketBallOverTimeSession()">
                     Start Overtime <i class="far fa-clock"></i>
                 </button>
             </div>
@@ -282,22 +283,29 @@
                 </div>
                 <div class="row mt-2">
                     <div class="col">
-                        <button type="button" class="btn btn-outline btn-score  text-point" (click)="addScore('PTM1')">1
+                        <!-- <button type="button" class="btn btn-outline btn-score  text-point" (click)="addScore('PTM1')">1
+                            PT
+                            Made</button> -->
+                        <button type="button" class="btn btn-outline btn-score text-point" (click)="addScore('PTM2')">2
                             PT
                             Made</button>
                         <button type="button" class="btn btn-outline btn-score btn-margin-l-10 text-point"
-                            (click)="addScore('PTM2')">2 PT
-                            Made</button>
-                        <button type="button" class="btn btn-outline btn-score btn-margin-l-10 text-point"
-                            (click)="addScore('PTM3')">3 Made</button>
-                        <button type="button" class="btn btn-outline  btn-score btn-margin-l-10 text-foul"
+                            (click)="addScore('PTM3')">3 PT Made</button>
+                        <!-- <button type="button" class="btn btn-outline  btn-score btn-margin-l-10 text-foul"
                             (click)="addScore('FGA1')">1 PT
-                            Miss</button>
+                            Miss</button> -->
                         <button type="button" class="btn btn-outline  btn-score btn-margin-l-10 text-foul"
                             (click)="addScore('FGA2')">2 PT
                             Miss</button>
                         <button type="button" class="btn btn-outline  btn-score btn-margin-l-10 text-foul"
-                            (click)="addScore('FGA3')">3 Miss</button>
+                            (click)="addScore('FGA3')">3 PT Miss</button>
+
+                        <button type="button" class="btn  btn-score btn-margin-l-10" (click)="addScore('FTM')"> FT
+                            <br> Made
+                        </button>
+                        <button type="button" class="btn  btn-score btn-margin-l-10" (click)="addScore('FTA')">
+                            FT <br> Attempted</button>
+
                     </div>
                 </div>
                 <div class="row mt-2">
@@ -321,20 +329,22 @@
 
                 <div class="row mt-2">
                     <div class="col">
-                        <button type="button" class="btn btn-score" (click)="addScore('TOV')"> TrunOver </button>
-                        <button type="button" class="btn  btn-score btn-margin-l-10" (click)="addScore('PBA')"> <span>
+                        <button type="button" class="btn  btn-score " (click)="addScore('PBA')"> <span>
                                 Putback</span>
                             <br> <span> Miss</span> </button>
+                        <button type="button" class="btn btn-score btn-margin-l-10" (click)="addScore('TOV')"> TrunOver
+                        </button>
+                        <button type="button" class="btn btn-outline  btn-score btn-margin-l-10"
+                            (click)="addScore('FTOV')"><span>
+                                Froced</span>
+                            <br> <span> TrunOver</span></button>
                         <button type="button" class="btn  btn-score btn-margin-l-10" (click)="addScore('TCH')"> <span>
                                 Take</span>
                             <br> <span> Charge</span> </button>
                         <button type="button" class="btn  btn-score btn-margin-l-10" (click)="addScore('FRST')"> <span>
                                 Froced Rush</span>
                             <br> <span> Shot</span> </button>
-                        <button type="button" class="btn btn-outline  btn-score btn-margin-l-10"
-                            (click)="addScore('FTOV')"><span>
-                                Froced</span>
-                            <br> <span> TrunOver</span></button>
+
                         <button type="button" class="btn  btn-score btn-margin-l-10" (click)="addScore('FJMP')"> Force
                             <br>
                             Jump </button>
@@ -362,19 +372,13 @@
 
                 <div class="row mt-2">
                     <div class="col">
-                        <button type="button" class="btn  btn-score" (click)="addScore('FTM')"> Free Throws
-                            <br> Attempted
+
+                        <button type="button" class="btn  btn-score" (click)="addScore('LAYM')">
+                            Layup </button>
+                        <button type="button" class="btn  btn-score btn-margin-l-10" (click)="addScore('LAYA')">
+                            Layup
+                            <br> Miss
                         </button>
-                        <button type="button" class="btn  btn-score btn-margin-l-10" (click)="addScore('FTA')">
-                            Free Throws <br> Attempted</button>
-                        <button type="button" class="btn  btn-score btn-margin-l-10" (click)="addScore('OFF')">
-                            Offensive <br> Fouls </button>
-                        <button type="button" class="btn  btn-score btn-margin-l-10" (click)="addScore('FFF')"> Flagrant
-                            <br> Foul </button>
-                        <button type="button" class="btn  btn-score btn-margin-l-10" (click)="addScore('TEF')">
-                            Technical<br> Fouls </button>
-                        <button type="button" class="btn btn-outline  btn-score btn-margin-l-10"
-                            (click)="addScore('DFF')"> Deflect</button>
 
                     </div>
                 </div>

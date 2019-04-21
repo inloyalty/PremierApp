@@ -61,6 +61,7 @@ export class LeageMatchAddEditComponent implements OnInit {
     schoolImage: any;
     schoolImageData: any;
     userSports: any;
+    loading=false;
 
     constructor(
         private cdRef: ChangeDetectorRef,
