@@ -120,6 +120,10 @@
     text-align: center !important;
 }
 
+.page-section .app img:hover {
+    background: rgba(0,0,0,0.5);
+}
+
 .page-section .app .app-type {
    padding : 0% 11%;
 }
