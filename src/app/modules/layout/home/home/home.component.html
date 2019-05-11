@@ -2,69 +2,43 @@
     <top-nav></top-nav>
     <section>
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
-            <!-- Indicators -->
-            <ol class="carousel-indicators">
+            <ul class="carousel-indicators">
                 <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                 <!-- <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li> -->
-            </ol>
-            <!-- Wrapper for slides -->
+                <li data-target="#myCarousel" data-slide-to="2"></li> -->
+            </ul>
             <div class="carousel-inner">
-                <div class="item active">
+                <div class="carousel-item active">
                     <div class="img-effect">
-                        <img src="assets/images/bg_8.jpg" class="w-100"/>
+                        <img src="assets/images/home/img1.png" class="w-100" />
                     </div>
                     <div class="carousel-caption">
                         <h1>
-                            <b> THE GAME HAS CHANGED. </b>
+                            <b>THE GAME HAS CHANGED.</b>
                         </h1>
                         <p>
                             Discover the apps that are empowering over 200,000 youth sports teams.
                         </p>
+                        <div class="zoomIn" style="margin-top:10%;">
+                            <input type="button" [disabled]="loading" name="learn" class="next action-button"
+                                value="Learn More" />
+                        </div>
                     </div>
+
                 </div>
-                <!-- <div class="item">
-                <div class="c-img-effect">
-                    <video autoplay muted loop id="myVideo">
-                        <source src="assets/videos/video2.m4v" type="video/mp4">
-                    </video>
+                <!-- <div class="carousel-item">
+                    <img src="assets/images/bg_8.jpg" class="w-100" />
                 </div>
-                <div class="carousel-caption">
-                    <h1>
-                        <b>Exploiting opportunities by diversifying. </b>
-                    </h1>
-                    <p>
-                        We excel in managing your investment by diversifying within our favourites asset classes. Each investment opportunity is
-                        duly analysed and continuously monitored.
-                    </p>
-                </div>
+                <div class="carousel-item">
+                    <img src="assets/images/bg_8.jpg" class="w-100" />
+                </div> -->
             </div>
-            <div class="item">
-                <div class="c-img-effect">
-                    <video autoplay muted loop id="myVideo1">
-                        <source src="assets/videos/video3.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="carousel-caption">
-                    <h1>
-                        <b>We work together for your goals</b>
-                    </h1>
-                    <p>
-                        Your financial needs are our mission, only a sound management of your expectations and risk profile will allow us to take
-                        care of your financial objectives.
-                    </p>
-                </div>
-            </div> -->
-            </div>
-            <!-- Left and right controls -->
-            <!-- <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-            <i class="fa fa-angle-left" aria-hidden="true"></i>
-            <span class="sr-only">Previos</span>
-        </a>
-        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-            <i class="fa fa-angle-right" aria-hidden="true"></i>
-            <span class="sr-only">Next</span>
-        </a> -->
+            <!-- <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#myCarousel" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </a> -->
         </div>
     </section>
     <div id="page-animation">
@@ -80,7 +54,7 @@
                         <p>GameChanger is a free app for scorekeeping, advanced statistics and
                             live
                             game updates.</p>
-                        <button class="btn btn-primary text-white">
+                        <button class="btn action-button text-white">
                             Learn More
                         </button>
                     </div>
@@ -91,7 +65,7 @@
                         <h3>For Other Sports</h3>
                         <p>DICK'S Team Manager is a free app for scheduling, messaging and photo
                             sharing.</p>
-                        <button class="btn btn-primary text-white">
+                        <button class="btn action-button text-white">
                             Learn More
                         </button>
                     </div>

@@ -19,10 +19,20 @@ export class TopNavComponent implements OnInit {
     }
 
     ngOnInit() {
+        // window.addEventListener('scroll', () => {
+        //     if (window.scrollY > 100) {
+        //         $('.black-header').removeClass('scroll');
+        //         $('.transparent').removeClass('hidden');
+        //     }
+        //     else {
+        //         $('.black-header').addClass('scroll');
+        //         $('.transparent').addClass('hidden');
+        //     }
+        // });
     }
 
     async onUrlCilck(url: string) {
-        await this.navigationSvc.navigateTo('login');
+        await this.navigationSvc.navigateTo(url);
     }
 
 }

@@ -14,10 +14,13 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home/home.component';
 import { TopNavModule } from '../../shared/modules/top-nav/top-nav.module';
 import { FooterModule } from '../../shared/modules/footer/footer.module';
+import { WorkComponent } from './work/work.component';
+import { SupportComponent } from './support/support.component';
+import { PricingComponent } from './pricing/pricing.component';
 
 
 @NgModule({
-    declarations: [HomeComponent],
+    declarations: [HomeComponent,WorkComponent,SupportComponent,PricingComponent],
     imports: [ CommonModule, FormsModule,NgSelectModule,FooterModule,TopNavModule,BsDatepickerModule.forRoot(),SharedDirectiveModule],
     exports: [HomeRoutingModule],
     providers: [NavigationService,HttpRestClientService,LocalStorageService],

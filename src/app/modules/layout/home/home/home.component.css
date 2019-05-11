@@ -1,8 +1,9 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700);
 
 
-/* New Css */
 
+/* New Css */
+/* 
 .carousel-control.right,
 .carousel-control.left {
     background-image: none;
@@ -47,32 +48,37 @@
     width: 6%;
 }
 
+*/
+
+.img-effect {
+    background-color: #2d2d30;
+}
+
+.carousel-inner .img-effect img {
+    transition: all 1s ease;
+    opacity: 0.4;
+    height: 760px;
+}
+
+
 .carousel-caption {
     top: -18%;
     right: 0%;
     left: 0%;
     bottom: 0px;
-    text-align: center;
-    display: none;
+    /* text-align: center; */
     padding: 21%;
 }
 
-.carousel-inner .img-effect img {
-    transition: all 1s ease;
-    opacity: 0.9;
-    height: 760px;
-}
 
-
-
-.carousel-inner>.item.active .carousel-caption,
-.carousel-inner>.item.active .carousel-caption h1 {
+.carousel-inner>.carousel-item.active .carousel-caption,
+.carousel-inner>.carousel-item.active .carousel-caption h1 {
     display: block;
     transition: 0.5s all;
     animation: fadeInLeft .8s linear forwards;
 }
 
-.carousel-inner>.item.active .carousel-caption p {
+.carousel-inner>.carousel-item.active .carousel-caption p {
     display: block;
     animation: fadeInRight .8s linear forwards;
 }
@@ -100,12 +106,12 @@
 }
 
 .carousel-caption p {
-    font-size: 3em;
+    font-size: 2em;
 }
 
 .carousel-caption h1 {
-    font-size: 5em;
-}
+    font-size: 4em;
+} 
 
 
 .page-section {
@@ -129,3 +135,20 @@
 .page-section h1{
     font-size: 3em;
 }
+
+
+.action-button {
+    width: 170px;
+    background: linear-gradient(198deg, #937fe4, #c53d3dfa);
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    /* border-radius: 25px; */
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 5px;
+  }
+  
+ .action-button:hover, #msform .action-button:focus {
+    box-shadow: 0 0 0 2px white, 0 0 0 3px #ee0979;
+  }
