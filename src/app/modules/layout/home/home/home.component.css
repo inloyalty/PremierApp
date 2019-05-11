@@ -57,7 +57,7 @@
 .carousel-inner .img-effect img {
     transition: all 1s ease;
     opacity: 0.4;
-    height: 760px;
+    height: 630px;
 }
 
 
@@ -115,13 +115,13 @@
 
 
 .page-section {
-    padding : 4% 10%;
+    padding : 4% 2%;
     background: #fff;
     text-align: center !important;
 }
 
 .page-section .app .app-type {
-   padding : 0% 17%;
+   padding : 0% 11%;
 }
 
 .page-section .app .app-type h3 {

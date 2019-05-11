@@ -92,9 +92,6 @@
     margin-bottom : 30px;
 }
 
-#msform .sign-up-detail {
-    box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
-}
 
 #msform fieldset {
     background: white;
@@ -258,14 +255,35 @@
     background: #DE6262;  /* fallback for old browsers */
     background: -webkit-linear-gradient(198deg, #937fe4, #c53d3dfa);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(198deg, #937fe4, #c53d3dfa); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    padding: 3% 15%;
+    padding: 3% 10%;
 }
 .banner-sec{
-  background:url('src/assets/images/login/login-banner.jpg')  no-repeat left bottom; 
+  background:url('src/assets/images/login/sign-up-banner.jpg')  no-repeat left bottom; 
   background-size:cover; 
   min-height:500px; 
   padding:0;
 }
+
+.banner-sec2{
+    background:url('src/assets/images/login/sign-up-banner2.jpg')  no-repeat left bottom; 
+    background-size:cover; 
+    min-height:500px; 
+    padding:0;
+  }
+
+  .banner-sec3{
+    background:url('src/assets/images/login/sign-up-banner3.jpg')  no-repeat left bottom; 
+    background-size:cover; 
+    min-height:500px; 
+    padding:0;
+  }
+
+  .banner-sec4{
+    background:url('src/assets/images/login/sign-up-banner4.jpg')  no-repeat left bottom; 
+    background-size:cover; 
+    min-height:500px; 
+    padding:0;
+  }
 
 .container{
   background:#fff; 

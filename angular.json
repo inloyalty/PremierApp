@@ -29,10 +29,11 @@
               "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "src/libs/datepicker/datepicker.css",
               "./node_modules/ngx-toastr/toastr.css"
-             
-
             ],
-            "scripts": [],
+            "scripts": [
+              "src/libs/jquery.min.js",
+              "src/libs/bootstrap.bundle.min.js"
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {
