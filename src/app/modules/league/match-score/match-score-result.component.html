@@ -16,10 +16,7 @@
                     <div class="col-3" style="padding-top: 30px;">
                         <h3 *ngIf="teamASummary"> {{teamASummary.tpm}} </h3>
                     </div>
-
-
                 </div>
-
             </div>
             <div class="col-6 text-center">
                 <div class="row">
@@ -76,13 +73,10 @@
                         <image [src]="teamB.image" [height]="100" [imgHeight]="100" [padding]="0" [caption]="teamB.name"
                             [rounded]="true" [captionFontSize]="10" [captionFontSize]="10">
                         </image>
-
                     </div>
                     <div class="col-3" style="padding-top: 30px;">
                         <h3 *ngIf="teamBSummary"> {{teamBSummary.tpm}} </h3>
                     </div>
-
-
                 </div>
             </div>
 
@@ -125,15 +119,10 @@
 </div>
 
 <div class="tab-content" id="myTabContent">
-
-
     <div class="tab-pane fade show active" *ngIf="selectedTab == 1" id="analyst" role="tabpanel"
         aria-labelledby="analyst-tab">
-
-
-
         <div class="card shadow-sm fade-in mt-3">
-            <div class="card-body">
+            <div class="card-header bg-white">
                 <div class="row border-bottom" style="min-height:35px; padding-top: 6px">
                     <div class="col-8">
                         <h5> Score Stats </h5>
@@ -145,6 +134,8 @@
                         <h5>{{teamB.name}}</h5>
                     </div>
                 </div>
+            </div>
+            <div class="card-body" [style.height.px]="cardHeight" style="overflow-y:auto;">
                 <ng-template ngFor let-stat [ngForOf]="statics" let-index="index">
                     <div class="row border-bottom" style="min-height:35px; padding-top: 6px">
                         <div class="col-8">
@@ -164,11 +155,8 @@
 
     <div class="tab-pane fade show active" *ngIf="selectedTab == 2" id="analyst" role="tabpanel"
         aria-labelledby="analyst-tab">
-
-
-
         <div class="card shadow-sm fade-in mt-3">
-            <div class="card-body">
+            <div class="card-header bg-white">
                 <div class="row border-bottom" style="min-height:35px; padding-top: 6px">
                     <div class="col-8">
                         <h5> Score Stats 1</h5>
@@ -180,6 +168,8 @@
                         <h5>{{teamB.name}}</h5>
                     </div>
                 </div>
+            </div>
+            <div class="card-body" [style.height.px]="cardHeight2" style="overflow-y:auto;">
                 <ng-template ngFor let-stat [ngForOf]="statics" let-index="index">
                     <div class="row border-bottom" style="min-height:35px; padding-top: 6px">
                         <div class="col-8">
@@ -197,12 +187,8 @@
     </div>
     <div class="tab-pane fade show active" *ngIf="selectedTab == 3" id="analyst" role="tabpanel"
         aria-labelledby="analyst-tab">
-
-
-
         <div class="card shadow-sm fade-in mt-3">
-            <div class="card-body">
-
+            <div class="card-body" [style.height.px]="cardHeight" style="overflow-y:auto;">
                 <table class="table table-bordered table-striped table-sm">
                     <thead>
                         <tr>
@@ -229,11 +215,6 @@
                             <th scope="col">FTM</th>
                             <th scope="col">FTA</th>
                             <th scope="col">FT%</th>
-
-                             
-                            
-
-
                         </tr>
                     </thead>
                     <tbody *ngIf="selectedTeamTab==0">
@@ -250,26 +231,18 @@
                                 <td scope="col">{{player.fgm}}</td>
                                 <td scope="col">{{player.fga}}</td>
                                 <td scope="col">{{player.fgper}}</td>
-                               
                                 <td scope="col">{{player.pM2}}</td>
                                 <td scope="col">{{player.pA2}}</td>
                                 <td scope="col">{{player.pM2PER}}</td>
-
                                 <td scope="col">{{player.pM3}}</td>
                                 <td scope="col">{{player.pA3}}</td>
                                 <td scope="col">{{player.pM3PER}}</td>
-
-                               
                                 <td scope="col">{{player.ftm}}</td>
                                 <td scope="col">{{player.fta}}</td>
                                 <td scope="col">{{player.ftper}}</td>
-
-                              
-                                
                             </tr>
                         </ng-template>
                     </tbody>
-
                     <tbody *ngIf="selectedTeamTab==1">
                         <ng-template ngFor let-player [ngForOf]="teamAPlayerSummaries" let-index="index">
                             <tr>
@@ -283,7 +256,7 @@
                                 <td scope="col">{{player.fgm}}</td>
                                 <td scope="col">{{player.fga}}</td>
                                 <td scope="col">{{player.fgper}}</td>
-                               
+
                                 <td scope="col">{{player.pM2}}</td>
                                 <td scope="col">{{player.pA2}}</td>
                                 <td scope="col">{{player.pM2PER}}</td>
@@ -292,7 +265,7 @@
                                 <td scope="col">{{player.pA3}}</td>
                                 <td scope="col">{{player.pM3PER}}</td>
 
-                               
+
                                 <td scope="col">{{player.ftm}}</td>
                                 <td scope="col">{{player.fta}}</td>
                                 <td scope="col">{{player.ftper}}</td>
@@ -312,7 +285,7 @@
                                 <td scope="col">{{player.fgm}}</td>
                                 <td scope="col">{{player.fga}}</td>
                                 <td scope="col">{{player.fgper}}</td>
-                               
+
                                 <td scope="col">{{player.pM2}}</td>
                                 <td scope="col">{{player.pA2}}</td>
                                 <td scope="col">{{player.pM2PER}}</td>
@@ -321,7 +294,7 @@
                                 <td scope="col">{{player.pA3}}</td>
                                 <td scope="col">{{player.pM3PER}}</td>
 
-                               
+
                                 <td scope="col">{{player.ftm}}</td>
                                 <td scope="col">{{player.fta}}</td>
                                 <td scope="col">{{player.ftper}}</td>
@@ -345,7 +318,7 @@
                     <div class=" card-header text-center bg-dark text-white">
                         {{teamA.name}}
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" [style.height.px]="cardHeight" style="overflow-y:auto;">
                         <div class="row cp-5 ds-2 bg-color text-white text-center">
                             <div class="col">
                                 <h5 class="card-title ">Starting Lineups</h5>
@@ -383,7 +356,7 @@
                     <div class=" card-header text-center bg-dark text-white">
                         {{teamB.name}}
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" [style.height.px]="cardHeight" style="overflow-y:auto;">
                         <div class="row cp-5 ds-2 bg-color text-white text-center">
                             <div class="col">
                                 <h5 class="card-title ">Starting Lineups</h5>
@@ -424,8 +397,8 @@
     <div class="tab-pane fade show active" *ngIf="selectedTab == 5" id="analyst" role="tabpanel"
         aria-labelledby="analyst-tab">
 
-        <div class="card shadow-sm fade-in ">
-            <div class="card-body">
+        <div class="card shadow-sm fade-in  margin-top">
+            <div class="card-body" [style.height.px]="cardHeight" style="overflow-y:auto;">
                 <div class="row">
 
                     <div class="col-10 offset-1">

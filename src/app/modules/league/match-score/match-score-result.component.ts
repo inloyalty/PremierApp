@@ -32,7 +32,8 @@ export class MatchScoreResultComponent implements OnInit {
     teamBQuaters = [];
     currentSessionid = 0;
     showTeamDetail = false;
-
+    cardHeight = 500;
+    cardHeight2 = 480;
     id: any = null;
     matchDate: any;
     public bsConfig: Partial<BsDatepickerConfig>;
@@ -100,6 +101,12 @@ export class MatchScoreResultComponent implements OnInit {
         if (this.id) {
             this.getBasketBallMatchScore();
         }
+    }
+
+    ngAfterViewChecked() {
+        this.cardHeight = window.innerHeight - 380;
+        this.cardHeight2 = window.innerHeight - 435;
+        this.cdRef.detectChanges();
     }
 
     jsonCopy(src) {
