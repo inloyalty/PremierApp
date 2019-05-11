@@ -4,7 +4,7 @@ import { EncryptorService } from "./encryptor.service";
 @Injectable()
 export class LocalStorageService {
 
-    private PREFIX_KEY: string = 'MYD_ADV_APP';
+    private PREFIX_KEY: string = 'PREMIER_APP';
 
     constructor(private encryptorSvc: EncryptorService) { }
     // get the value from local storage based on key 
