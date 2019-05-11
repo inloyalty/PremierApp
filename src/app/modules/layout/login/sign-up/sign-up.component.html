@@ -1,532 +1,305 @@
-<div class="container-fluid bg-transparent login" busy [showLoading]="loading">
-    <!-- <div id="login-background" class="bg-gradient"
-        style="background-image:url('../assets/images/bg1.jpg');  background-color: #2F3238;"></div>
-    <div id="login-overlay"></div>
-    <div class="login-card-background">
-    </div> -->
-    <!-- <div class="card card-login text-white">
-        <div class="card-body">
-            <div class="clearfix mb-1">
-
-                <h1 class="card-title text-center">Sign up</h1>
-            </div> -->
-    <div class="row m-0">
-        <div class="col-3"></div>
-        <div class="col-6 card card-signup">
-            <form id="msform" name="Form" #userForm="ngForm" method="post" enctype="multipart/form-data" novalidate>
-                <ul id="progressbar">
-                    <li  [ngClass]="{'active': currentTabIndex >=  1}">Login Details</li>
-                    <li [ngClass]="{'active': currentTabIndex >=  2}">Personal Details</li>
-                    <li [ngClass]="{'active': currentTabIndex >=  3}">Account Setup</li>
-                    <li [ngClass]="{'active': currentTabIndex >=  4}">Account Setup</li>
-                </ul>
-                <fieldset *ngIf="currentTabIndex == 1">
-                    <h2 class="fs-title">Login Details</h2>
-                    <div class="form-group">
-                        <label for="" class="float-left mb-2">Email <span>*</span> </label>
-                        <label *ngIf="(userForm.submitted || email.touched) && email.errors?.required"
-                            class="text-danger float-right">Email is required</label>
-                        <label *ngIf="(userForm.submitted || email.touched) && email.errors?.email"
-                            class="text-danger float-right">Email not valid</label>
-                        <label *ngIf="isEmailExist" class="text-danger float-right">Email id already exist.</label>
-                        <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Email"
-                            [(ngModel)]="signUpModel.email" #email="ngModel" name="email" required email
-                            (change)="onEmailChange($event)">
+<div class="container-fluid pl-0 pr-0 bg-transparent login" busy [showLoading]="loading">
+    <section class="login-block">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 banner-sec">
+                    <div class="text-white p-5">
+                        <h2>This is Heaven</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                            quis nostrud exercitation</p>
                     </div>
-                    <div class="form-group">
-                        <label for="" class="float-left mb-2">Password
-                            <span>*</span>
-
-                        </label>
-                        <label *ngIf="(userForm.submitted || password.touched) && !password.valid"
-                            class="text-danger float-right">Password is required</label>
-                        <input type="password" class="form-control" placeholder="Password" name="password"
-                            [(ngModel)]="signUpModel.password" #password="ngModel" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="" class="float-left mb-2">Confirm Password
-                            <span>*</span>
-
-                        </label>
-                        <label *ngIf="(userForm.submitted || confirmPassword.touched) && !confirmPassword.valid"
-                            class="text-danger float-right">Confirm Password is required</label>
-                        <label *ngIf="(confirmPassword.valid) && (signUpModel.confirmPassword != signUpModel.password)"
-                            class="text-danger float-right">
-                            Confirm password should be same as Password</label>
-
-                        <input type="password" class="form-control" placeholder="Confirm Password"
-                            name="confirmPassword" [(ngModel)]="signUpModel.confirmPassword" #confirmPassword="ngModel"
-                            required>
-                    </div>
-
-                </fieldset>
-                <fieldset *ngIf="currentTabIndex == 2">
-                    <h2 class="fs-title">Personal Details</h2>
-                    <h3 class="fs-subtitle">Your presence on the social network</h3>
-                    <div class="row m-0">
-                        <div class="col-6 pl-0">
-                            <div class="form-group ">
-                                <label for="" class="float-left mb-2">User Name <span>*</span> </label>
-                                <label *ngIf="(userForm.submitted || userName.touched) && !userName.valid"
-                                    class="text-danger float-right">User name is required</label>
-                                <label *ngIf="isUserName" class="text-danger float-right">user Name already
-                                    exist.</label>
-                                <input type="text" class="form-control" placeholder="User Name"
-                                    [(ngModel)]="signUpModel.userName" #userName="ngModel" name="userName" required
-                                    (change)="onUserNameChange($event)">
-                            </div>
-                        </div>
-                        <div class="col-6 pl-0">
-                            <div class="form-group ">
-                                <label for="" class="float-left mb-2">First Name <span>*</span> </label>
-                                <label *ngIf="(userForm.submitted || firstName.touched) && !firstName.valid"
-                                    class="text-danger float-right">First name is required</label>
-                                <input type="text" class="form-control" placeholder="First Name"
-                                    [(ngModel)]="signUpModel.firstName" #firstName="ngModel" name="firstName" required>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row m-0">
-                        <div class="col-6 pl-0">
-                            <div class="form-group ">
-                                <label for="" class="float-left mb-2">Middle Name </label>
-                                <input type="text" class="form-control" placeholder="Middle Name"
-                                    [(ngModel)]="signUpModel.middleName" #middleName="ngModel" name="middleName">
-                            </div>
-                        </div>
-                        <div class="col-6 pl-0">
-                            <div class="form-group ">
-                                <label for="" class="float-left mb-2">Last Name </label>
-                                <input type="text" class="form-control" placeholder="Last Name"
-                                    [(ngModel)]="signUpModel.lastName" #astName="ngModel" name="lastName">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row m-0">
-                        <div class="col-6 pl-0">
-                            <div class="form-group ">
-                                <label for="" class="float-left mb-2">Date Of Birth </label>
-                                <input id="dateOfBirth" class="form-control" bsDatepicker [bsConfig]="bsConfig"
-                                    [(ngModel)]="dateOfBirth" name="dateOfBirth">
-                            </div>
-                        </div>
-                        <div class="col-6 pl-0">
-                            <div class="form-group ">
-                                <label for="" class="float-left mb-2">Address<span>*</span> </label>
-                                <label *ngIf="(userForm.submitted || address.touched) && !address.valid"
-                                    class="text-danger float-right">Address is required</label>
-                                <input type="text" class="form-control" placeholder="Address"
-                                    [(ngModel)]="signUpModel.address" #address="ngModel" name="address" required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row m-0">
-                        <div class="col-6 pl-0 text-left">
-                            <div class="form-group ">
-                                <label for="" class="mb-2">Country </label>
-                                <ng-select [items]="countries" [(ngModel)]="signUpModel.countryId"
-                                    (change)="onCountryChange($event)" bindLabel="name" bindValue="id" name="country"
-                                    [ngModelOptions]="{standalone: true}" class="custom  form-control">
-                                </ng-select>
-
-                            </div>
-                        </div>
-                        <div class="col-6 pl-0">
-                            <div class="form-group text-left">
-                                <label for="" class="mb-2">State </label>
-                                <ng-select [items]="states" [(ngModel)]="signUpModel.stateId" name="state"
-                                    bindLabel="name" bindValue="id" [ngModelOptions]="{standalone: true}"
-                                    class="custom form-control">
-                                </ng-select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row m-0">
-                        <div class="col-6 pl-0">
-                            <div class="form-group ">
-                                <label for="" class="float-left mb-2">Zip Code <span>*</span> </label>
-                                <label *ngIf="(userForm.submitted || zipCode.touched) && !zipCode.valid"
-                                    class="text-danger float-right">Zip Code is required</label>
-                                <input type="text" class="form-control" placeholder="Zip Code"
-                                    [(ngModel)]="signUpModel.zipCode" #zipCode="ngModel" name="zipCode" required>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row m-0">
-                        <div class="col-6 pl-0">
-                            <div class="form-group ">
-                                    <label for="" class="float-left mb-2">Register As </label>
-                                <span >
-                                    <myd-segmented-button [buttons]="segmentedButtons"
-                                        (buttonChanged)="onRegistrationChanged($event)"></myd-segmented-button>
-                                </span>
-                            </div>
-                        </div>
-
-                    </div>
-
-
-                    <div class="row m-0" *ngIf="rigistrationType ==1">
-                        <div class="form-group custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="customCheck2"
-                                [(ngModel)]="signUpModel.isAutoAccountTransfer" name="isAutoAccountTransfer">
-                            <label class="custom-control-label text-wrap text-left" for="customCheck2">Would you like to
-                                automatically
-                                give possession
-                                of records and access to child when he is 13
-                                years old</label>
-                        </div>
-                    </div>
-                    
-                    <div class="row m-0" *ngIf="rigistrationType ==1">
-                        <div class="col-6 pl-0" *ngIf="signUpModel.isAutoAccountTransfer">
-                            <div class="form-group">
-                                <label for="" class="float-left mb-2">Child Email<span>*</span> </label>
-                                <label *ngIf="(userForm.submitted || childEmail.touched) && !childEmail.valid"
-                                    class="text-danger float-right">Child Email is required</label>
-
-                                <label *ngIf="isChildEmailExist" class="text-danger float-right">Child email already
-                                    exist.</label>
-
-                                <input type="text" class="form-control" placeholder="Child Email"
-                                    [(ngModel)]="signUpModel.childEmail" #childEmail="ngModel" name="childEmail"
-                                    required (change)="onChildEmailChange($event)">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row m-0">
-                            <div class="col-6 pl-0">
-                                    <div class="form-group" *ngIf="rigistrationType ==3">
-                                            <label class="float-left mb-2" for="">School Name</label>
-                                            <input  type="text" class="form-control" placeholder="School Name"
-                                                [(ngModel)]="signUpModel.schoolName" #schoolName="ngModel" name="schoolName" >
-                                        </div>   
-                            </div>
-                        </div>
-
-                        <div class="row m-0">
-                                <div class="col-6 pl-0">
-                                        <div class="form-group" *ngIf="rigistrationType ==3">
-                                                <label class="float-left mb-2" for="">Grade</label>
-                                                <input type="text" class="form-control" placeholder="Grade"
-                                                    [(ngModel)]="signUpModel.grade" #grade="ngModel" name="grade" >
-                                            </div> 
+                </div>
+                <div class="col-6 card card-signup login-sec">
+                    <form id="msform" class="m-0" name="Form" #userForm="ngForm" method="post" enctype="multipart/form-data"
+                        novalidate>
+                        <ul id="progressbar" class="p-0">
+                            <li [ngClass]="{'active': currentTabIndex >=  1}">Login Details</li>
+                            <li [ngClass]="{'active': currentTabIndex >=  2}">Personal Details</li>
+                            <li [ngClass]="{'active': currentTabIndex >=  3}">Account Setup</li>
+                            <li [ngClass]="{'active': currentTabIndex >=  4}">Account Setup</li>
+                        </ul>
+                        <div class="sign-up-detail">
+                            <fieldset *ngIf="currentTabIndex == 1" class="fadeInleft">
+                                <h2 class="fs-title">Login Details</h2>
+                                <div class="form-group">
+                                    <label for="" class="float-left mb-2">Email <span>*</span> </label>
+                                    <label *ngIf="(userForm.submitted || email.touched) && email.errors?.required"
+                                        class="text-danger float-right">Email is required</label>
+                                    <label *ngIf="(userForm.submitted || email.touched) && email.errors?.email"
+                                        class="text-danger float-right">Email not valid</label>
+                                    <label *ngIf="isEmailExist" class="text-danger float-right">Email id already
+                                        exist.</label>
+                                    <input type="email" class="form-control" aria-describedby="emailHelp"
+                                        placeholder="Email" [(ngModel)]="signUpModel.email" #email="ngModel"
+                                        name="email" required email (change)="onEmailChange($event)">
                                 </div>
+                                <div class="form-group">
+                                    <label for="" class="float-left mb-2">Password
+                                        <span>*</span>
+
+                                    </label>
+                                    <label *ngIf="(userForm.submitted || password.touched) && !password.valid"
+                                        class="text-danger float-right">Password is required</label>
+                                    <input type="password" class="form-control" placeholder="Password" name="password"
+                                        [(ngModel)]="signUpModel.password" #password="ngModel" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="float-left mb-2">Confirm Password
+                                        <span>*</span>
+
+                                    </label>
+                                    <label
+                                        *ngIf="(userForm.submitted || confirmPassword.touched) && !confirmPassword.valid"
+                                        class="text-danger float-right">Confirm Password is required</label>
+                                    <label
+                                        *ngIf="(confirmPassword.valid) && (signUpModel.confirmPassword != signUpModel.password)"
+                                        class="text-danger float-right">
+                                        Confirm password should be same as Password</label>
+
+                                    <input type="password" class="form-control" placeholder="Confirm Password"
+                                        name="confirmPassword" [(ngModel)]="signUpModel.confirmPassword"
+                                        #confirmPassword="ngModel" required>
+                                </div>
+
+                            </fieldset>
+                            <fieldset *ngIf="currentTabIndex == 2" class="zoomIn">
+                                <h2 class="fs-title">Personal Details</h2>
+                                <h3 class="fs-subtitle">Your presence on the social network</h3>
+                                <div class="row m-0">
+                                    <div class="col-6 pl-0">
+                                        <div class="form-group ">
+                                            <label for="" class="float-left mb-2">User Name <span>*</span> </label>
+                                            <label *ngIf="(userForm.submitted || userName.touched) && !userName.valid"
+                                                class="text-danger float-right">User name is required</label>
+                                            <label *ngIf="isUserName" class="text-danger float-right">user Name already
+                                                exist.</label>
+                                            <input type="text" class="form-control" placeholder="User Name"
+                                                [(ngModel)]="signUpModel.userName" #userName="ngModel" name="userName"
+                                                required (change)="onUserNameChange($event)">
+                                        </div>
+                                    </div>
+                                    <div class="col-6 p-0">
+                                        <div class="form-group ">
+                                            <label for="" class="float-left mb-2">First Name <span>*</span> </label>
+                                            <label *ngIf="(userForm.submitted || firstName.touched) && !firstName.valid"
+                                                class="text-danger float-right">First name is required</label>
+                                            <input type="text" class="form-control" placeholder="First Name"
+                                                [(ngModel)]="signUpModel.firstName" #firstName="ngModel"
+                                                name="firstName" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row m-0">
+                                    <div class="col-6 pl-0">
+                                        <div class="form-group ">
+                                            <label for="" class="float-left mb-2">Middle Name </label>
+                                            <input type="text" class="form-control" placeholder="Middle Name"
+                                                [(ngModel)]="signUpModel.middleName" #middleName="ngModel"
+                                                name="middleName">
+                                        </div>
+                                    </div>
+                                    <div class="col-6 p-0">
+                                        <div class="form-group ">
+                                            <label for="" class="float-left mb-2">Last Name </label>
+                                            <input type="text" class="form-control" placeholder="Last Name"
+                                                [(ngModel)]="signUpModel.lastName" #astName="ngModel" name="lastName">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row m-0">
+                                    <div class="col-6 pl-0">
+                                        <div class="form-group ">
+                                            <label for="" class="float-left mb-2">Date Of Birth </label>
+                                            <input id="dateOfBirth" class="form-control" bsDatepicker
+                                                [bsConfig]="bsConfig" [(ngModel)]="dateOfBirth" name="dateOfBirth">
+                                        </div>
+                                    </div>
+                                    <div class="col-6 p-0">
+                                        <div class="form-group ">
+                                            <label for="" class="float-left mb-2">Address<span>*</span> </label>
+                                            <label *ngIf="(userForm.submitted || address.touched) && !address.valid"
+                                                class="text-danger float-right">Address is required</label>
+                                            <input type="text" class="form-control" placeholder="Address"
+                                                [(ngModel)]="signUpModel.address" #address="ngModel" name="address"
+                                                required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row m-0">
+                                    <div class="col-6 pl-0 text-left">
+                                        <div class="form-group ">
+                                            <label for="" class="mb-2">Country </label>
+                                            <ng-select [items]="countries" [(ngModel)]="signUpModel.countryId"
+                                                (change)="onCountryChange($event)" bindLabel="name" bindValue="id"
+                                                name="country" [ngModelOptions]="{standalone: true}"
+                                                class="custom  form-control">
+                                            </ng-select>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-6 p-0">
+                                        <div class="form-group text-left">
+                                            <label for="" class="mb-2">State </label>
+                                            <ng-select [items]="states" [(ngModel)]="signUpModel.stateId" name="state"
+                                                bindLabel="name" bindValue="id" [ngModelOptions]="{standalone: true}"
+                                                class="custom form-control">
+                                            </ng-select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row m-0">
+                                    <div class="col-6 pl-0">
+                                        <div class="form-group ">
+                                            <label for="" class="float-left mb-2">Zip Code <span>*</span> </label>
+                                            <label *ngIf="(userForm.submitted || zipCode.touched) && !zipCode.valid"
+                                                class="text-danger float-right">Zip Code is required</label>
+                                            <input type="text" class="form-control" placeholder="Zip Code"
+                                                [(ngModel)]="signUpModel.zipCode" #zipCode="ngModel" name="zipCode"
+                                                required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row m-0">
+                                    <div class="col-6 pl-0">
+                                        <div class="form-group ">
+                                            <label for="" class="float-left mb-2">Register As </label>
+                                            <span>
+                                                <myd-segmented-button [buttons]="segmentedButtons"
+                                                    (buttonChanged)="onRegistrationChanged($event)">
+                                                </myd-segmented-button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row m-0" *ngIf="rigistrationType ==1">
+                                    <div class="form-group custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck2"
+                                            [(ngModel)]="signUpModel.isAutoAccountTransfer"
+                                            name="isAutoAccountTransfer">
+                                        <label class="custom-control-label text-wrap text-left" for="customCheck2">Would
+                                            you
+                                            like to
+                                            automatically
+                                            give possession
+                                            of records and access to child when he is 13
+                                            years old</label>
+                                    </div>
+                                </div>
+                                <div class="row m-0" *ngIf="rigistrationType ==1">
+                                    <div class="col-6 pl-0" *ngIf="signUpModel.isAutoAccountTransfer">
+                                        <div class="form-group">
+                                            <label for="" class="float-left mb-2">Child Email<span>*</span> </label>
+                                            <label
+                                                *ngIf="(userForm.submitted || childEmail.touched) && !childEmail.valid"
+                                                class="text-danger float-right">Child Email is required</label>
+
+                                            <label *ngIf="isChildEmailExist" class="text-danger float-right">Child email
+                                                already
+                                                exist.</label>
+
+                                            <input type="text" class="form-control" placeholder="Child Email"
+                                                [(ngModel)]="signUpModel.childEmail" #childEmail="ngModel"
+                                                name="childEmail" required (change)="onChildEmailChange($event)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row m-0">
+                                    <div class="col-6 pl-0">
+                                        <div class="form-group" *ngIf="rigistrationType ==3">
+                                            <label class="float-left mb-2" for="">School Name</label>
+                                            <input type="text" class="form-control" placeholder="School Name"
+                                                [(ngModel)]="signUpModel.schoolName" #schoolName="ngModel"
+                                                name="schoolName">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row m-0">
+                                    <div class="col-6 pl-0">
+                                        <div class="form-group" *ngIf="rigistrationType ==3">
+                                            <label class="float-left mb-2" for="">Grade</label>
+                                            <input type="text" class="form-control" placeholder="Grade"
+                                                [(ngModel)]="signUpModel.grade" #grade="ngModel" name="grade">
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset *ngIf="currentTabIndex == 3" class="fadeInTop">
+                                <h2 class="fs-title">Create your account</h2>
+                                <h3 class="fs-subtitle">Fill in your credentials</h3>
+                                <div class="row m-0">
+                                    <div *ngFor="let item of sports" [class.card-selected]="item.selected == true"
+                                        [class.card-unselected]="item.selected == false"
+                                        class="col-2 card mt-3 card-image"
+                                        style="width: 110px; color: black; margin-left: 10px"
+                                        (click)="onSportItemClick(item)">
+                                        <img class="card-img-top" [src]="item.image" alt="Card image cap">
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                            <fieldset *ngIf="currentTabIndex == 4" class="fadeInBottom">
+                                <h2>Details</h2>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Reward Received"
+                                        [(ngModel)]="signUpModel.rewardReceived" #rewardReceived="ngModel"
+                                        name="rewardReceived" aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button [disabled]="loading" class="btn btn-primary" type="button"
+                                            id="button-addon1" (click)="addUserReward()">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="mb-3" style="text-align: left">
+                                    <div class="chip chip-sm bg-warning text-white"
+                                        *ngFor="let reward of userRewards; let i= index;">
+                                        {{reward.name}}
+                                        <span class="close" (click)="removeSelectedItem(reward)">×</span>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Club Joined"
+                                        [(ngModel)]="signUpModel.clubJoind" #clubJoind="ngModel" name="clubJoind"
+                                        aria-describedby="basic-clubJoind">
+                                    <div class="input-group-append">
+                                        <button [disabled]="loading" class="btn btn-primary" type="button"
+                                            id="button-addon1" (click)="addUserClud()">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+
+                                </div>
+                                <div class="mb-3" style="text-align: left">
+                                    <div class="chip chip-sm bg-info text-white"
+                                        *ngFor="let reward of userClubs; let i= index;">
+                                        {{reward.name}}
+                                        <span class="close" (click)="removeSelectedItem(reward)">×</span>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="row m-0 float-right">
+                                <!-- <input type="button" [disabled]="loading" name="next" class=""
+                            value="Next" /> -->
+                                <button *ngIf="currentTabIndex > 1" type="submit" class="btn next action-button"
+                                    (click)="onPreviousClick()">
+                                    <i class="fas fa-arrow-left"></i>Previous
+                                </button>
+                                <button *ngIf="currentTabIndex < 4" type="submit"
+                                    class="btn next action-button float-right" [disabled]="!userForm.form.valid"
+                                    (click)="userForm.form.valid && onNextClick()">Next
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                                <button *ngIf="currentTabIndex == 4" type="submit"
+                                    class="btn next action-button pull-right " (click)="onSave()"
+                                    [disabled]="loading==true">Save
+                                    <i class="fas fa-save"></i>
+                                </button>
                             </div>
-
-                   
-                      
-
-
-                </fieldset>
-                <fieldset *ngIf="currentTabIndex == 3">
-                    <h2 class="fs-title">Create your account</h2>
-                    <h3 class="fs-subtitle">Fill in your credentials</h3>
-                    <div class="row m-0">
-                        <div *ngFor="let item of sports" [class.card-selected]="item.selected == true"
-                            [class.card-unselected]="item.selected == false" class="col-2 card mt-3 card-image"
-                            style="width: 110px; color: black; margin-left: 10px" (click)="onSportItemClick(item)">
-                            <img class="card-img-top" [src]="item.image" alt="Card image cap">
                         </div>
-                    </div>
-
-                </fieldset>
-                <fieldset *ngIf="currentTabIndex == 4">
-                    <h2>Details</h2>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Reward Received"
-                            [(ngModel)]="signUpModel.rewardReceived" #rewardReceived="ngModel" name="rewardReceived"
-                            aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button [disabled]="loading" class="btn btn-primary" type="button" id="button-addon1"
-                                (click)="addUserReward()">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="mb-3" style="text-align: left">
-                        <div class="chip chip-sm bg-warning text-white" *ngFor="let reward of userRewards; let i= index;">
-                            {{reward.name}}
-                            <span class="close" (click)="removeSelectedItem(reward)">×</span>
-                        </div>
-                    </div>
-
-                    
-
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Club Joined"
-                            [(ngModel)]="signUpModel.clubJoind" #clubJoind="ngModel" name="clubJoind"
-                            aria-describedby="basic-clubJoind">
-                        <div class="input-group-append">
-                            <button [disabled]="loading" class="btn btn-primary" type="button" id="button-addon1"
-                                (click)="addUserClud()">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </div>
-
-                    </div>
-                    <div class="mb-3" style="text-align: left">
-                        <div class="chip chip-sm bg-info text-white" *ngFor="let reward of userClubs; let i= index;">
-                            {{reward.name}}
-                            <span class="close" (click)="removeSelectedItem(reward)">×</span>
-                        </div>
-                    </div>
-                </fieldset>
-                <div class="row m-0 float-right">
-                    <!-- <input type="button" [disabled]="loading" name="next" class=""
-                        value="Next" /> -->
-                    <button *ngIf="currentTabIndex > 1" type="submit" class="btn next action-button float-right"
-                        (click)="onPreviousClick()">
-                        <i class="fas fa-arrow-left"></i>Previous
-                    </button>
-
-                    <button *ngIf="currentTabIndex < 4" type="submit" class="btn next action-button float-right "
-                        [disabled]="!userForm.form.valid" (click)="userForm.form.valid && onNextClick()">Next
-                        <i class="fas fa-arrow-right"></i>
-                    </button>
-
-                    <button *ngIf="currentTabIndex == 4" type="submit" class="btn next action-button float-right "
-                    (click)="onSave()" [disabled]="loading==true">Save
-                    <i class="fas fa-save"></i>
-                </button>
-
+                    </form>
                 </div>
-            </form>
-        </div>
-        <div class="col-3"></div>
-    </div>
-    <!-- </div>
-    </div> -->
-    <!-- <div class="clearfix mb-3">
-
-                <ul class="list-group detail-menu">
-
-                    <li class="list-group-item rounded text-center ripple margin-right text-muted"
-                        [class.active]="currentTabIndex==1" (click)="onMenuItemClick(i)">
-                        <div class="pt-2">
-                            <i class="fas fa-user-plus"></i>&nbsp;
-                            <p>Sign Up</p>
-                        </div>
-                    </li>
-                    <li class="list-group-item rounded text-center ripple margin-right text-muted"
-                        [class.active]="currentTabIndex==2" (click)="onMenuItemClick(i)">
-                        <div class="pt-2">
-                            <i class="fas fa-user-plus"></i>&nbsp;
-                            <p>Sign Up</p>
-                        </div>
-                    </li>
-                    <li class="list-group-item rounded text-center ripple margin-right text-muted"
-                        [class.active]="currentTabIndex==3" (click)="onMenuItemClick(i)">
-                        <div class="pt-2">
-                            <i class="fas fa-user-plus"></i>&nbsp;
-                            <p>Sign Up</p>
-                        </div>
-                    </li>
-                    <li class="list-group-item rounded text-center ripple margin-right text-muted"
-                        [class.active]="currentTabIndex==4" (click)="onMenuItemClick(i)">
-                        <div class="pt-2">
-                            <i class="fas fa-user-plus"></i>&nbsp;
-                            <p>Sign Up</p>
-                        </div>
-                    </li>
-                </ul>
-
-            </div> -->
-    <!-- <div class="form-group mb-2">
-
-                <label>
-                    <h5>{{stepTitle}} </h5>
-                </label>
-                <label class="float-right">
-                    <h5> Step {{currentTabIndex}}/4 </h5>
-                </label>
             </div>
-           
-
-                <!-- <div *ngIf="currentTabIndex ==1">
-                </div> -->
-
-    <!-- <div *ngIf="currentTabIndex ==2">
-                    <div class="form-group ">
-                        <label for="">User Name <span>*</span> </label>
-                        <label *ngIf="(userForm.submitted || userName.touched) && !userName.valid"
-                            class="text-danger float-right">User name is required</label>
-                        <label *ngIf="isUserName" class="text-danger float-right">user Name already exist.</label>
-                        <input type="text" class="form-control" placeholder="User Name"
-                            [(ngModel)]="signUpModel.userName" #userName="ngModel" name="userName" required
-                            (change)="onUserNameChange($event)">
-                    </div>
-                    <div class="form-group ">
-                        <label for="">First Name <span>*</span> </label>
-                        <label *ngIf="(userForm.submitted || firstName.touched) && !firstName.valid"
-                            class="text-danger float-right">First name is required</label>
-                        <input type="text" class="form-control" placeholder="First Name"
-                            [(ngModel)]="signUpModel.firstName" #firstName="ngModel" name="firstName" required>
-                    </div>
-                    <div class="form-group ">
-                        <label for="">Middle Name </label>
-                        <input type="text" class="form-control" placeholder="Middle Name"
-                            [(ngModel)]="signUpModel.middleName" #middleName="ngModel" name="middleName">
-                    </div>
-                    <div class="form-group ">
-                        <label for="">Last Name </label>
-                        <input type="text" class="form-control" placeholder="Last Name"
-                            [(ngModel)]="signUpModel.lastName" #astName="ngModel" name="lastName">
-                    </div>
-                    <div class="form-group ">
-                        <label for="">Date Of Birth </label>
-                        <input id="dateOfBirth" class="form-control" bsDatepicker [bsConfig]="bsConfig"
-                            [(ngModel)]="dateOfBirth" name="dateOfBirth">
-                    </div>
-
-                    <div class="form-group ">
-                        <label for="">Address<span>*</span> </label>
-                        <label *ngIf="(userForm.submitted || address.touched) && !address.valid"
-                            class="text-danger float-right">Address is required</label>
-                        <input type="text" class="form-control" placeholder="Address" [(ngModel)]="signUpModel.address"
-                            #address="ngModel" name="address" required>
-                    </div>
-                    <div class="form-group ">
-                        <label for="">Country </label>
-
-                        <ng-select [items]="countries" [(ngModel)]="signUpModel.countryId"
-                            (change)="onCountryChange($event)" bindLabel="name" bindValue="id" name="country"
-                            [ngModelOptions]="{standalone: true}" class="custom form-control">
-                        </ng-select>
-
-                    </div>
-                    <div class="form-group ">
-                        <label for="">State </label>
-
-                        <ng-select [items]="states" [(ngModel)]="signUpModel.stateId" name="state" bindLabel="name"
-                            bindValue="id" [ngModelOptions]="{standalone: true}" class="custom form-control">
-                        </ng-select>
-                    </div>
-                    <div class="form-group ">
-                        <label for="">Zip Code <span>*</span> </label>
-                        <label *ngIf="(userForm.submitted || zipCode.touched) && !zipCode.valid"
-                            class="text-danger float-right">Zip Code is required</label>
-
-                        <input type="text" class="form-control" placeholder="Zip Code" [(ngModel)]="signUpModel.zipCode"
-                            #zipCode="ngModel" name="zipCode" required>
-                    </div>
-                    <div class="form-group ">
-                        <label>Register As</label>
-                        <span style="padding-left: 10px;">
-
-                            <myd-segmented-button [buttons]="segmentedButtons"
-                                (buttonChanged)="onRegistrationChanged($event)"></myd-segmented-button>
-                        </span>
-
-                    </div>
-
-                    <!-- <div class="form-group custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="customCheck1" name="isParent"
-                            [(ngModel)]="signUpModel.isParent" name="isParent">
-                        <label class="custom-control-label" for="customCheck1">Are you parent who is registering for
-                            your child</label>
-                    </div> -->
-
-    <!-- <div class="form-group custom-control custom-checkbox" *ngIf="rigistrationType ==1">
-                        <input type="checkbox" class="custom-control-input" id="customCheck2"
-                            [(ngModel)]="signUpModel.isAutoAccountTransfer" name="isAutoAccountTransfer">
-                        <label class="custom-control-label text-wrap" for="customCheck2">Would you like to automatically
-                            give possession
-                            of records <br> and access to child when he is 13
-                            years old</label>
-                    </div>
-                    <div class="form-group" *ngIf="signUpModel.isParent">
-                        <label for="">Child Email<span>*</span> </label>
-                        <label *ngIf="(userForm.submitted || childEmail.touched) && !childEmail.valid"
-                            class="text-danger float-right">Child Email is required</label>
-
-                        <label *ngIf="isChildEmailExist" class="text-danger float-right">Child email already
-                            exist.</label>
-
-                        <input type="text" class="form-control" placeholder="Child Email"
-                            [(ngModel)]="signUpModel.childEmail" #childEmail="ngModel" name="childEmail" required
-                            (change)="onChildEmailChange($event)">
-                    </div>
-                    <div class="form-group" *ngIf="rigistrationType ==3">
-                        <label for="">School Name</label>
-                        <input type="text" class="form-control" placeholder="School Name"
-                            [(ngModel)]="signUpModel.schoolName" #schoolName="ngModel" name="schoolName" >
-                    </div>
-                    <div class="form-group" *ngIf="rigistrationType ==3">
-                        <label for="">Grade</label>
-                        <input type="text" class="form-control" placeholder="Grade"
-                            [(ngModel)]="signUpModel.grade" #grade="ngModel" name="grade" >
-                    </div>
-
-                </div>
-                <div *ngIf="currentTabIndex ==3" class="row">
-                    <div *ngFor="let item of sports" [class.card-selected]="item.selected == true"
-                        [class.card-unselected]="item.selected == false" class="col card card-image"
-                        style="width: 110px; color: black; margin-left: 10px" (click)="onSportItemClick(item)">
-                        <img class="card-img-top" [src]="item.image" alt="Card image cap">
-
-                    </div>
-                </div>
-
-                <div *ngIf="currentTabIndex ==4">
-                    <div class="form-group input-group mb-4">
-                        <input type="text" class="form-control" placeholder="Reward Received"
-                            [(ngModel)]="signUpModel.rewardReceived" #rewardReceived="ngModel" name="rewardReceived">
-                        <div class="input-group-append">
-                            <button [disabled]="loading" class="btn btn-primary" type="button" id="button-addon1"
-                                (click)="addUserReward()">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <div class="chip chip-sm bg-primary" *ngFor="let reward of userRewards; let i= index;">
-                            {{reward.name}}
-                            <span class="close" (click)="removeSelectedItem(reward)">×</span>
-                        </div>
-                    </div>
-
-                    <div class="form-group input-group mb-4">
-                        <input type="text" class="form-control" placeholder="Club Joined"
-                            [(ngModel)]="signUpModel.clubJoind" #clubJoind="ngModel" name="clubJoind">
-                        <div class="input-group-append">
-                            <button [disabled]="loading" class="btn btn-primary" type="button" id="button-addon1"
-                                (click)="addUserClud()">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </div>
-
-                    </div>
-                    <div class="mb-4">
-                        <div class="chip chip-sm bg-primary" *ngFor="let reward of userClubs; let i= index;">
-                            {{reward.name}}
-                            <span class="close" (click)="removeSelectedItem(reward)">×</span>
-                        </div>
-                    </div>
-                </div>  -->
-
-    <!-- <div class="form-group clearfix mb-3">
-
-                    <button *ngIf="currentTabIndex > 1" type="submit" class="btn btn-primary "
-                        (click)="onPreviousClick()">
-                        <i class="fas fa-arrow-left"></i>Previous
-                    </button>
-
-                    <button *ngIf="currentTabIndex < 4" type="submit" class="btn btn-primary float-right "
-                        [disabled]="!userForm.form.valid" (click)="userForm.form.valid && onNextClick()">Next
-                        <i class="fas fa-arrow-right"></i>
-                    </button>
-
-                    <button *ngIf="currentTabIndex == 4" type="submit" class="btn btn-primary float-right "
-                        (click)="onSave()" [disabled]="loading==true">Save
-                        <i class="fas fa-save"></i>
-                    </button>
-                </div> -->
-
-
-    <!-- </form> -->
-
+        </div>
+    </section>
 </div>

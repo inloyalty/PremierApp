@@ -9,15 +9,7 @@
 }
 
 .login {
-    margin-top: 5%;
-}
-  
-.card.card-signup
-{
-    top: 80px;
-    /* height: 550px;
-    overflow: auto; */
-    background: transparent;
+    padding-top: 65px;
 }
 
 
@@ -97,22 +89,24 @@
 #msform {
     text-align: center;
     position: relative;
-    margin-top: 30px;
     margin-bottom : 30px;
+}
+
+#msform .sign-up-detail {
+    box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
 }
 
 #msform fieldset {
     background: white;
     border: 0 none;
     border-radius: 0px;
-    box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
     padding: 20px 30px;
     box-sizing: border-box;
-    width: 80%;
-    margin: 0 10%;
-
+    width: 100%;
     /*stacking fieldsets above each other*/
     position: relative;
+    height: 400px;
+    overflow-y: auto;
 }
 
 /*Hide all except first fieldset*/
@@ -152,7 +146,7 @@
 /*buttons*/
 #msform .action-button {
     width: 100px;
-    background: #ee0979;
+    background: linear-gradient(198deg, #937fe4, #c53d3dfa);
     font-weight: bold;
     color: white;
     border: 0 none;
@@ -160,6 +154,7 @@
     cursor: pointer;
     padding: 10px 5px;
     margin: 10px 5px;
+    right: 0px;
 }
 
 #msform .action-button:hover, #msform .action-button:focus {
@@ -211,7 +206,7 @@
     list-style-type: none;
     text-transform: uppercase;
     font-size: 9px;
-    width: 23.33%;
+    width: 24.33%;
     float: left;
     position: relative;
     letter-spacing: 1px;
@@ -251,28 +246,38 @@
 /*marking active/completed steps green*/
 /*The number of the step and the connector before it = green*/
 #progressbar li.active:before, #progressbar li.active:after {
-    background: #ee0979;
+    background: linear-gradient(198deg, #937fe4, #c53d3dfa);;
     color: white;
 }
 
 
-/* Not relevant to this form */
-.dme_link {
-    margin-top: 30px;
-    text-align: center;
+/** New Login Css */
+
+
+.login-block{
+    background: #DE6262;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(198deg, #937fe4, #c53d3dfa);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(198deg, #937fe4, #c53d3dfa); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    padding: 3% 15%;
 }
-.dme_link a {
-    background: #FFF;
-    font-weight: bold;
-    color: #ee0979;
-    border: 0 none;
-    border-radius: 25px;
-    cursor: pointer;
-    padding: 5px 25px;
-    font-size: 12px;
+.banner-sec{
+  background:url('src/assets/images/login/login-banner.jpg')  no-repeat left bottom; 
+  background-size:cover; 
+  min-height:500px; 
+  padding:0;
 }
 
-.dme_link a:hover, .dme_link a:focus {
-    background: #C5C5F1;
-    text-decoration: none;
+.container{
+  background:#fff; 
+  border-radius: 10px; 
+  box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+
+  /* box-shadow:15px 20px 0px rgba(0,0,0,0.1); */
 }
+
+.login-sec{padding: 50px 60px; position:relative;}
+.login-sec .copy-text{position:absolute; width:80%; bottom:20px; font-size:13px; text-align:center;}
+
+.login-sec h2{margin-bottom:30px; font-weight:800; font-size:30px; color: #DE6262;}
+.login-sec h2:after{content:" "; width:100px; height:5px; background:#FEB58A;
+     display:block; margin-top:20px; border-radius:3px; margin-left:auto;margin-right:auto}

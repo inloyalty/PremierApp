@@ -68,6 +68,27 @@ body {
     background-color: #F4F5F6
 }
 
+/* Scrollbar Css*/
+::-webkit-scrollbar {
+    width: 7px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(198deg, #937fe4, #c53d3dfa); 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(198deg, #937fe4, #c53d3dfa); 
+  }
+
 [tabindex="-1"]:focus {
     outline: 0 !important
 }

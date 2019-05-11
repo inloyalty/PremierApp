@@ -464,3 +464,104 @@ top-navbar .top-navbar .ngxp__container>.ngxp__arrow {
   display: flex;
   align-items: center;
 }
+
+
+/** Animation css */
+
+
+.fadeInleft {
+    animation: fadeInLeft .8s linear forwards;
+}  
+
+.fadeInRight {
+    animation: fadeInRight .8s linear forwards;
+}
+
+.fadeInTop {
+    animation: fadeInTop .8s linear forwards;
+}
+
+.fadeInBottom {
+    animation: fadeInBottom .8s linear forwards;
+}
+
+.zoomIn {
+    animation: zoomIn .8s linear forwards;
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-200px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(200px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInTop {
+    from {
+        opacity: 0;
+        transform: translateY(-200px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInBottom {
+    from {
+        opacity: 0;
+        transform: translateY(200px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes zoomIn {
+    0% {
+        opacity: 0;
+        transform: scale(0);;
+    }
+
+    20% {
+        opacity: 0.2;
+        transform: scale(0.2);
+    }
+
+    40% {
+        opacity: 0.4;
+        transform: scale(0.4);
+    }
+
+    60% {
+        opacity: 0.6;
+        transform: scale(0.6);
+    }
+
+    80% {
+        opacity: 0.8;
+        transform: scale(0.8);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(1);
+    }
+}
+
