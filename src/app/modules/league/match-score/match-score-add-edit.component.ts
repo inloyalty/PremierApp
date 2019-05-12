@@ -34,7 +34,7 @@ export class MatchScoreAddEditComponent implements OnInit, OnDestroy {
     teamBQuaters = [];
     currentSessionid = 0;
     showTeamDetail = false;
-
+    cardHeight = 500;
     id: any = null;
     matchDate: any;
     public bsConfig: Partial<BsDatepickerConfig>;
@@ -103,6 +103,12 @@ export class MatchScoreAddEditComponent implements OnInit, OnDestroy {
             this.getScoringPoints();
         }
     }
+
+    ngAfterViewChecked() {
+        this.cardHeight = (window.innerHeight - 235);
+        this.cdRef.detectChanges();
+    }
+
 
     onTabChanged(event: any) {
         this.selectedTab = event.id;

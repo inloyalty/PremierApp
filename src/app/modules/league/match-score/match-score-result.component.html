@@ -1,20 +1,19 @@
-<div class="card">
-
+<div class="card" style="background: url('assets/images/home/img10.jpg');">
     <div class="card-body">
-        <div class="row bg-gray-1">
-            <div class="col-3">
-                <div class="row">
-                    <div class="col-4" style="padding-top: 30px;">
-                        <h3>{{teamA.name}} </h3>
+        <div class="row m-0">
+            <div class="col-3 pl-0">
+                <div class="row m-0">
+                    <div class="col-4 px-0" style="padding-top: 30px;">
+                        <h4>{{teamA.name}} </h4>
                     </div>
                     <div class="col-5">
-                        <image [src]="teamA.image" [height]="100" [imgHeight]="100" [padding]="0" [caption]="teamB.name"
+                        <image [src]="teamA.image" [height]="90" [imgHeight]="90" [padding]="0" [caption]="teamB.name"
                             [rounded]="true" [captionFontSize]="10" [captionFontSize]="10">
                         </image>
 
                     </div>
-                    <div class="col-3" style="padding-top: 30px;">
-                        <h3 *ngIf="teamASummary"> {{teamASummary.tpm}} </h3>
+                    <div class="col-3 px-0 text-right" style="padding-top: 30px;">
+                        <h4 *ngIf="teamASummary"> {{teamASummary.tpm}} </h4>
                     </div>
                 </div>
             </div>
@@ -24,75 +23,58 @@
                     <div class="col-8">
                         <div class="row border-bottom">
                             <div class="col-3 ">
-
                             </div>
                             <ng-template ngFor let-matchQuater [ngForOf]="matchQuaters" let-index="index">
                                 <div class="col" style="width:20px">
-                                    <h3> {{matchQuater.quarterNr}} </h3>
+                                    <label class="m-0"> {{matchQuater.quarterNr}} </label>
                                 </div>
                             </ng-template>
-
                         </div>
-                        <div class="row ">
+                        <div class="row mt-2">
                             <div class="col-3 ">
-                                <h4> {{teamA.name}}</h4>
+                                <label> {{teamA.name}}</label>
                             </div>
-
                             <ng-template ngFor let-matchQuater [ngForOf]="teamAQuaters" let-index="index">
                                 <div class="col" style="width:20px">
-                                    <h3 *ngIf="matchQuater.teamAscore"> {{matchQuater.teamAscore.tpm}} </h3>
+                                    <label *ngIf="matchQuater.teamAscore"> {{matchQuater.teamAscore.tpm}} </label>
                                 </div>
                             </ng-template>
-
-
                         </div>
                         <div class="row ">
                             <div class="col-3 ">
-                                <h4> {{teamB.name}}</h4>
+                                <label> {{teamB.name}}</label>
                             </div>
                             <ng-template ngFor let-matchQuater [ngForOf]="teamBQuaters" let-index="index">
                                 <div class="col" style="width:20px">
-                                    <h3 *ngIf="matchQuater.teamBscore"> {{matchQuater.teamBscore.tpm}} </h3>
+                                    <label *ngIf="matchQuater.teamBscore"> {{matchQuater.teamBscore.tpm}} </label>
                                 </div>
                             </ng-template>
-
                         </div>
-
                     </div>
-                    <div class="col-8"></div>
-
+                    <div class="col-2"></div>
                 </div>
-
             </div>
-            <div class="col-3">
-                <div class="row">
-                    <div class="col-4" style="padding-top: 30px;">
-                        <h3>{{teamB.name}} </h3>
+            <div class="col-3 p-0">
+                <div class="row m-0">
+                    <div class="col-4 px-0" style="padding-top: 30px;">
+                        <h4>{{teamB.name}} </h4>
                     </div>
                     <div class="col-5">
                         <image [src]="teamB.image" [height]="100" [imgHeight]="100" [padding]="0" [caption]="teamB.name"
                             [rounded]="true" [captionFontSize]="10" [captionFontSize]="10">
                         </image>
                     </div>
-                    <div class="col-3" style="padding-top: 30px;">
-                        <h3 *ngIf="teamBSummary"> {{teamBSummary.tpm}} </h3>
+                    <div class="col-3 pl-0 text-right" style="padding-top: 30px;">
+                        <h4 *ngIf="teamBSummary"> {{teamBSummary.tpm}} </h4>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
-
-
-
-
-
-
-
 </div>
 
-<div class="card">
-    <div class=" card-body">
+<div class="card margin-top">
+    <div class="card-body py-0">
         <div class="row">
             <div class="col">
                 <myd-tab (tabChanged)="onTabChanged($event)" [tabItems]="tabs"> </myd-tab>
@@ -123,14 +105,14 @@
         aria-labelledby="analyst-tab">
         <div class="card shadow-sm fade-in mt-3">
             <div class="card-header bg-white">
-                <div class="row border-bottom" style="min-height:35px; padding-top: 6px">
+                <div class="row" style="min-height:35px; padding-top: 6px">
                     <div class="col-8">
                         <h5> Score Stats </h5>
                     </div>
-                    <div class="col-2">
+                    <div class="col-2 pl-2">
                         <h5>{{teamA.name}}</h5>
                     </div>
-                    <div class="col-2">
+                    <div class="col-2 pl-2">
                         <h5>{{teamB.name}}</h5>
                     </div>
                 </div>
@@ -157,14 +139,14 @@
         aria-labelledby="analyst-tab">
         <div class="card shadow-sm fade-in mt-3">
             <div class="card-header bg-white">
-                <div class="row border-bottom" style="min-height:35px; padding-top: 6px">
+                <div class="row" style="min-height:35px; padding-top: 6px">
                     <div class="col-8">
                         <h5> Score Stats 1</h5>
                     </div>
-                    <div class="col-2">
+                    <div class="col-2 pl-2">
                         <h5>{{teamA.name}}</h5>
                     </div>
-                    <div class="col-2">
+                    <div class="col-2 pl-2">
                         <h5>{{teamB.name}}</h5>
                     </div>
                 </div>
@@ -173,7 +155,7 @@
                 <ng-template ngFor let-stat [ngForOf]="statics" let-index="index">
                     <div class="row border-bottom" style="min-height:35px; padding-top: 6px">
                         <div class="col-8">
-                            <h5> {{stat.name}} </h5>
+                            <span> {{stat.name}} </span>
                         </div>
                         <div class="col-2"> <span *ngIf="teamASelectedQuater && teamASelectedQuater[stat.code]">
                                 {{teamASelectedQuater[stat.code]}}</span> </div>
@@ -312,22 +294,22 @@
         aria-labelledby="analyst-tab">
 
 
-        <div class="row">
-            <div class="col-sm-6 ">
-                <div class="card shadow-sm fade-in ">
+        <div class="row m-0">
+            <div class="col-md-6 pl-0">
+                <div class="card shadow-sm fade-in margin-top">
                     <div class=" card-header text-center bg-dark text-white">
                         {{teamA.name}}
                     </div>
                     <div class="card-body" [style.height.px]="cardHeight" style="overflow-y:auto;">
                         <div class="row cp-5 ds-2 bg-color text-white text-center">
                             <div class="col">
-                                <h5 class="card-title ">Starting Lineups</h5>
+                                <h5 class="card-title m-0 p-2">Starting Lineups</h5>
                             </div>
                         </div>
                         <ng-template ngFor let-player [ngForOf]="teamALineups" let-index="index" let-even="even">
                             <div class="row border-bottom" *ngIf="player.isStartup" style="min-height: 40px;">
                                 <div class="col">
-                                    {{player.shirtNr}} - {{player.firstName}} {{player.LastName}}
+                                   <label class="mt-2">{{player.shirtNr}} - {{player.firstName}} {{player.LastName}}</label> 
                                 </div>
                             </div>
 
@@ -336,14 +318,14 @@
 
                         <div class="row cp-5 ds-1 bg-color text-white text-center">
                             <div class="col">
-                                <h5 class="card-title ">Substitutes</h5>
+                                <h5 class="card-title m-0 p-2">Substitutes</h5>
                             </div>
                         </div>
 
                         <ng-template ngFor let-player [ngForOf]="teamALineups" let-index="index">
                             <div class="row border-bottom" *ngIf="!player.isStartup" style="min-height: 40px;">
                                 <div class="col">
-                                    {{player.shirtNr}} - {{player.firstName}} {{player.LastName}}
+                                   <label class="mt-2">{{player.shirtNr}} - {{player.firstName}} {{player.LastName}}</label> 
                                 </div>
                             </div>
                         </ng-template>
@@ -351,21 +333,21 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6">
-                <div class="card shadow-sm fade-in ">
+            <div class="col-sm-6 p-0">
+                <div class="card shadow-sm fade-in margin-top">
                     <div class=" card-header text-center bg-dark text-white">
                         {{teamB.name}}
                     </div>
                     <div class="card-body" [style.height.px]="cardHeight" style="overflow-y:auto;">
                         <div class="row cp-5 ds-2 bg-color text-white text-center">
                             <div class="col">
-                                <h5 class="card-title ">Starting Lineups</h5>
+                                <h5 class="card-title m-0 p-2">Starting Lineups</h5>
                             </div>
                         </div>
                         <ng-template ngFor let-player [ngForOf]="teamBLineups" let-index="index" let-even="even">
                             <div class="row border-bottom" *ngIf="player.isStartup" style="min-height: 40px;">
                                 <div class="col">
-                                    {{player.shirtNr}} - {{player.firstName}} {{player.LastName}}
+                                  <label class="mt-2">{{player.shirtNr}} - {{player.firstName}} {{player.LastName}}</label>  
                                 </div>
                             </div>
 
@@ -374,14 +356,14 @@
 
                         <div class="row cp-5 ds-1 bg-color text-white text-center">
                             <div class="col">
-                                <h5 class="card-title ">Substitutes</h5>
+                                <h5 class="card-title m-0 p-2">Substitutes</h5>
                             </div>
                         </div>
 
                         <ng-template ngFor let-player [ngForOf]="teamALineups" let-index="index">
                             <div class="row border-bottom" *ngIf="!player.isStartup" style="min-height: 40px;">
                                 <div class="col">
-                                    {{player.shirtNr}} - {{player.firstName}} {{player.LastName}}
+                                   <label class="mt-2">{{player.shirtNr}} - {{player.firstName}} {{player.LastName}}</label> 
                                 </div>
                             </div>
                         </ng-template>
@@ -407,7 +389,7 @@
 
                                 <div class="col-5 border">
 
-                                    <div class="row" style="min-height:80px;">
+                                    <div class="row" style="min-height:80px; margin-top:6%">
                                         <div class="col-2 flex-center">
                                             <image [src]="playByPlay.field7" [height]="50" [imgHeight]="50"
                                                 [padding]="0" [caption]="playByPlay.field4" [rounded]="true"
@@ -421,16 +403,16 @@
 
                                     </div>
                                 </div>
-                                <div class="col-2 border flex-center">
+                                <div class="col-2 border flex-center p-1">
 
 
-                                    <div class="d-flex flex-column">
-                                        <div class="p-2 bg-info">
+                                    <div class="d-flex flex-column w-100">
+                                        <div class="p-2 bg-info mt-1">
                                             <span class="pr-2"> {{playByPlay.field9}} </span>
                                             <span> {{playByPlay.field10}} </span>
                                         </div>
-                                        <div class="p-2 bg-primary">{{playByPlay.field5}}</div>
-                                        <div class="p-2 bg-warning">{{playByPlay.field8}}</div>
+                                        <div class="p-2 bg-primary mt-1 text-white">{{playByPlay.field5}}</div>
+                                        <div class="p-2 bg-warning mt-1">{{playByPlay.field8}}</div>
                                     </div>
 
                                 </div>
@@ -444,19 +426,19 @@
                                 <div class="col-5  flex-center">
 
                                 </div>
-                                <div class="col-2 border flex-center">
-                                    <div class="d-flex flex-column">
-                                        <div class="p-2 bg-info">
+                                <div class="col-2 border flex-center p-1">
+                                    <div class="d-flex flex-column w-100">
+                                        <div class="p-2 bg-info mt-1">
                                             <span class="pr-2"> {{playByPlay.field9}} </span>
                                             <span> {{playByPlay.field10}} </span>
                                         </div>
-                                        <div class="p-2 bg-primary">{{playByPlay.field5}}</div>
-                                        <div class="p-2 bg-warning">{{playByPlay.field8}}</div>
+                                        <div class="p-2 bg-primary mt-1 text-white">{{playByPlay.field5}}</div>
+                                        <div class="p-2 bg-warning mt-1">{{playByPlay.field8}}</div>
                                     </div>
                                 </div>
                                 <div class="col-5 border">
 
-                                    <div class="row" style="min-height:80px;">
+                                    <div class="row" style="min-height:80px; margin-top:6%">
                                         <div class="col-2 flex-center">
                                             <image [src]="playByPlay.field7" [height]="50" [imgHeight]="50"
                                                 [padding]="0" [caption]="playByPlay.field4" [rounded]="true"
@@ -484,7 +466,5 @@
             </div>
         </div>
     </div>
-
-
 
 </div>

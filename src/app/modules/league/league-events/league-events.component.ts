@@ -20,7 +20,7 @@ import { Filter } from 'src/app/models/filter';
 export class LeagueMatchEventsComponent implements AfterViewChecked, OnInit {
 
     public windowHeight = (window.innerHeight - 128).toString();
-    public cardHeight = (window.innerHeight - 205).toString();
+    public cardHeight = 500;
 
     public forgotPasswordModel: any = {};
     public league: any = {};
@@ -91,7 +91,7 @@ export class LeagueMatchEventsComponent implements AfterViewChecked, OnInit {
     }
 
     ngAfterViewChecked() {
-        this.cardHeight = (window.innerHeight - 165).toString();;
+        this.cardHeight = (window.innerHeight - 128);
         this.windowHeight = (window.innerHeight - 80).toString();
         this.cdRef.detectChanges();
     }
