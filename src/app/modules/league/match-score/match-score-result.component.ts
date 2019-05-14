@@ -104,8 +104,8 @@ export class MatchScoreResultComponent implements OnInit {
     }
 
     ngAfterViewChecked() {
-        this.cardHeight = window.innerHeight - 380;
-        this.cardHeight2 = window.innerHeight - 435;
+        this.cardHeight = window.innerHeight - 345;
+        this.cardHeight2 = window.innerHeight - 400;
         this.cdRef.detectChanges();
     }
 

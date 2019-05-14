@@ -1,93 +1,73 @@
 <div class="row" style="margin-top: 60px;">
-
     <div class="col-9">
         <div class="card">
-            <div class="row ml-1 mr-1">
-                <div class="col border" style="min-height:50px;">
-                    <h3> Matchup </h3>
+            <div class="row m-0">
+                <div class="col border" style="min-height:46px;">
+                    <h4 class="mt-2"> Matchup </h4>
                 </div>
                 <ng-template ngFor let-matchQuater [ngForOf]="matchQuaters" let-index="index">
                     <div class="col border">
                         <div class="row">
-                            <div class="col-sm-5">
-                                <h5 *ngIf="!matchQuater.isOverTime"> Q{{matchQuater.quarterNr}} </h5>
-                                <h5 *ngIf="matchQuater.isOverTime"> OT </h5>
-
+                            <div class="col-md-4 mt-2 pr-0">
+                                <h5 *ngIf="!matchQuater.isOverTime" style="margin-top:3px;"> Q{{matchQuater.quarterNr}} </h5>
+                                <h5 *ngIf="matchQuater.isOverTime" style="margin-top:3px;"> OT </h5>
                             </div>
-                            <div class="col-sm-7">
-
+                            <div class="col-md-8 pl-0 mt-2">
                                 <div class="float-right">
-
-
                                 </div>
                                 <div class="float-right">
                                     <button *ngIf="!matchQuater.start || matchQuater.isPaused == true" title="Start"
                                         class="btn btn-primary btn-sm float-right" type="button"
-                                        (click)="onSessionStart(matchQuater.id)" style="font-size: 16px;">
+                                        (click)="onSessionStart(matchQuater.id)" style="font-size: 12px;">
                                         <i class="fas fa-play"></i>
                                     </button>
-
                                     <button title="Paused" *ngIf="matchQuater.start  && !matchQuater.end "
                                         class="btn btn-warning btn-sm text-white" type="button"
                                         (click)="onSessionPause(matchQuater.id)"
-                                        style="font-size: 16px; margin-right: 3px;">
+                                        style="font-size: 12px; margin-right: 3px;">
                                         <i class="fas fa-pause"></i>
                                     </button>
-
                                     <button
                                         *ngIf="( matchQuater.start && !matchQuater.end && matchQuater.isPaused == false)  "
                                         title="Stop" class="btn btn-danger btn-sm float-right" type="button"
-                                        (click)="onSessionEnd(matchQuater.id)" style="font-size: 16px;">
+                                        (click)="onSessionEnd(matchQuater.id)" style="font-size: 12px;">
                                         <i class="fas fa-stop"></i>
                                     </button>
                                 </div>
-
-
                             </div>
                         </div>
-
-
                     </div>
-
                 </ng-template>
-
                 <div class="col border">
-                    <h3> Total </h3>
+                    <h4 class="mt-2"> Total </h4>
                 </div>
-
             </div>
-            <div class="row ml-1 mr-1">
-                <div class="col border" style="min-height:50px;">
-                    <h3> {{teamA.name}} </h3>
+            <div class="row m-0">
+                <div class="col border" style="min-height:46px;">
+                    <h4 class="mt-2"> {{teamA.name}} </h4>
                 </div>
                 <ng-template ngFor let-matchQuater [ngForOf]="matchQuaters" let-index="index">
                     <div class="col border">
-                        <h3 *ngIf="matchQuater.teamAMatchSummary"> {{matchQuater.teamAMatchSummary.TPTS}} </h3>
+                        <h4 class="mt-2" *ngIf="matchQuater.teamAMatchSummary"> {{matchQuater.teamAMatchSummary.TPTS}} </h4>
                     </div>
-
                 </ng-template>
-
                 <div class="col border">
-                    <h3 *ngIf="teamAMatchSummary"> {{teamAMatchSummary.TPTS}} </h3>
+                    <h4 class="mt-2" *ngIf="teamAMatchSummary"> {{teamAMatchSummary.TPTS}} </h4>
                 </div>
-
             </div>
-            <div class="row ml-1 mr-1">
-                <div class="col border" style="min-height:50px;">
-                    <h3> {{teamB.name}} </h3>
+            <div class="row m-0">
+                <div class="col border" style="min-height:46px;">
+                    <h4 class="mt-2"> {{teamB.name}} </h4>
                 </div>
                 <ng-template ngFor let-matchQuater [ngForOf]="matchQuaters" let-index="index">
                     <div class="col border">
-                        <h3 *ngIf="matchQuater.teamBMatchSummary"> {{matchQuater.teamBMatchSummary.TPTS}} </h3>
+                        <h4  class="mt-2" *ngIf="matchQuater.teamBMatchSummary"> {{matchQuater.teamBMatchSummary.TPTS}} </h4>
                     </div>
-
                 </ng-template>
                 <div class="col border">
-                    <h3 *ngIf="teamBMatchSummary"> {{teamBMatchSummary.TPTS}} </h3>
+                    <h4 class="mt-2" *ngIf="teamBMatchSummary"> {{teamBMatchSummary.TPTS}} </h4>
                 </div>
-
             </div>
-
         </div>
     </div>
     <div class="col-3">
@@ -106,14 +86,11 @@
                 </button>
             </div>
         </div>
-
     </div>
-
-
 </div>
 
-<div class="card">
-    <div class="card-body">
+<div class="card margin-top shadow-sm">
+    <div class="card-body" [style.height.px]="cardHeight" style="overflow-y: auto;">
         <div class="row">
             <div class="col-6">
                 <div class="row">
@@ -125,9 +102,9 @@
                     <div class="col" style="max-height:500px;overflow-y: scroll;">
                         <ng-template ngFor let-playByPlay [ngForOf]="playByPlays" let-index="index">
                             <div class="row border-bottom">
-                                <div class="col">
-                                    <h3> {{playByPlay.field3}}</h3>
-                                    <h5>{{playByPlay.field4}}</h5>
+                                <div class="col mt-2">
+                                    <h5> {{playByPlay.field3}}</h5>
+                                    <label class="text-muted">{{playByPlay.field4}}</label>
                                 </div>
                             </div>
                         </ng-template>
@@ -136,8 +113,8 @@
                 <div class="row" *ngIf="selectedTab ==2">
                     <div class="card-body">
                         <div class="row border-bottom" style="font-weight: bold;">
-                            <div class="col-1"> In</div>
-                            <div class="col-4"> Name</div>
+                            <div class="col-2 text-center"> In</div>
+                            <div class="col-3 text-center"> Name</div>
                             <div class="col-1"> Nr. </div>
                             <div class="col-1"> Points</div>
                             <div class="col-1"> Fouls</div>
@@ -151,14 +128,14 @@
 
                             <div class="row m-0 p-0" style="height: 50px">
                                 <div class="col-2 border-bottom border-right pull-left">
-                                    <div class="form-group custom-control custom-checkbox">
+                                    <div class="form-group custom-control custom-checkbox" style="margin-top:14px; margin-bottom:0px;">
                                         <input type="checkbox" class="custom-control-input" id="customCheck1_{{index}}"
                                             name="isParent" [(ngModel)]="player.isInMatch"
                                             (change)="onInMatchChanged('A',player)">
                                         <label class="custom-control-label" for="customCheck1_{{index}}"></label>
                                         <button *ngIf="player.isInMatch" type="button"
                                             class="btn btn btn-outline-danger btn-sm pull-right"
-                                            style="padding-left: 5px; padding-top: 5px;"
+                                            style="padding-left: 5px; padding-top: 5px; font-size: 10px;"
                                             (click)="showPlayerChangeDrawer('A', player)"><i
                                                 class="fas fa-exchange-alt"></i></button>
                                     </div>
@@ -167,24 +144,24 @@
                                     </div>
                                 </div>
 
-                                <div class="col-3  border-bottom border-right" style="padding-top: 10px;">
+                                <div class="col-3  border-bottom border-right" style="padding-top: 12px;">
                                     <span class="align-middle"> {{player.firstName}} {{player.lastName}}</span>
 
                                 </div>
-                                <div class="col-1 border-bottom border-right" style="padding-top: 10px;">
+                                <div class="col-1 border-bottom border-right" style="padding-top: 12px;">
                                     {{player.shirtNr}}
                                 </div>
-                                <div class="col-1 border-bottom border-right" style="padding-top: 10px;">
+                                <div class="col-1 border-bottom border-right" style="padding-top: 12px;">
                                     {{player.statics.TPTS}}
 
                                 </div>
-                                <div class="col-1 border-bottom border-right" style="padding-top: 10px;">
+                                <div class="col-1 border-bottom border-right" style="padding-top: 12px;">
                                     {{ player.statics.TFLS}}
                                 </div>
-                                <div class="col-1 border-bottom border-right">{{player.statics.REB}}</div>
-                                <div class="col-1 border-bottom border-right"> {{player.statics.AST}}</div>
-                                <div class="col-1 border-bottom border-right"> {{player.statics.BLK}}</div>
-                                <div class="col-1 border-bottom border-right"> {{player.statics.STL}}</div>
+                                <div class="col-1 border-bottom border-right" style="padding-top: 12px;">{{player.statics.REB}}</div>
+                                <div class="col-1 border-bottom border-right" style="padding-top: 12px;" > {{player.statics.AST}}</div>
+                                <div class="col-1 border-bottom border-right" style="padding-top: 12px;"> {{player.statics.BLK}}</div>
+                                <div class="col-1 border-bottom border-right" style="padding-top: 12px;"> {{player.statics.STL}}</div>
                             </div>
 
                         </ng-template>
@@ -195,8 +172,8 @@
                     <div class="card-body">
                         <div class="row border-bottom" style="font-weight: bold;">
 
-                            <div class="col-1"> In</div>
-                            <div class="col-4"> Name</div>
+                            <div class="col-2 text-center"> In</div>
+                            <div class="col-3 text-center"> Name</div>
                             <div class="col-1"> Nr. </div>
                             <div class="col-1"> Points</div>
                             <div class="col-1"> Fouls</div>
@@ -210,14 +187,14 @@
 
                             <div class="row m-0 p-0" style="min-height: 50px">
                                 <div class="col-2 border-bottom border-right pull-left">
-                                    <div class="form-group custom-control custom-checkbox">
+                                    <div class="form-group custom-control custom-checkbox" style="margin-top:14px; margin-bottom : 0px;">
                                         <input type="checkbox" class="custom-control-input" id="customCheck1_{{index}}"
                                             name="isParent" [(ngModel)]="player.isInMatch"
                                             (change)="onInMatchChanged('B',player)">
                                         <label class="custom-control-label" for="customCheck1_{{index}}"></label>
                                         <button *ngIf="player.isInMatch" type="button"
                                             class="btn btn btn-outline-danger btn-sm pull-right"
-                                            style="padding-left: 5px; padding-top: 5px;"
+                                            style="padding-left: 5px; padding-top: 5px; font-size: 10px;"
                                             (click)="showPlayerChangeDrawer('B', player)"><i
                                                 class="fas fa-exchange-alt"></i></button>
                                     </div>
@@ -226,24 +203,24 @@
                                     </div>
                                 </div>
 
-                                <div class="col-3  border-bottom border-right" style="padding-top: 10px;">
+                                <div class="col-3  border-bottom border-right" style="padding-top: 12px;">
                                     <span class="align-middle"> {{player.firstName}} {{player.lastName}}</span>
 
                                 </div>
-                                <div class="col-1 border-bottom border-right" style="padding-top: 10px;">
+                                <div class="col-1 border-bottom border-right" style="padding-top: 12px;">
                                     {{player.shirtNr}}
                                 </div>
-                                <div class="col-1 border-bottom border-right" style="padding-top: 10px;">
+                                <div class="col-1 border-bottom border-right" style="padding-top: 12px;">
                                     {{player.statics.TPTS}}
 
                                 </div>
-                                <div class="col-1 border-bottom border-right" style="padding-top: 10px;">
+                                <div class="col-1 border-bottom border-right" style="padding-top: 12px;">
                                     {{ player.statics.TFLS}}
                                 </div>
-                                <div class="col-1 border-bottom border-right">{{player.statics.REB}}</div>
-                                <div class="col-1 border-bottom border-right"> {{player.statics.AST}}</div>
-                                <div class="col-1 border-bottom border-right"> {{player.statics.BLK}}</div>
-                                <div class="col-1 border-bottom border-right"> {{player.statics.STL}}</div>
+                                <div class="col-1 border-bottom border-right" style="padding-top: 12px;">{{player.statics.REB}}</div>
+                                <div class="col-1 border-bottom border-right" style="padding-top: 12px;"> {{player.statics.AST}}</div>
+                                <div class="col-1 border-bottom border-right" style="padding-top: 12px;"> {{player.statics.BLK}}</div>
+                                <div class="col-1 border-bottom border-right" style="padding-top: 12px;"> {{player.statics.STL}}</div>
                             </div>
 
                         </ng-template>
@@ -391,12 +368,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
 
 <myd-side-drawer [title]="'Change Player'" (close)="onClose($event)" [showDrawer]="showDrader">
     <div body>
