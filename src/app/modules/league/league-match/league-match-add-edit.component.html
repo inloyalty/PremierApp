@@ -1,28 +1,24 @@
-<div class="row fade-in padding-top m-1">
-    <div class=" col card bg-secondary text-light">
+<div class="row fade-in padding-top m-0">
+    <div class="col card bg-secondary text-light p-0">
         <div class="card-header">
-            <label>
-                <h3>{{stepTitle}} </h3>
+            <label class="m-0">
+                <h3 class="mt-2">{{stepTitle}} </h3>
             </label>
-            <label class="float-right">
-                <h3> Step {{currentTabIndex}}/2 </h3>
+            <label class="float-right m-0">
+                <h3 class="mt-2"> Step {{currentTabIndex}}/2 </h3>
             </label>
         </div>
     </div>
 </div>
 
 <form name="Form" #userForm="ngForm" method="post" enctype="multipart/form-data" novalidate>
-
     <div class="card">
-
-        <div class="card-body">
-
+        <div class="card-body" [style.height.px]="cardHeight" style="overflow-y: auto;">
             <div *ngIf="currentTabIndex == 1">
                 <div class="form-group ">
                     <label for="">Sport <span>*</span></label>
                     <label *ngIf="(userForm.submitted || sportId.touched) && !sportId.valid"
                         class="text-danger float-right"> Sport is required</label>
-
                     <ng-select [items]="sports" [(ngModel)]="leagueMatch.sportId" bindLabel="name" bindValue="sportId"
                         name="sportId" [ngModelOptions]="{standalone: true}" class="custom form-control"
                         #sportId="ngModel" required>
@@ -34,7 +30,6 @@
                         name="gameTypeId" [ngModelOptions]="{standalone: true}" class="custom form-control">
                     </ng-select>
                 </div>
-
                 <div class="form-group ">
                     <label for="">League/School </label>
                     <div class="input-group">
@@ -128,25 +123,18 @@
                 </div>
 
             </div>
-
             <div *ngIf="currentTabIndex == 2">
-
                 <div *ngIf="matchFormat ==1" class="col-12">
                     <form>
                         <div class="card">
                             <div class="card-body">
                                 <div class="col-12">
                                     <div class="form-group ">
-
                                         <span>
-
                                             <h4> User Name : {{logedInUserInfo.firstName}}
                                                 {{logedInUserInfo.lastName}} </h4>
                                         </span>
-
                                     </div>
-
-
                                 </div>
                             </div>
                         </div>

@@ -28,8 +28,8 @@
                 [headerItems]="headerItems" [height]="cardHeight" (sort)="onSort($event)"
                 (pageChange)="onPageChange($event)">
                 <ng-template myd-select-option let-item>
-                    <div class="row p-0">
-                        <div class="col-2">
+                    <div class="row m-0 p-0">
+                        <div class="col-2 p-0">
                             <div class="col-2" style="max-width: 75px;">
                                 <image [src]="item.image" [height]="35" [imgHeight]="35" [padding]="0"
                                     [caption]="item.name" [capTop]="0" [capLeft]="0" [captionPadding]="5"

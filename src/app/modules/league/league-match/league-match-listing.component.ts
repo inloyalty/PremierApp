@@ -30,14 +30,14 @@ export class LeagueMatchListingComponent implements AfterViewChecked, OnInit {
     UserImage: any;
     totalRecords: number = 0;
     headerItems: any = [
-        { title: 'League', 'sortable': true, 'width': null, 'widthClass': 'col float-left', 'sortBy': 'document_title', id: "1" },
-        { title: 'Match Nr', 'sortable': true, 'width': null, 'widthClass': 'col float-left', 'sortBy': 'doc_status_id', id: "2" },
-        { title: 'Venue', 'sortable': true, 'width': null, 'widthClass': 'col float-left', 'sortBy': 'document_creation_date', id: "3" },
-        { title: 'Venue Date', 'sortable': true, 'width': null, 'widthClass': 'col float-left', 'sortBy': 'document_creation_date', id: "3" },
-        { title: 'Is Team Match', 'sortable': true, 'width': null, 'widthClass': 'col float-left', 'sortBy': 'document_creation_date', id: "3" },
-        { title: 'TeamA', 'sortable': true, 'width': null, 'widthClass': 'col float-left', 'sortBy': 'document_creation_date', id: "3" },
-        { title: 'TeamB', 'sortable': true, 'width': null, 'widthClass': 'col float-left', 'sortBy': 'document_creation_date', id: "3" },
-        { title: '', 'sortable': false, 'width': null, 'widthClass': 'col float-left float-right', 'sortBy': ' ' },
+        { title: 'League', 'sortable': true, 'width': null, 'widthClass': 'col-2 float-left', 'sortBy': 'document_title', id: "1" },
+        { title: 'Match Nr', 'sortable': true, 'width': null, 'widthClass': 'col-1 float-left', 'sortBy': 'doc_status_id', id: "2" },
+        { title: 'Venue', 'sortable': true, 'width': null, 'widthClass': 'col-2 float-left', 'sortBy': 'document_creation_date', id: "3" },
+        { title: 'Venue Date', 'sortable': true, 'width': null, 'widthClass': 'col-2 float-left', 'sortBy': 'document_creation_date', id: "3" },
+        { title: 'Is Team Match', 'sortable': true, 'width': null, 'widthClass': 'col-2 float-left', 'sortBy': 'document_creation_date', id: "3" },
+        { title: 'TeamA', 'sortable': true, 'width': null, 'widthClass': 'col-1 float-left', 'sortBy': 'document_creation_date', id: "3" },
+        { title: 'TeamB', 'sortable': true, 'width': null, 'widthClass': 'col-1 float-left', 'sortBy': 'document_creation_date', id: "3" },
+        { title: '', 'sortable': false, 'width': null, 'widthClass': 'col-1 float-left float-right', 'sortBy': ' ' },
     ]
     countries: any;
     states: any;
@@ -75,7 +75,7 @@ export class LeagueMatchListingComponent implements AfterViewChecked, OnInit {
     }
 
     ngAfterViewChecked() {
-        this.cardHeight = (window.innerHeight - 165).toString();;
+        this.cardHeight = (window.innerHeight - 155).toString();;
         this.windowHeight = (window.innerHeight - 80).toString();
         this.cdRef.detectChanges();
     }

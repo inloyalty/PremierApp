@@ -65,7 +65,7 @@ export class LeagueComponent implements AfterViewChecked, OnInit {
     }
 
     ngAfterViewChecked() {
-        this.cardHeight = (window.innerHeight - 165).toString();;
+        this.cardHeight = (window.innerHeight - 155).toString();;
         this.windowHeight = (window.innerHeight - 80).toString();
         this.cdRef.detectChanges();
     }
