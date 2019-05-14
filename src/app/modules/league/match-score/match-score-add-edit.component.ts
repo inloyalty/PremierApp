@@ -382,20 +382,20 @@ export class MatchScoreAddEditComponent implements OnInit, OnDestroy {
                 scoreModel.teamId = this.teamA.id;
                 scoreModel.teamPlayerId = player.id;
 
-                console.log(player);
+               
                 // calculate the total points 
 
                 let total2Points = + Number(this.teamAMatchSummary['PTM2']) * 2;
                 let total3Points = + Number(this.teamAMatchSummary['PTM3']) * 3;
 
-                this.teamAMatchSummary['TPTS'] = + total2Points + total3Points;
+                this.teamAMatchSummary['TPTS'] =  total2Points + total3Points;
 
                 // this.teamAMatchSummary['TPTS'] = + Number(this.teamAMatchSummary['PTM2']) + Number(this.teamAMatchSummary['PTM3']);
                 // let _quaterPointsSumTotal =  + (Number(quater.teamAMatchSummary['PTM2'])) + Number(quater.teamAMatchSummary['PTM3']);
 
-                let qtytotal2Points = + Number(this.teamAMatchSummary['PTM2']) * 2;
-                let qtytotal3Points = + Number(this.teamAMatchSummary['PTM3']) * 3;
-                quater.teamAMatchSummary['TPTS'] = + qtytotal2Points + qtytotal3Points;
+                let qtytotal2Points = + Number(quater.teamAMatchSummary['PTM2']) * 2;
+                let qtytotal3Points = + Number(quater.teamAMatchSummary['PTM3']) * 3;
+                quater.teamAMatchSummary['TPTS'] =  qtytotal2Points + qtytotal3Points;
 
 
              //   quater.teamAMatchSummary['TPTS'] = +Number(quater.teamAMatchSummary['PTM1']) + Number(quater.teamAMatchSummary['PTM2']) + Number(quater.teamAMatchSummary['PTM3']);
@@ -422,7 +422,9 @@ export class MatchScoreAddEditComponent implements OnInit, OnDestroy {
                 this.teamAMatchSummary['REB'] = +Number(this.teamAMatchSummary['OREB']) + Number(this.teamAMatchSummary['DREB']);
                 quater.teamAMatchSummary['REB'] = +Number(quater.teamAMatchSummary['OREB']) + Number(quater.teamAMatchSummary['DREB']);
                 player.statics['REB'] = +Number(player.statics['OREB']) + Number(player.statics['DREB']);
-
+                    
+                console.log(quater);
+                console.log(this.teamAMatchSummary);
 
             }
             else {
@@ -450,8 +452,8 @@ export class MatchScoreAddEditComponent implements OnInit, OnDestroy {
                 this.teamBMatchSummary['TPTS'] = + total2Points + total3Points;
 
 
-                let qtytotal2Points = + Number(this.teamBMatchSummary['PTM2']) * 2;
-                let qtytotal3Points = + Number(this.teamBMatchSummary['PTM3']) * 3;
+                let qtytotal2Points = + Number(quater.teamBMatchSummary['PTM2']) * 2;
+                let qtytotal3Points = + Number(quater.teamBMatchSummary['PTM3']) * 3;
                 quater.teamBMatchSummary['TPTS'] = + qtytotal2Points + qtytotal3Points;
 
                 let playertotal2Points = + Number(player.statics['PTM2']) * 2;
@@ -476,7 +478,8 @@ export class MatchScoreAddEditComponent implements OnInit, OnDestroy {
                 this.teamBMatchSummary['REB'] = +Number(this.teamBMatchSummary['OREB']) + Number(this.teamBMatchSummary['DREB']);
                 quater.teamBMatchSummary['REB'] = +Number(quater.teamBMatchSummary['OREB']) + Number(quater.teamBMatchSummary['DREB']);
                 player.statics['REB'] = +Number(player.statics['OREB']) + Number(player.statics['DREB']);
-
+                console.log(quater);
+                console.log(this.teamAMatchSummary);
 
             }
 

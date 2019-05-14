@@ -406,6 +406,9 @@ top-navbar .top-navbar .ngxp__container>.ngxp__arrow {
   color: #FFF !important;
 }
 
+.bg-score{
+  background-color: #b8b8be;
+}
 .bg-rebound {
   background-color: #fd7e14 !important;
   color: #FFF !important;
