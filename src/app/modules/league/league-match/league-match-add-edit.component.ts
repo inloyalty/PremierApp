@@ -26,6 +26,7 @@ export class LeageMatchAddEditComponent implements OnInit {
     public leagueMatch: any = {}
     public stepTitle = 'Match Detail';
     public currentTabIndex = 1;
+    public cardHeight = 500;
     leagues: any =[];
     countries: any;
     states: any;
@@ -97,14 +98,16 @@ export class LeageMatchAddEditComponent implements OnInit {
         }
     }
 
+    ngAfterViewChecked() {
+        this.cardHeight = window.innerHeight - 212;
+        this.cdRef.detectChanges();
+    }
 
     async  getLeagueMatch() {
-
         let apiResponse = await this.leageSvc.getLeagueMatch(this.id);
         if (apiResponse && apiResponse.data) {
             this.leagueMatch = apiResponse.data;
             this.matchFormat = this.leagueMatch.isTeamMatch ? 2 : 1;
-
             if(this.leagueMatch.startDate)
             {
                 this.matchDate = new Date(this.leagueMatch.startDate) 
@@ -118,9 +121,6 @@ export class LeageMatchAddEditComponent implements OnInit {
                 this.matchFormat = 1;
                 this.matchFormats[0].active = true;
                 this.matchFormats[1].active = false;
-
-
-
             }
             if (this.leagueMatch.isTeamMatch) {
                 this.selectedTeamAPlayers = this.leagueMatch.teamAPlayers;
@@ -130,7 +130,6 @@ export class LeageMatchAddEditComponent implements OnInit {
                 if (this.teamAPlayers && this.teamAPlayers.length > 0) {
                     this.teamAPlayers.forEach(item => {
                         let teamPlayer = _.find(this.leagueMatch.teamAPlayers, (teamPlayer) => { return teamPlayer.id == item.id; });
-
                         if (teamPlayer != null) {
                             item.selected = true;
                         }
@@ -145,21 +144,13 @@ export class LeageMatchAddEditComponent implements OnInit {
                         }
                     })
                 }
-
-
-
             }
-
-
-
         }
     }
 
     onNextClick() {
-
         this.currentTabIndex = this.currentTabIndex + 1;
         this.setStepTitle();
-
     }
 
     onPreviousClick() {
@@ -171,6 +162,7 @@ export class LeageMatchAddEditComponent implements OnInit {
         this.matchFormat = event.id;
         this.leagueMatch.isTeamMatch = event.id == 1 ? false : true;
     }
+
     private setStepTitle() {
         if (this.currentTabIndex == 1) {
             this.stepTitle = 'Match Detail'
@@ -184,7 +176,6 @@ export class LeageMatchAddEditComponent implements OnInit {
 
 
     async  getLeagues() {
-
         let apiResponse = await this.leageSvc.getLeagues(this.lookupFilter);
         if (apiResponse && apiResponse.data && apiResponse.data.length > 0) {
             this.leagues = apiResponse.data;
@@ -192,7 +183,6 @@ export class LeageMatchAddEditComponent implements OnInit {
     }
 
     async  getTeams() {
-
         let apiResponse = await this.teamSvc.getTeams();
         if (apiResponse && apiResponse.data && apiResponse.data.length > 0) {
             this.teams = apiResponse.data;
