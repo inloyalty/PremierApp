@@ -9,7 +9,8 @@
                     <div class="col border">
                         <div class="row">
                             <div class="col-md-4 mt-2 pr-0">
-                                <h5 *ngIf="!matchQuater.isOverTime" style="margin-top:3px;"> Q{{matchQuater.quarterNr}} </h5>
+                                <h5 *ngIf="!matchQuater.isOverTime" style="margin-top:3px;"> Q{{matchQuater.quarterNr}}
+                                </h5>
                                 <h5 *ngIf="matchQuater.isOverTime" style="margin-top:3px;"> OT </h5>
                             </div>
                             <div class="col-md-8 pl-0 mt-2">
@@ -48,7 +49,8 @@
                 </div>
                 <ng-template ngFor let-matchQuater [ngForOf]="matchQuaters" let-index="index">
                     <div class="col border">
-                        <h4 class="mt-2" *ngIf="matchQuater.teamAMatchSummary"> {{matchQuater.teamAMatchSummary.TPTS}} </h4>
+                        <h4 class="mt-2" *ngIf="matchQuater.teamAMatchSummary"> {{matchQuater.teamAMatchSummary.TPTS}}
+                        </h4>
                     </div>
                 </ng-template>
                 <div class="col border">
@@ -61,7 +63,8 @@
                 </div>
                 <ng-template ngFor let-matchQuater [ngForOf]="matchQuaters" let-index="index">
                     <div class="col border">
-                        <h4  class="mt-2" *ngIf="matchQuater.teamBMatchSummary"> {{matchQuater.teamBMatchSummary.TPTS}} </h4>
+                        <h4 class="mt-2" *ngIf="matchQuater.teamBMatchSummary"> {{matchQuater.teamBMatchSummary.TPTS}}
+                        </h4>
                     </div>
                 </ng-template>
                 <div class="col border">
@@ -126,9 +129,10 @@
 
                         <ng-template ngFor let-player [ngForOf]="teamAPlayers" let-index="index">
 
-                            <div class="row m-0 p-0" style="height: 50px">
+                            <div class="row" style="height: 50px">
                                 <div class="col-2 border-bottom border-right pull-left">
-                                    <div class="form-group custom-control custom-checkbox" style="margin-top:14px; margin-bottom:0px;">
+                                    <div class="form-group custom-control custom-checkbox"
+                                        style="margin-top:14px; margin-bottom:0px;">
                                         <input type="checkbox" class="custom-control-input" id="customCheck1_{{index}}"
                                             name="isParent" [(ngModel)]="player.isInMatch"
                                             (change)="onInMatchChanged('A',player)">
@@ -158,10 +162,14 @@
                                 <div class="col-1 border-bottom border-right" style="padding-top: 12px;">
                                     {{ player.statics.TFLS}}
                                 </div>
-                                <div class="col-1 border-bottom border-right" style="padding-top: 12px;">{{player.statics.REB}}</div>
-                                <div class="col-1 border-bottom border-right" style="padding-top: 12px;" > {{player.statics.AST}}</div>
-                                <div class="col-1 border-bottom border-right" style="padding-top: 12px;"> {{player.statics.BLK}}</div>
-                                <div class="col-1 border-bottom border-right" style="padding-top: 12px;"> {{player.statics.STL}}</div>
+                                <div class="col-1 border-bottom border-right" style="padding-top: 12px;">
+                                    {{player.statics.REB}}</div>
+                                <div class="col-1 border-bottom border-right" style="padding-top: 12px;">
+                                    {{player.statics.AST}}</div>
+                                <div class="col-1 border-bottom border-right" style="padding-top: 12px;">
+                                    {{player.statics.BLK}}</div>
+                                <div class="col-1 border-bottom border-right" style="padding-top: 12px;">
+                                    {{player.statics.STL}}</div>
                             </div>
 
                         </ng-template>
@@ -185,9 +193,10 @@
 
                         <ng-template ngFor let-player [ngForOf]="teamBPlayers" let-index="index">
 
-                            <div class="row m-0 p-0" style="min-height: 50px">
+                            <div class="row" style="min-height: 50px">
                                 <div class="col-2 border-bottom border-right pull-left">
-                                    <div class="form-group custom-control custom-checkbox" style="margin-top:14px; margin-bottom : 0px;">
+                                    <div class="form-group custom-control custom-checkbox"
+                                        style="margin-top:14px; margin-bottom : 0px;">
                                         <input type="checkbox" class="custom-control-input" id="customCheck1_{{index}}"
                                             name="isParent" [(ngModel)]="player.isInMatch"
                                             (change)="onInMatchChanged('B',player)">
@@ -217,10 +226,14 @@
                                 <div class="col-1 border-bottom border-right" style="padding-top: 12px;">
                                     {{ player.statics.TFLS}}
                                 </div>
-                                <div class="col-1 border-bottom border-right" style="padding-top: 12px;">{{player.statics.REB}}</div>
-                                <div class="col-1 border-bottom border-right" style="padding-top: 12px;"> {{player.statics.AST}}</div>
-                                <div class="col-1 border-bottom border-right" style="padding-top: 12px;"> {{player.statics.BLK}}</div>
-                                <div class="col-1 border-bottom border-right" style="padding-top: 12px;"> {{player.statics.STL}}</div>
+                                <div class="col-1 border-bottom border-right" style="padding-top: 12px;">
+                                    {{player.statics.REB}}</div>
+                                <div class="col-1 border-bottom border-right" style="padding-top: 12px;">
+                                    {{player.statics.AST}}</div>
+                                <div class="col-1 border-bottom border-right" style="padding-top: 12px;">
+                                    {{player.statics.BLK}}</div>
+                                <div class="col-1 border-bottom border-right" style="padding-top: 12px;">
+                                    {{player.statics.STL}}</div>
                             </div>
 
                         </ng-template>
@@ -263,7 +276,8 @@
                         <!-- <button type="button" class="btn btn-outline btn-score  text-point" (click)="addScore('PTM1')">1
                             PT
                             Made</button> -->
-                        <button type="button" class="btn btn-outline btn-score bg-score text-point" (click)="addScore('PTM2')">2
+                        <button type="button" class="btn btn-outline btn-score bg-score text-point"
+                            (click)="addScore('PTM2')">2
                             PT
                             Made</button>
                         <button type="button" class="btn btn-outline btn-score bg-score btn-margin-l-10 text-point"
@@ -277,7 +291,8 @@
                         <button type="button" class="btn btn-outline  btn-score bg-score btn-margin-l-10 text-foul"
                             (click)="addScore('FGA3')">3 PT Miss</button>
 
-                        <button type="button" class="btn  btn-score bg-score btn-margin-l-10" (click)="addScore('FTM')"> FT
+                        <button type="button" class="btn  btn-score bg-score btn-margin-l-10" (click)="addScore('FTM')">
+                            FT
                             <br> Made
                         </button>
                         <button type="button" class="btn  btn-score bg-score btn-margin-l-10" (click)="addScore('FTA')">
@@ -287,18 +302,24 @@
                 </div>
                 <div class="row mt-2">
                     <div class="col">
-                        <button type="button" class="btn  btn-score bg-score" (click)="addScore('AST')"> Assist </button>
-                        <button type="button" class="btn  btn-score bg-score btn-margin-l-10" (click)="addScore('STL')"> Steal
+                        <button type="button" class="btn  btn-score bg-score" (click)="addScore('AST')"> Assist
                         </button>
-                        <button type="button" class="btn  btn-score bg-score btn-margin-l-10" (click)="addScore('BLK')"> Block
+                        <button type="button" class="btn  btn-score bg-score btn-margin-l-10" (click)="addScore('STL')">
+                            Steal
                         </button>
-                        <button type="button" class="btn btn-score bg-score btn-margin-l-10" (click)="addScore('OREB')"> <span>
+                        <button type="button" class="btn  btn-score bg-score btn-margin-l-10" (click)="addScore('BLK')">
+                            Block
+                        </button>
+                        <button type="button" class="btn btn-score bg-score btn-margin-l-10" (click)="addScore('OREB')">
+                            <span>
                                 Off</span> <br> <span>
                                 Rebound</span> </button>
-                        <button type="button" class="btn btn-score bg-score btn-margin-l-10" (click)="addScore('DREB')"><span>
+                        <button type="button" class="btn btn-score bg-score btn-margin-l-10"
+                            (click)="addScore('DREB')"><span>
                                 Def</span> <br>
                             <span> Rebound</span> </button>
-                        <button type="button" class="btn btn-score bg-score btn-margin-l-10" (click)="addScore('PBM')"> <span>
+                        <button type="button" class="btn btn-score bg-score btn-margin-l-10" (click)="addScore('PBM')">
+                            <span>
                                 Putback</span>
                             <br> <span> Made</span> </button>
                     </div>
@@ -309,20 +330,24 @@
                         <button type="button" class="btn  btn-score bg-score " (click)="addScore('PBA')"> <span>
                                 Putback</span>
                             <br> <span> Miss</span> </button>
-                        <button type="button" class="btn btn-score bg-score btn-margin-l-10" (click)="addScore('TOV')"> TrunOver
+                        <button type="button" class="btn btn-score bg-score btn-margin-l-10" (click)="addScore('TOV')">
+                            TrunOver
                         </button>
                         <button type="button" class="btn btn-outline  btn-score bg-score btn-margin-l-10"
                             (click)="addScore('FTOV')"><span>
                                 Froced</span>
                             <br> <span> TrunOver</span></button>
-                        <button type="button" class="btn  btn-score bg-score btn-margin-l-10" (click)="addScore('TCH')"> <span>
+                        <button type="button" class="btn  btn-score bg-score btn-margin-l-10" (click)="addScore('TCH')">
+                            <span>
                                 Take</span>
                             <br> <span> Charge</span> </button>
-                        <button type="button" class="btn  btn-score bg-score btn-margin-l-10" (click)="addScore('FRST')"> <span>
+                        <button type="button" class="btn  btn-score bg-score btn-margin-l-10"
+                            (click)="addScore('FRST')"> <span>
                                 Froced Rush</span>
                             <br> <span> Shot</span> </button>
 
-                        <button type="button" class="btn  btn-score bg-score btn-margin-l-10" (click)="addScore('FJMP')"> Force
+                        <button type="button" class="btn  btn-score bg-score btn-margin-l-10"
+                            (click)="addScore('FJMP')"> Force
                             <br>
                             Jump </button>
 
@@ -374,14 +399,24 @@
         <ul class="list-group list-group-flush">
             <li class="list-group-item list-group-item-action" *ngFor="let player of exchangePlayers">
                 <div class="row">
-                    <div class="col-9">
-                        <h5 class="font-weight-normal pl-0 padding-top">
-                            <span> {{player.firstName}} {{player.middleName}} {{player.lastName}} </span>
-
-                            <span style="padding-left: 30px;"> Shirt Nr: {{player.shirtNr}} </span> </h5>
+                    <div class="col-9 p-0">
+                        <div class="row m-0" >
+                            <div class="col-2 pl-0" style="max-width: 75px; padding-top:5px;">
+                                <image [src]="player.image" [height]="30" [imgHeight]="35" [padding]="0"
+                                    [caption]="player.name" [capTop]="0" [capLeft]="0" [captionPadding]="5"
+                                    [captionFontSize]="10">
+                                </image>
+                            </div>
+                            <div class="col-4 pl-0" style="padding-top:10px;">
+                                <span> {{player.firstName}} {{player.middleName}} {{player.lastName}} </span>
+                            </div>
+                            <div class="col-6" style="padding-top:10px;">
+                                <span style="padding-left: 30px;"> Shirt Nr: {{player.shirtNr}} </span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-3 pr-0">
-                        <button type="button" class="btn btn-outline-light btn-flat btn-rounded float-right"
+                    <div class="col-3">
+                        <button type="button" class="btn btn-primary btn-flat btn-rounded ripple float-right"
                             style="height:40px;" (click)="onPlayerExchange(player)">
                             Change
                         </button>

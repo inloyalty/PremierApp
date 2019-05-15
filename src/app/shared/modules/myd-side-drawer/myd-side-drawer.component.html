@@ -3,7 +3,7 @@
         <h6 class="drawer-header">{{title}}
             <span class="close" style="margin-top:-4px;" (click)="closeDrawer()">&times;</span>
         </h6>
-        <div class="drawer-body">
+        <div class="drawer-body pt-1">
             <ng-content select="[body]"></ng-content>
         </div>
         <div class="drawer-footer" *ngIf="footer">

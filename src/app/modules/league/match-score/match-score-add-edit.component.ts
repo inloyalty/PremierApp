@@ -219,11 +219,13 @@ export class MatchScoreAddEditComponent implements OnInit, OnDestroy {
         if (teamName == 'A') {
 
             this.exchangePlayers = _.filter(this.teamAPlayers, (item) => { return !item.isInMatch; });
+
         }
         else {
             this.exchangePlayers = _.filter(this.teamBPlayers, (item) => { return !item.isInMatch; });
 
         }
+        console.log(this.exchangePlayers);
         this.showDrader = true;
 
     }

@@ -18,5 +18,6 @@ export const AppConstant = Object.freeze({
          BLUE:'#1067af',
          GREEN:'#34A853',
          YELLOW:'#ffc100'
-    }
+    },
+    USER_INFO : 'USER_INFO'
 })

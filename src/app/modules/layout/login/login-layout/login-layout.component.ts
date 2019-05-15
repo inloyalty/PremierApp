@@ -50,6 +50,7 @@ export class LoginLayoutComponent implements OnInit, OnDestroy {
                     this.localStorageSvc.set(AppConstant.LOGGED_IN_USER_INFO, JSON.stringify(apiResponse.data));
                     console.log(apiResponse.data.token);
                     this.localStorageSvc.set(AppConstant.AUTH_TOKEN, apiResponse.data.token);
+                    this.localStorageSvc.set(AppConstant.USER_INFO , JSON.stringify(apiResponse.data));
                     await this.navigationSvc.navigateTo('dashboard');
                 }
                 else {

@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy, Output, EventEmitter } from "@angular/core";
 import { RemoteImagePipe } from 'src/app/shared/pipes/remote-image.pipe';
 import { NavigationService } from 'src/app/shared/services/navigation.service';
+import { AppConstant } from '../../constants/app-constant';
+import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
 
 
 @Component({
@@ -20,31 +22,29 @@ export class MainMenuComponent implements OnInit, OnDestroy {
     apiResponseModel: any;
 
     @Output() titleChange: EventEmitter<any> = new EventEmitter();
+    userName: string;
 
 
     constructor(
-        private navigationSvc: NavigationService
+        private navigationSvc: NavigationService,
+        private localStorageSvc: LocalStorageService
     ) {
 
 
         this.footerMenuItems = [
             {
-                id: 101, "name": "Settings", "title": "Settings", "url": "/setting", "active": false, "order": 150, "iconImage": "", "iconClass": "fas fa-cog"
-            },
-            {
-                id: 102, "name": "Lock", "title": "Lock", "url": "../login/lock", "active": false, "order": 150, "iconImage": "", "iconClass": "fas fa-lock"
-            },
-            {
                 id: 103, "name": "Signout", "title": "Sign out", "url": "/login", "active": false, "order": 150, "iconImage": "", "iconClass": "fas fa-power-off"
-            },
-            {
-                id: 104, "name": "Help", "title": "Help", "url": "/help", "active": false, "order": 150, "iconImage": "", "iconClass": "far fa-question-circle"
             }
         ];
         this.getMainMenu();
     }
     ngOnInit(): void {
 
+        let userDetail: any = this.localStorageSvc.get(AppConstant.USER_INFO);
+        if (userDetail) {
+            userDetail = JSON.parse(userDetail);
+            this.userName = userDetail.firstName + ' ' + userDetail.lastName;
+        }
     }
 
 
@@ -54,7 +54,7 @@ export class MainMenuComponent implements OnInit, OnDestroy {
 
     onToggleNav() {
         this.isOpen = !this.isOpen;
-        if(this.isOpen == true) {
+        if (this.isOpen == true) {
             document.getElementById('content-wrapper').style.paddingLeft = '200px';
         }
         else {
