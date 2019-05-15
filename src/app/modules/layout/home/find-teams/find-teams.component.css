@@ -55,3 +55,27 @@
  .action-button:hover, #msform .action-button:focus {
     box-shadow: 0 0 0 2px white, 0 0 0 3px #ee0979;
   }
+
+  
+.page-section {
+    padding : 4% 30%;
+    background: #fff;
+}
+
+.page-section .app img:hover {
+    background: rgba(0,0,0,0.5);
+    transition: 0.5s ease-in-out;
+}
+
+.page-section .app .app-type {
+   padding : 0% 11%;
+}
+
+.page-section .app .app-type h3 {
+    margin-top : 3%;
+}
+
+.page-section .app .app-type p {
+    font-size: 1.1em;
+}
+
