@@ -17,10 +17,11 @@ import { FooterModule } from '../../shared/modules/footer/footer.module';
 import { WorkComponent } from './work/work.component';
 import { SupportComponent } from './support/support.component';
 import { PricingComponent } from './pricing/pricing.component';
+import { FindTeamsComponent } from './find-teams/find-teams.component';
 
 
 @NgModule({
-    declarations: [HomeComponent,WorkComponent,SupportComponent,PricingComponent],
+    declarations: [HomeComponent,WorkComponent,SupportComponent,PricingComponent, FindTeamsComponent],
     imports: [ CommonModule, FormsModule,NgSelectModule,FooterModule,TopNavModule,BsDatepickerModule.forRoot(),SharedDirectiveModule],
     exports: [HomeRoutingModule],
     providers: [NavigationService,HttpRestClientService,LocalStorageService],

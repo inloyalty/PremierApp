@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { WorkComponent } from './work/work.component';
 import { SupportComponent } from './support/support.component';
 import { PricingComponent } from './pricing/pricing.component';
+import { FindTeamsComponent } from './find-teams/find-teams.component';
 
 const LOGIN_ROUTES: Routes = [
     {
@@ -17,8 +18,11 @@ const LOGIN_ROUTES: Routes = [
     },
     {
         path: 'pricing', component: PricingComponent
+    },
+    {
+        path: 'find-teams', component: FindTeamsComponent
     }
-     
+
 ]
 
 @NgModule({
@@ -26,7 +30,7 @@ const LOGIN_ROUTES: Routes = [
         RouterModule.forChild(LOGIN_ROUTES)
     ],
     exports: [RouterModule]
-    
+
 })
 
 export class HomeRoutingModule { }
