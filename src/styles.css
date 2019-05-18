@@ -568,3 +568,7 @@ top-navbar .top-navbar .ngxp__container>.ngxp__arrow {
     }
 }
 
+.btn.btn-outline-light.active{
+  background-color: #1D63DB !important;
+  color: #FFFFFF !important;
+}

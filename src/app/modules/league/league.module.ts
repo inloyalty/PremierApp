@@ -26,13 +26,15 @@ import { MatchScoreAddEditComponent } from './match-score/match-score-add-edit.c
 import { MatchScoreResultComponent } from './match-score/match-score-result.component';
 import { MatchScoreIndividualAddEditComponent } from './match-score/match-score-individual-add-edit.component';
 import { MatchScoreResultIndividualComponent } from './match-score/match-score-result-individual.component';
+import { MydProgressBarModule } from 'src/app/shared/modules/myd-progress-bar/myd-progress-bar.module';
+import { ChartModule } from 'angular-highcharts';
 
 
 @NgModule({
     declarations: [LeagueComponent, LeagueMatchListingComponent, LeageMatchAddEditComponent
         , LeagueMatchEventsComponent, MatchScoreAddEditComponent, MatchScoreResultComponent
     ,MatchScoreIndividualAddEditComponent,MatchScoreResultIndividualComponent],
-    imports: [CommonModule, FormsModule, NgSelectModule, BsDatepickerModule.forRoot(), CommandBarModule,
+    imports: [CommonModule, FormsModule, NgSelectModule,MydProgressBarModule,ChartModule, BsDatepickerModule.forRoot(), CommandBarModule,
         MydTabModule, MydSideDrawerModule, MydListModule, ImageModule, SharedDirectiveModule, SharedPipeModule
         , MydSegmentedButtonModue],
     exports: [LeagueRoutingModule],
