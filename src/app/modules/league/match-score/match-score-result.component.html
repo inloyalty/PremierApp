@@ -183,7 +183,7 @@
                     <div class="card-body" [style.height.px]="chartHeight" style="overflow-y:auto;">
                         <div class="row m-0" *ngFor="let stat of statics">
                             <div class="col-5 p-0">
-                                <myd-progress-bar [max]="100" [backgroundColor]="'transparent'"
+                                <myd-progress-bar [max]="100" [rightToLeft]="true" [backgroundColor]="'transparent'"
                                     [progressColor]="teamASummary[stat.code] > teamBSummary[stat.code] ? '#1379cd' : '#ddd'"
                                     [value]="teamASummary[stat.code]" [showValue]="true">
                                 </myd-progress-bar>
