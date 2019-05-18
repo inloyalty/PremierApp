@@ -214,7 +214,6 @@ export class MatchScoreResultComponent implements OnInit {
         else {
             this.selectedPlayByPlays = _.filter(this.leagueMatch.playByPlays, (item) => { return item.field9 == 'OT'; });
         }
-        console.log(this.selectedPlayByPlays);
         this.bindChartData(this.selectedPlayByPlays);
     }
 
