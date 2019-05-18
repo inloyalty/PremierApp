@@ -326,11 +326,8 @@ export class MatchScoreResultComponent implements OnInit {
         let chartData: any;
         let dateArray = [];
         let lineChartData = [];
-        let teamA: any;
-        let teamB: any;
         if (selectedPlayByPlays && selectedPlayByPlays.length > 0) {
             var teamGrouping = _.groupBy(selectedPlayByPlays, 'field6');
-            console.log(teamGrouping);
             var teamKeys = Object.keys(teamGrouping);
             teamKeys.forEach(element => {
                 let teamData = teamGrouping[element];
@@ -378,6 +375,5 @@ export class MatchScoreResultComponent implements OnInit {
                 });
             });
         }
-        console.log(this.chart);
     }
 }
