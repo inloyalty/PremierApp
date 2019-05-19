@@ -72,6 +72,7 @@ export class MatchScoreResultComponent implements OnInit {
     tableHeight: number = 300;
     chart: Chart;
     lineChartData: any;
+    chartHeight2: number = 400;
 
 
     constructor(
@@ -98,9 +99,10 @@ export class MatchScoreResultComponent implements OnInit {
     }
 
     ngAfterViewChecked() {
-        this.cardHeight = window.innerHeight - 340;
-        this.cardHeight2 = window.innerHeight - 400;
-        this.chartHeight = window.innerHeight - 473;
+        this.cardHeight = window.innerHeight - 335;
+        this.cardHeight2 = window.innerHeight - 390;
+        this.chartHeight = window.innerHeight - 429;
+        this.chartHeight2 = window.innerHeight - 483;
         this.tableHeight = window.innerHeight - 540;
         this.cdRef.detectChanges();
     }
