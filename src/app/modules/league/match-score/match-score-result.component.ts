@@ -184,6 +184,7 @@ export class MatchScoreResultComponent implements OnInit {
 
     onTabChanged(event) {
         console.log(event);
+        this.isListView = true;
         this.selectedTab = event.id;
         if (this.selectedTab == 2) {
             this.selectedQuaterTab = this.tabsQuaters[0].id;
@@ -327,16 +328,22 @@ export class MatchScoreResultComponent implements OnInit {
         let chartData: any;
         let dateArray = [];
         let lineChartData = [];
+        console.log(selectedPlayByPlays);
         if (selectedPlayByPlays && selectedPlayByPlays.length > 0) {
             var teamGrouping = _.groupBy(selectedPlayByPlays, 'field6');
             var teamKeys = Object.keys(teamGrouping);
+            let itemIndex = 1;
             teamKeys.forEach(element => {
                 let teamData = teamGrouping[element];
                 chartData = [];
+                dateArray = [];
                 teamData.forEach(item => {
-                    chartData.push(item.createdOn, parseInt(item.field8));
+                    let goal = item.field8.split('-');
+                    chartData.push(item.field10, itemIndex == 1 ? parseInt(goal[0]) : parseInt(goal[1]));
                     dateArray.push(chartData);
+                    chartData = [];
                 });
+                itemIndex += 1;
                 var chartDto = {
                     name: element,
                     data: dateArray,
@@ -374,6 +381,41 @@ export class MatchScoreResultComponent implements OnInit {
                     },
                     series: lineChartData
                 });
+                console.log(this.chart);
+            });
+        }
+        else {
+            this.chart = new Chart({
+                chart: {
+                    type: 'spline'
+                },
+                title: {
+                    text: ''
+                },
+                credits: {
+                    enabled: false
+                },
+                xAxis: {
+                    type: 'datetime',
+                    title: {
+                        text: 'Time'
+                    }
+                },
+                colors: ['#1379cd', '#1067af'],
+                yAxis: {
+                    title: {
+                        text: 'Points'
+                    }
+                },
+                plotOptions: {
+                    spline: {
+                        marker: {
+                            enabled: true
+                        },
+                        showInLegend: false
+                    }
+                },
+                series: []
             });
         }
     }
