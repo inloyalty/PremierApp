@@ -9,7 +9,7 @@ import { AppConstant } from './modules/constants/app-constant';
 })
 export class AppComponent {
   title = 'sport-app';
-  baseUrl = 'http://216.15.177.55/PremierApi/api/';
+  baseUrl = 'http://premierapi.coderlipi.com/api/';
  //   baseUrl = 'http://localhost:55937/api/';
 
   constructor(
